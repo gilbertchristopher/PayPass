@@ -11,6 +11,8 @@ import { ShopPage } from '../pages/shop/shop';
 import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
 
+import { AuthService } from '../services/authService';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -36,6 +38,7 @@ import { LoginPage } from '../pages/login/login';
   providers: [
     StatusBar,
     SplashScreen,
+    AuthService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
