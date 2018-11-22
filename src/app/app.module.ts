@@ -9,11 +9,13 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ShopPage } from '../pages/shop/shop';
 import { ProfilePage } from '../pages/profile/profile';
+import { LoginPage } from '../pages/login/login';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    LoginPage,
     TabsPage,
     ShopPage,
     ProfilePage
@@ -26,6 +28,7 @@ import { ProfilePage } from '../pages/profile/profile';
   entryComponents: [
     MyApp,
     HomePage,
+    LoginPage,
     TabsPage,
     ShopPage,
     ProfilePage
