@@ -32,4 +32,8 @@ export class LoginPage {
     }
   }
 
+  goToSignUpPage(){
+    console.log("Sign Up Page")
+  }
+
 }
