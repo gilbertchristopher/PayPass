@@ -2,4 +2,18 @@ page-login {
     ion-title *{
     
     }
+    .background-login{
+        height: 100%; 
+        background-image: url('../../assets/imgs/BackgroundLoginPage.png'); 
+        background-size: cover; 
+        background-repeat: no-repeat; 
+        background-position: center; 
+    }
+    .background-transparent-100{
+        background: rgba(255, 255, 255, 0);
+    }
+    .text-field-login{
+        background: rgba(255, 255, 255, 0.5); 
+        border-radius: 5px;
+    }
 }
