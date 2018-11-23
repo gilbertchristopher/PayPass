@@ -1,0 +1,22 @@
+<ion-content padding text-center>
+  <ion-grid style="height: 100%">
+    <ion-row align-items-center justify-content-center style="height: 100%">
+      <ion-col>
+          <ion-title>PayPass</ion-title>
+          <ion-list>
+            <ion-item>
+              <ion-label floating>Username</ion-label>
+              <ion-input type="text" #username></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Password</ion-label>
+              <ion-input type="password" #password></ion-input>
+            </ion-item>
+          </ion-list>
+          <button ion-button full (click)="signIn()">log in</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

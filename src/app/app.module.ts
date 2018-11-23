@@ -9,11 +9,15 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ShopPage } from '../pages/shop/shop';
 import { ProfilePage } from '../pages/profile/profile';
+import { LoginPage } from '../pages/login/login';
+
+import { AuthService } from '../services/authService';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    LoginPage,
     TabsPage,
     ShopPage,
     ProfilePage
@@ -26,6 +30,7 @@ import { ProfilePage } from '../pages/profile/profile';
   entryComponents: [
     MyApp,
     HomePage,
+    LoginPage,
     TabsPage,
     ShopPage,
     ProfilePage
@@ -33,6 +38,7 @@ import { ProfilePage } from '../pages/profile/profile';
   providers: [
     StatusBar,
     SplashScreen,
+    AuthService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
