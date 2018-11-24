@@ -24,7 +24,12 @@ import { AuthService } from '../services/authService';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    // IonicModule.forRoot(MyApp)  default
+    IonicModule.forRoot(MyApp, {
+      scrollPadding: false,
+      scrollAssist: true,
+      autoFocusAssist: false
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

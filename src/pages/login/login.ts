@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 /**
  * Generated class for the LoginPage page.
@@ -15,21 +16,33 @@ import { TabsPage } from '../tabs/tabs';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+  // @ViewChild('username') uname;
+  // @ViewChild('password') password;
 
-  @ViewChild('username') uname;
-  @ViewChild('password') password;
+  loginForm: FormGroup;
   
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  ngOnInit(){
+    this.initializeForm();
+  }
+
+  private initializeForm(){
+    this.loginForm = new FormGroup({
+      usernameInput: new FormControl(null, Validators.compose([Validators.required])),
+      passwordInput: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)]))
+    })
+  }
   // ionViewDidLoad() {
   //   console.log('ionViewDidLoad LoginPage');
   // }
 
-  signIn(){
-    if(this.uname.value == "admin" && this.password.value == "admin"){
-      this.navCtrl.push(TabsPage);
-    }
+  login(){
+    // if(this.uname.value == "admin" && this.password.value == "admin"){
+    //   this.navCtrl.push(TabsPage);
+    // }
+    this.navCtrl.push(TabsPage);
   }
 
   goToSignUpPage(){
