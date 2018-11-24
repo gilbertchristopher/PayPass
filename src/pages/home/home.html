@@ -1,11 +1,109 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      PayPass
-    </ion-title>
+  <ion-navbar color="theme" style="height: 60px;">
+    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="isSearchbarOpened=false"></ion-searchbar>
+    <img *ngIf="!isSearchbarOpened" src="../../assets/imgs/icon.png" style="width: 100px;">
+    <ion-buttons end>
+      <button ion-button icon-only *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  
+<ion-content>
+  <h1 style="padding-left:30px;">Store Lists</h1>
+  <ion-list>
+    <ion-item>
+      <ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3 class="image-card-list">
+              <img src="../../assets/imgs/logo.png">
+            </ion-col>
+            <ion-col col-9>
+              <ion-card-header>
+                <strong>Toko A</strong>
+              </ion-card-header>
+              <ion-card-content>Gading Serpong, Tangerang</ion-card-content>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3 class="image-card-list">
+              <img src="../../assets/imgs/logo.png">
+            </ion-col>
+            <ion-col col-9>
+              <ion-card-header>
+                <strong>Lotte Mart</strong>
+              </ion-card-header>
+              <ion-card-content>Alam Sutera, Tangerang</ion-card-content>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3 class="image-card-list">
+              <img src="../../assets/imgs/logo.png">
+            </ion-col>
+            <ion-col col-9>
+              <ion-card-header>
+                <strong>Lotte Mart</strong>
+              </ion-card-header>
+              <ion-card-content>BSD, Tangerang</ion-card-content>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3 class="image-card-list">
+              <img src="../../assets/imgs/logo.png">
+            </ion-col>
+            <ion-col col-9>
+              <ion-card-header>
+                <strong>Lotte Mart</strong>
+              </ion-card-header>
+              <ion-card-content>Binong, Tangerang</ion-card-content>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3 class="image-card-list">
+              <img src="../../assets/imgs/logo.png">
+            </ion-col>
+            <ion-col col-9>
+              <ion-card-header>
+                <strong>Lotte Mart</strong>
+              </ion-card-header>
+              <ion-card-content>Tomang, Jakarta</ion-card-content>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3 class="image-card-list">
+              <img src="../../assets/imgs/logo.png">
+            </ion-col>
+            <ion-col col-9>
+              <ion-card-header>
+                <strong>Lotte Mart</strong>
+              </ion-card-header>
+              <ion-card-content>Palmerah Selatan, Jakarta</ion-card-content>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-item>
+  </ion-list>
 </ion-content>
