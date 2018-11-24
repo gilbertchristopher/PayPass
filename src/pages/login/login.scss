@@ -1,13 +1,11 @@
 page-login {
-    ion-title *{
-    
-    }
     .background-login{
         height: 100%; 
         background-image: url('../../assets/imgs/BackgroundLoginPage_LebihTransparan.png'); 
         background-size: cover; 
         background-repeat: no-repeat; 
-        background-position: center; 
+        background-position: center;
+        top: 0;
     }
     .background-transparent-100{
         background: rgba(255, 255, 255, 0);
