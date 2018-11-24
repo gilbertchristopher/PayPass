@@ -1,7 +1,8 @@
-<ion-content padding text-center>
-  <ion-grid style="height: 100%">
-    <ion-row align-items-center justify-content-center style="height: 100%">
-      <ion-col>
+
+  <ion-content padding text-center>
+    <ion-grid style="height: 100%">
+      <ion-row align-items-center justify-content-center style="height: 100%">
+        <ion-col>
           <ion-title>PayPass</ion-title>
           <ion-list>
             <ion-item>
@@ -14,9 +15,8 @@
             </ion-item>
           </ion-list>
           <button ion-button full (click)="signIn()">log in</button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-
-</ion-content>
+          <button ion-button full clear (click)="signIn()">Register</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
