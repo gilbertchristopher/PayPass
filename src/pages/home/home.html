@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="theme" style="height: 60px;">
-    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" (search)="onSearch($event)" (ionCancel)="isSearchbarOpened=false"></ion-searchbar>
+    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" placeholder="Search Store" (search)="onSearch($event)" (ionCancel)="isSearchbarOpened=false"></ion-searchbar>
     <img *ngIf="!isSearchbarOpened" src="../../assets/imgs/icon.png" style="width: 100px;">
     <ion-buttons end>
       <button ion-button icon-only *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">
@@ -14,7 +14,7 @@
   <h1 style="padding-left:30px;">Store Lists</h1>
   <ion-list>
     <ion-item>
-      <ion-card>
+      <ion-card (click)="goToStoreDetailPage()">
         <ion-grid>
           <ion-row>
             <ion-col col-3 class="image-card-list">
