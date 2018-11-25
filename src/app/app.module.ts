@@ -13,6 +13,9 @@ import { LoginPage } from '../pages/login/login';
 
 import { AuthService } from '../services/authService';
 import { StoreDetailPage } from '../pages/store-detail/store-detail';
+import { AddProductPage } from '../pages/add-product/add-product';
+import { ProductPage } from '../pages/product/product';
+import { EditProductPage } from '../pages/edit-product/edit-product';
 import { RegisrolePage } from '../pages/regisrole/regisrole';
 import { RegisterPage } from '../pages/register/register';
 import { RegistersellerPage } from '../pages/registerseller/registerseller';
@@ -28,7 +31,10 @@ import { RegistersellerPage } from '../pages/registerseller/registerseller';
     TabsPage,
     ShopPage,
     ProfilePage,
-    StoreDetailPage
+    StoreDetailPage,
+    ProductPage,
+    AddProductPage,
+    EditProductPage
   ],
   imports: [
     BrowserModule,
@@ -51,7 +57,10 @@ import { RegistersellerPage } from '../pages/registerseller/registerseller';
     TabsPage,
     ShopPage,
     ProfilePage,
-    StoreDetailPage
+    StoreDetailPage,
+    ProductPage,
+    AddProductPage,
+    EditProductPage
   ],
   providers: [
     StatusBar,
