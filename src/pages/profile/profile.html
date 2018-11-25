@@ -14,50 +14,30 @@
 
 
 <ion-content padding>
-  <div class="user-photo" padding-top>
-    <ion-avatar>
-      <img [src]="'/assets/imgs/profile.jpg'">
-    </ion-avatar>
-  </div>
+  <ion-card padding color="light">
+    <ion-row> 
+      <ion-col col-3>
+        <div style="height:74px; width:74px; border-radius: 37px; border-width: 2px; border-color: #05BCFF;">
+          <img src="../../assets/imgs/profile.jpg" style="width: 70px; border-radius: 35px;">
+        </div>
+      </ion-col>
+      <ion-col col-9>
+        <strong>Muhammad Arief</strong><br>
+        muhammad.widyanto@gmail.com<br>
+        021-34567<br>
+      </ion-col>
+    </ion-row>
+    <button ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;">Edit Profile</button>
+  </ion-card>
 
-  <ion-list>
-    <ion-item>
-      <ion-icon name="person" slot="start"></ion-icon>
-      <ion-label>
-        <p>Nama</p>
-        <h2>Muhammad Arief</h2>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="mail" slot="start"></ion-icon>
-      <ion-label>
-        <p>Email</p>
-        <h2>Muhammad.widyanto@student.umn.ac.id</h2>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-        <ion-icon name="call" slot="start"></ion-icon>
-        <ion-label>
-          <p>Phone</p>
-          <h2>081234567890</h2>
-        </ion-label>
-      </ion-item>
-
-      
-
-        <ion-item>
-            <ion-icon name="list" slot="start"></ion-icon>
-            <ion-label>
-              <p>History</p>
-              <h2>History 1</h2>
-              <h2>History 2</h2>
-              <h2>History 3</h2>
-              <h2>History 4</h2>
-              <h2>History 5</h2>
-            </ion-label>
-            <button ion-button color="secondary">See More</button>
-          </ion-item>
-  </ion-list>
   
+  <ion-card padding color="light">
+    <ion-row>
+        <h1>History</h1><br><br>See your transaction history
+    </ion-row>
+    <button ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;">Show History</button>
+
+  </ion-card>
+  <button ion-button block color="danger" style="border-width: 3px; border-color: #05BCFF;">Log Out</button>
 
 </ion-content>
