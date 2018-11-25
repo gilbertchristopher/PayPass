@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="theme">
     <ion-title>Profile</ion-title>
   </ion-navbar>
 
@@ -14,5 +14,50 @@
 
 
 <ion-content padding>
+  <div class="user-photo" padding-top>
+    <ion-avatar>
+      <img [src]="'/assets/imgs/profile.jpg'">
+    </ion-avatar>
+  </div>
+
+  <ion-list>
+    <ion-item>
+      <ion-icon name="person" slot="start"></ion-icon>
+      <ion-label>
+        <p>Nama</p>
+        <h2>Muhammad Arief</h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="mail" slot="start"></ion-icon>
+      <ion-label>
+        <p>Email</p>
+        <h2>Muhammad.widyanto@student.umn.ac.id</h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-icon name="call" slot="start"></ion-icon>
+        <ion-label>
+          <p>Phone</p>
+          <h2>081234567890</h2>
+        </ion-label>
+      </ion-item>
+
+      
+
+        <ion-item>
+            <ion-icon name="list" slot="start"></ion-icon>
+            <ion-label>
+              <p>History</p>
+              <h2>History 1</h2>
+              <h2>History 2</h2>
+              <h2>History 3</h2>
+              <h2>History 4</h2>
+              <h2>History 5</h2>
+            </ion-label>
+            <button ion-button color="secondary">See More</button>
+          </ion-item>
+  </ion-list>
+  
 
 </ion-content>
