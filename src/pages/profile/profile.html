@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="theme">
     <ion-title>Profile</ion-title>
   </ion-navbar>
 
@@ -14,5 +14,30 @@
 
 
 <ion-content padding>
+  <ion-card padding color="light">
+    <ion-row> 
+      <ion-col col-3>
+        <div style="height:74px; width:74px; border-radius: 37px; border-width: 2px; border-color: #05BCFF;">
+          <img src="../../assets/imgs/profile.jpg" style="width: 70px; border-radius: 35px;">
+        </div>
+      </ion-col>
+      <ion-col col-9>
+        <strong>Muhammad Arief</strong><br>
+        muhammad.widyanto@gmail.com<br>
+        021-34567<br>
+      </ion-col>
+    </ion-row>
+    <button ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;">Edit Profile</button>
+  </ion-card>
+
+  
+  <ion-card padding color="light">
+    <ion-row>
+        <h1>History</h1><br><br>See your transaction history
+    </ion-row>
+    <button ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;">Show History</button>
+
+  </ion-card>
+  <button ion-button block color="danger" style="border-width: 3px; border-color: #05BCFF;">Log Out</button>
 
 </ion-content>
