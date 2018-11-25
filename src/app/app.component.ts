@@ -15,6 +15,7 @@ import { StoreDetailPage } from '../pages/store-detail/store-detail';
 })
 export class MyApp {
   rootPage:any = LoginPage;
+  // rootPage:any = TabsPage;
   
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private authService: AuthService) {
     platform.ready().then(() => {
