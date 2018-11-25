@@ -1,7 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AddProductPage } from '../add-product/add-product';
 
 /**
  * Generated class for the LoginPage page.
@@ -15,7 +16,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class LoginPage {
+export class LoginPage implements OnInit{
   // @ViewChild('username') uname;
   // @ViewChild('password') password;
 
@@ -30,7 +31,7 @@ export class LoginPage {
 
   private initializeForm(){
     this.loginForm = new FormGroup({
-      usernameInput: new FormControl(null, Validators.compose([Validators.required])),
+      emailInput: new FormControl(null, Validators.compose([Validators.required])),
       passwordInput: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)]))
     })
   }
