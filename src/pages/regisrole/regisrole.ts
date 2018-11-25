@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
 import { LoginPage } from '../login/login';
 import { RegisterPage } from '../register/register';
+import { RegistersellerPage } from '../registerseller/registerseller';
 
 /**
  * Generated class for the RegisrolePage page.
@@ -17,7 +18,7 @@ import { RegisterPage } from '../register/register';
   templateUrl: 'regisrole.html',
 })
 export class RegisrolePage {
-  regisForm: FormGroup;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -25,22 +26,11 @@ export class RegisrolePage {
     console.log('ionViewDidLoad RegisrolePage');
   }
 
-  ngOnInit(){
-    this.initializeForm();
-  }
-
-
-  private initializeForm(){
-    this.regisForm = new FormGroup({
-      usernameInput: new FormControl(null, Validators.compose([Validators.required])),
-      emailInput: new FormControl(null, Validators.compose([Validators.required])),
-      handphoneInput: new FormControl(null, Validators.compose([Validators.required])),
-      passwordInput: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)]))
-      // repasswordInput: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)))
-    })
-  }
-
-  goToRegisForm(){
+  goToRegisFormBuyer(){
     this.navCtrl.push(RegisterPage);
+  }
+
+  goToRegisFormSeller(){
+    this.navCtrl.push(RegistersellerPage);
   }
 }

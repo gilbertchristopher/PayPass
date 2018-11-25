@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators } from '../../../node_modules/@angul
 import { LoginPage } from '../login/login';
 
 /**
- * Generated class for the RegisterPage page.
+ * Generated class for the RegistersellerPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -12,18 +12,18 @@ import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
-  selector: 'page-register',
-  templateUrl: 'register.html',
+  selector: 'page-registerseller',
+  templateUrl: 'registerseller.html',
 })
-export class RegisterPage {
-
+export class RegistersellerPage {
   regisForm: FormGroup;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
+    console.log('ionViewDidLoad RegistersellerPage');
   }
+
 
   ngOnInit(){
     this.initializeForm();

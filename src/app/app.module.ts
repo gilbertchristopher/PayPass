@@ -12,19 +12,18 @@ import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
 
 import { AuthService } from '../services/authService';
-<<<<<<< HEAD
-import { RegisterPage } from '../pages/register/register';
-import { RegisrolePage } from '../pages/regisrole/regisrole';
-=======
 import { StoreDetailPage } from '../pages/store-detail/store-detail';
->>>>>>> 7d081d0e16192153aa76cd97db505e22a5fe0218
+import { RegisrolePage } from '../pages/regisrole/regisrole';
+import { RegisterPage } from '../pages/register/register';
+import { RegistersellerPage } from '../pages/registerseller/registerseller';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    RegisterPage,
     RegisrolePage,
+    RegisterPage,
+    RegistersellerPage,
     LoginPage,
     TabsPage,
     ShopPage,
@@ -45,8 +44,9 @@ import { StoreDetailPage } from '../pages/store-detail/store-detail';
   entryComponents: [
     MyApp,
     HomePage,
-    RegisterPage,
     RegisrolePage,
+    RegisterPage,
+    RegistersellerPage,
     LoginPage,
     TabsPage,
     ShopPage,
