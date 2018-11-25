@@ -12,6 +12,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
 
 import { AuthService } from '../services/authService';
+import { StoreDetailPage } from '../pages/store-detail/store-detail';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AuthService } from '../services/authService';
     LoginPage,
     TabsPage,
     ShopPage,
-    ProfilePage
+    ProfilePage,
+    StoreDetailPage
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import { AuthService } from '../services/authService';
     IonicModule.forRoot(MyApp, {
       scrollPadding: false,
       scrollAssist: true,
-      autoFocusAssist: false
+      autoFocusAssist: false,
+      tabsHideOnSubPages: true,
     })
   ],
   bootstrap: [IonicApp],
@@ -38,7 +41,8 @@ import { AuthService } from '../services/authService';
     LoginPage,
     TabsPage,
     ShopPage,
-    ProfilePage
+    ProfilePage,
+    StoreDetailPage
   ],
   providers: [
     StatusBar,
