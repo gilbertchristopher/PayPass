@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AddProductPage } from '../add-product/add-product';
+import { registerModuleFactory } from '../../../node_modules/@angular/core/src/linker/ng_module_factory_loader';
+import { RegisterPage } from '../register/register';
+import { RegisrolePage } from '../regisrole/regisrole';
 
 /**
  * Generated class for the LoginPage page.
@@ -47,7 +50,7 @@ export class LoginPage implements OnInit{
   }
 
   goToSignUpPage(){
-    console.log("Sign Up Page")
+    this.navCtrl.push(RegisrolePage);
   }
 
 }

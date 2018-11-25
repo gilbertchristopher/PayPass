@@ -16,11 +16,17 @@ import { StoreDetailPage } from '../pages/store-detail/store-detail';
 import { AddProductPage } from '../pages/add-product/add-product';
 import { ProductPage } from '../pages/product/product';
 import { EditProductPage } from '../pages/edit-product/edit-product';
+import { RegisrolePage } from '../pages/regisrole/regisrole';
+import { RegisterPage } from '../pages/register/register';
+import { RegistersellerPage } from '../pages/registerseller/registerseller';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    RegisrolePage,
+    RegisterPage,
+    RegistersellerPage,
     LoginPage,
     TabsPage,
     ShopPage,
@@ -44,6 +50,9 @@ import { EditProductPage } from '../pages/edit-product/edit-product';
   entryComponents: [
     MyApp,
     HomePage,
+    RegisrolePage,
+    RegisterPage,
+    RegistersellerPage,
     LoginPage,
     TabsPage,
     ShopPage,
