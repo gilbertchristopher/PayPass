@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-navbar color="theme" style="height: 60px;">
+    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" placeholder="Search Product" (search)="onSearch($event)" (ionCancel)="isSearchbarOpened=false"></ion-searchbar>
+    <img *ngIf="!isSearchbarOpened" src="../../assets/imgs/icon.png" style="width: 100px;">
+    <ion-buttons end>
+      <button ion-button icon-only *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid padding>
+    <ion-card padding color="light">
+      <ion-row>
+        <ion-col col-3>
+          <div style="height:74px; width:74px; border-radius: 37px; border-width: 2px; border-color: #05BCFF;">
+            <img src="../../assets/imgs/logo.png" style="width: 70px; border-radius: 35px;">
+          </div>
+        </ion-col>
+        <ion-col col-9>
+          <strong>Toko A</strong><br>
+          Jalan Scientia Boulevard, Gading Serpong, Tangerang<br>
+          021-34567<br>
+        </ion-col>
+      </ion-row>
+      <button ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;">Detail</button>
+    </ion-card>
+    
+    <ion-row>
+      <ion-col col-6>
+        <ion-card>
+          <img src="../../assets/imgs/icon.png" style="height: 100px;">
+          <ion-card-header style="padding-bottom: 0;"><strong>Sprite 1 dus</strong></ion-card-header>
+          <ion-card-content style="padding-bottom: 0;">Rp 100.000</ion-card-content>
+          <ion-card-content style="padding-top: 0;">Stok: 30</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col col-6>
+        <ion-card>
+          <img src="../../assets/imgs/icon.png" style="height: 100px;">
+          <ion-card-header style="padding-bottom: 0;"><strong>Sprite 1 dus</strong></ion-card-header>
+          <ion-card-content style="padding-bottom: 0;">Rp 100.000</ion-card-content>
+          <ion-card-content style="padding-top: 0;">Stok: 30</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <ion-card>
+          <img src="../../assets/imgs/logo.png" style="height: 100px;">
+          <ion-card-header style="padding-bottom: 0;"><strong>Sprite 1 dus</strong></ion-card-header>
+          <ion-card-content style="padding-bottom: 0;">Rp 100.000</ion-card-content>
+          <ion-card-content style="padding-top: 0;">Stok: 30</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col col-6>
+        <ion-card>
+          <img src="../../assets/imgs/icon.png" style="height: 100px;">
+          <ion-card-header style="padding-bottom: 0;"><strong>Sprite 1 dus</strong></ion-card-header>
+          <ion-card-content style="padding-bottom: 0;">Rp 100.000</ion-card-content>
+          <ion-card-content style="padding-top: 0;">Stok: 30</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>
