@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
 import { LoginPage } from '../login/login';
+import { RegisterPage } from '../register/register';
 
 /**
- * Generated class for the RegisterPage page.
+ * Generated class for the RegisrolePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -12,17 +13,16 @@ import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
-  selector: 'page-register',
-  templateUrl: 'register.html',
+  selector: 'page-regisrole',
+  templateUrl: 'regisrole.html',
 })
-export class RegisterPage {
-
+export class RegisrolePage {
   regisForm: FormGroup;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
+    console.log('ionViewDidLoad RegisrolePage');
   }
 
   ngOnInit(){
@@ -40,11 +40,7 @@ export class RegisterPage {
     })
   }
 
-  goToSignInPage(){
-    this.navCtrl.push(LoginPage);
-  }
-
-  regis(){
-    this.navCtrl.push(LoginPage);
+  goToRegisForm(){
+    this.navCtrl.push(RegisterPage);
   }
 }

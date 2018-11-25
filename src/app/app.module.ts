@@ -12,11 +12,15 @@ import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
 
 import { AuthService } from '../services/authService';
+import { RegisterPage } from '../pages/register/register';
+import { RegisrolePage } from '../pages/regisrole/regisrole';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    RegisterPage,
+    RegisrolePage,
     LoginPage,
     TabsPage,
     ShopPage,
@@ -35,6 +39,8 @@ import { AuthService } from '../services/authService';
   entryComponents: [
     MyApp,
     HomePage,
+    RegisterPage,
+    RegisrolePage,
     LoginPage,
     TabsPage,
     ShopPage,
