@@ -38,7 +38,8 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       rgb(218, 206, 206),
+  theme:      #05BCFF,
 );
 
 
@@ -86,3 +87,6 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+$card-md-margin-left: 0;
+$card-md-margin-right: 0;

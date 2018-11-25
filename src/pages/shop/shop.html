@@ -1,0 +1,67 @@
+<ion-header>
+
+  <ion-navbar color="theme" style="height: 60px;">
+    <img src="../../assets/imgs/icon.png" style="width: 100px;">
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div padding-left>
+    <h1>Shopping Cart</h1>
+    Lotte Mart, Alam Sutera
+  </div>
+
+  <ion-list>
+    <ion-item>
+      <ion-card color="light">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3>
+              <img src="../../assets/imgs/icon.png" style="width: 70px; height: 70px; border-radius: 4px;">
+            </ion-col>
+            <ion-col col-9>
+              <ion-card-header no-padding padding-bottom>
+                <strong>Sprite per dus</strong>
+              </ion-card-header>
+              <ion-card-content no-padding padding-bottom>Rp 100.000</ion-card-content>
+              <div text-right>
+                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;">-</button>
+                <input text-center type="number" value="{{productQty}}" style="width: 30px; height: 30px; align-self: center; border-radius: 4px;">
+                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;">+</button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <ion-card color="light">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3>
+              <img src="../../assets/imgs/logo.png" style="width: 70px; height: 70px; border-radius: 4px;">
+            </ion-col>
+            <ion-col col-9>
+              <ion-card-header no-padding padding-bottom>
+                <strong>Coca Cola per dus</strong>
+              </ion-card-header>
+              <ion-card-content no-padding padding-bottom>Rp 100.000</ion-card-content>
+              <div text-right>
+                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;">-</button>
+                <input text-center type="number" value="{{productQty}}" style="width: 30px; height: 30px; align-self: center; border-radius: 4px;">
+                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;">+</button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab color="theme" (click)="showBarcodeScanner()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+    
+  </ion-fab>
+
+</ion-content>
