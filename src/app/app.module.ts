@@ -12,8 +12,12 @@ import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
 
 import { AuthService } from '../services/authService';
+<<<<<<< HEAD
 import { RegisterPage } from '../pages/register/register';
 import { RegisrolePage } from '../pages/regisrole/regisrole';
+=======
+import { StoreDetailPage } from '../pages/store-detail/store-detail';
+>>>>>>> 7d081d0e16192153aa76cd97db505e22a5fe0218
 
 @NgModule({
   declarations: [
@@ -24,7 +28,8 @@ import { RegisrolePage } from '../pages/regisrole/regisrole';
     LoginPage,
     TabsPage,
     ShopPage,
-    ProfilePage
+    ProfilePage,
+    StoreDetailPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,8 @@ import { RegisrolePage } from '../pages/regisrole/regisrole';
     IonicModule.forRoot(MyApp, {
       scrollPadding: false,
       scrollAssist: true,
-      autoFocusAssist: false
+      autoFocusAssist: false,
+      tabsHideOnSubPages: true,
     })
   ],
   bootstrap: [IonicApp],
@@ -44,7 +50,8 @@ import { RegisrolePage } from '../pages/regisrole/regisrole';
     LoginPage,
     TabsPage,
     ShopPage,
-    ProfilePage
+    ProfilePage,
+    StoreDetailPage
   ],
   providers: [
     StatusBar,
