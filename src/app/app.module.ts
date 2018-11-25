@@ -13,6 +13,9 @@ import { LoginPage } from '../pages/login/login';
 
 import { AuthService } from '../services/authService';
 import { StoreDetailPage } from '../pages/store-detail/store-detail';
+import { AddProductPage } from '../pages/add-product/add-product';
+import { ProductPage } from '../pages/product/product';
+import { EditProductPage } from '../pages/edit-product/edit-product';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { StoreDetailPage } from '../pages/store-detail/store-detail';
     TabsPage,
     ShopPage,
     ProfilePage,
-    StoreDetailPage
+    StoreDetailPage,
+    ProductPage,
+    AddProductPage,
+    EditProductPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,10 @@ import { StoreDetailPage } from '../pages/store-detail/store-detail';
     TabsPage,
     ShopPage,
     ProfilePage,
-    StoreDetailPage
+    StoreDetailPage,
+    ProductPage,
+    AddProductPage,
+    EditProductPage
   ],
   providers: [
     StatusBar,
