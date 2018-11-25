@@ -13,11 +13,17 @@ import { LoginPage } from '../pages/login/login';
 
 import { AuthService } from '../services/authService';
 import { StoreDetailPage } from '../pages/store-detail/store-detail';
+import { RegisrolePage } from '../pages/regisrole/regisrole';
+import { RegisterPage } from '../pages/register/register';
+import { RegistersellerPage } from '../pages/registerseller/registerseller';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    RegisrolePage,
+    RegisterPage,
+    RegistersellerPage,
     LoginPage,
     TabsPage,
     ShopPage,
@@ -38,6 +44,9 @@ import { StoreDetailPage } from '../pages/store-detail/store-detail';
   entryComponents: [
     MyApp,
     HomePage,
+    RegisrolePage,
+    RegisterPage,
+    RegistersellerPage,
     LoginPage,
     TabsPage,
     ShopPage,
