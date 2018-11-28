@@ -29,6 +29,7 @@ import { AuthService } from '../services/authService';
 import { ProductService } from '../services/productService';
 import { StoreService } from '../services/storeService';
 import { Loc } from '../services/location';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { Loc } from '../services/location';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     // IonicModule.forRoot(MyApp)  default
     IonicModule.forRoot(MyApp, {
       scrollPadding: false,
