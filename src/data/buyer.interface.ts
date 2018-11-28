@@ -1,13 +1,13 @@
 import { User } from './user.interface';
 
 export interface Buyer{
-    id: String;
-    first_name: String;
-    last_name: String;
+    id: string;
+    first_name: string;
+    last_name: string;
     dateOfBirth: Date;
-    address: String;
-    buyerCity: String;
-    buyerRegency: String;
-    buyerPhone: String;
+    address: string;
+    buyerCity: string;
+    buyerRegency: string;
+    buyerPhone: string;
     user: User;
 }
