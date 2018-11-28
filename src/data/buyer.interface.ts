@@ -5,9 +5,5 @@ export interface Buyer{
     first_name: string;
     last_name: string;
     dateOfBirth: Date;
-    address: string;
-    buyerCity: string;
-    buyerRegency: string;
-    buyerPhone: string;
     user: User;
 }
