@@ -8,7 +8,6 @@ import firebase from 'firebase';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
-import { StoreDetailPage } from '../pages/store-detail/store-detail';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,7 +23,7 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
-
+    //initial firebase
     var config = {
       apiKey: "AIzaSyBZOKoPlfS4OnuJtCrdqYOwurf7zcUnNGs",
       authDomain: "paypass-id.firebaseapp.com",
