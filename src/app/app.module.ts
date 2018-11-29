@@ -88,7 +88,6 @@ import { HttpClientModule } from '@angular/common/http';
     BarcodeScanner,
     QRScanner,
     Geolocation,
-    // AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

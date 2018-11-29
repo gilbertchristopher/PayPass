@@ -1,55 +1,69 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AddProductPage } from '../add-product/add-product';
-import { registerModuleFactory } from '../../../node_modules/@angular/core/src/linker/ng_module_factory_loader';
-import { RegisterPage } from '../register/register';
 import { RegisrolePage } from '../regisrole/regisrole';
+import { AuthService } from '../../services/authService';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class LoginPage implements OnInit{
-  // @ViewChild('username') uname;
-  // @ViewChild('password') password;
-
+export class LoginPage implements OnInit {
   loginForm: FormGroup;
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController) {
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.initializeForm();
   }
 
-  private initializeForm(){
+  private initializeForm() {
     this.loginForm = new FormGroup({
-      emailInput: new FormControl(null, Validators.compose([Validators.required])),
+      emailInput: new FormControl(null, Validators.compose([Validators.required, Validators.email])),
       passwordInput: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)]))
     })
   }
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad LoginPage');
-  // }
 
-  login(){
-    // if(this.uname.value == "admin" && this.password.value == "admin"){
-    //   this.navCtrl.push(TabsPage);
-    // }
-    this.navCtrl.push(TabsPage);
+  presentFailedLoginToast(){
+    let toast = this.toastCtrl.create({
+      message: "Email or password is wrong!",
+      duration: 3000,
+      position: "bottom"
+    });
+    toast.present();
   }
 
-  goToSignUpPage(){
+  presentLoginLoading() {
+    let loading = this.loadingCtrl.create({
+      spinner: 'circles',
+      content: 'Loading, Please Wait...',
+      dismissOnPageChange: true,
+    });
+
+    loading.present();
+
+    setTimeout(() => {
+      loading.dismiss();
+      this.navCtrl.push(TabsPage);
+    }, 5000);
+  }
+
+  login() {
+    // this.presentLoading();
+    this.authService.signin(this.loginForm.value.emailInput, this.loginForm.value.passwordInput).then((userData) => {
+      this.presentLoginLoading();
+    }).catch((error) => {
+      this.presentFailedLoginToast();
+    });
+  }
+
+  goToSignUpPage() {
     this.navCtrl.push(RegisrolePage);
   }
 
