@@ -50,7 +50,7 @@ export class LoginPage implements OnInit {
 
     setTimeout(() => {
       loading.dismiss();
-      this.navCtrl.push(TabsPage);
+      // this.navCtrl.push(TabsPage);
     }, 5000);
   }
 
