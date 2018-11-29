@@ -1,13 +1,15 @@
 export interface User{
-    id: String;
-    email: String;
-    password: String;
-    role: String;
-    address: String;
-    city: String;
-    regency: String;
-    phone: String;
-    long: number;
-    lat: number;
-    profilePic: String; // base64
+    id: string;
+    email: string;
+    password: string;
+    role: string;
+    firstname: string;
+    lastname: string;
+    phoneNumber: string;
+    // address: string;
+    // city: string;
+    // regency: string;
+    // long: number;
+    // lat: number;
+    // profilePic: string; // base64
 }

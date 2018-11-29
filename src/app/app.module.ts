@@ -7,6 +7,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { QRScanner } from '@ionic-native/qr-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
 
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -29,6 +30,7 @@ import { AuthService } from '../services/authService';
 import { ProductService } from '../services/productService';
 import { StoreService } from '../services/storeService';
 import { Loc } from '../services/location';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { Loc } from '../services/location';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     // IonicModule.forRoot(MyApp)  default
     IonicModule.forRoot(MyApp, {
       scrollPadding: false,
@@ -56,7 +59,7 @@ import { Loc } from '../services/location';
       autoFocusAssist: false,
       tabsHideOnSubPages: true,
     }),
-    AgmCoreModule.forRoot({apiKey:'AIzaSyDynK315YlFfzTZyQ8ckV5Vzeg6SkomBeE'})
+    AgmCoreModule.forRoot({apiKey:'AIzaSyDynK315YlFfzTZyQ8ckV5Vzeg6SkomBeE'}),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -85,6 +88,7 @@ import { Loc } from '../services/location';
     BarcodeScanner,
     QRScanner,
     Geolocation,
+    // AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

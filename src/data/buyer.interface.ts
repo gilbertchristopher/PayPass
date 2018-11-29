@@ -1,9 +1,8 @@
 import { User } from './user.interface';
 
 export interface Buyer{
-    id: String;
-    first_name: String;
-    last_name: String;
+    id: string;
+    profilePic: string;
     dateOfBirth: Date;
     user: User;
 }
