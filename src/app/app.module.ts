@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { QRScanner } from '@ionic-native/qr-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
-
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -25,6 +25,7 @@ import { RegistersellerPage } from '../pages/registerseller/registerseller';
 import { StoreInformationPage } from '../pages/store-information/store-information';
 
 import { AgmCoreModule } from '@agm/core';
+
 
 import { AuthService } from '../services/authService';
 import { ProductService } from '../services/productService';
@@ -87,6 +88,7 @@ import { HttpClientModule } from '@angular/common/http';
     Loc,
     BarcodeScanner,
     QRScanner,
+    AndroidPermissions,
     Geolocation,
     // AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
