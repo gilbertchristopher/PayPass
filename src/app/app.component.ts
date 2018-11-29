@@ -6,16 +6,18 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthService } from '../services/authService';
 import firebase from 'firebase';
 
+
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+import { AngularFireModule } from 'angularfire2';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = LoginPage;
+  rootPage: any = LoginPage;
   // rootPage:any = TabsPage;
-  
+
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private authService: AuthService) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -33,7 +35,10 @@ export class MyApp {
       messagingSenderId: "534497429105"
     };
     firebase.initializeApp(config);
+    AngularFireModule.initializeApp(config);
 
+    // Get a reference to the database service
+    var database = firebase.database();
     firebase.auth().onAuthStateChanged(user => {
       //kalo ada user nya mau ngapain...
     });

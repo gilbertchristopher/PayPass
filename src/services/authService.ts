@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AuthService {
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient) {
 
     }
 
@@ -35,10 +35,24 @@ export class AuthService {
     getActiveUser() {
         return firebase.auth().currentUser;
     }
-    
-    storeUser(user: User) {  
-        console.log("store ", user.id);
-        return this.http.put("https://paypass-id.firebaseio.com/" + user.id + "/userInfo", user);
+
+    storeUser(user: User) {
+        // console.log("store ", user.id);
+        // console.log("user ", user)
+        firebase.database().ref('userInfo/' + user.id).set({
+            "email": user.email,
+            "password": user.password,
+            "role": user.role
+        }, function (error) {
+            if (error) {
+                // The write failed...
+                console.log("error")
+            } else {
+                // Data saved successfully!
+                console.log("success")
+            }
+        });
+        // return this.http.put("https://paypass-id.firebaseio.com/" + user.id + "/userInfo", user);
         // return this.http.put("https://paypass-id.firebaseio.com/" + user.id + "/buyerInfo", buyer);
     }
 }

@@ -6,12 +6,8 @@ import { AuthService } from '../../services/authService';
 import { User } from '../../data/user.interface';
 import { Buyer } from '../../data/buyer.interface';
 
-/**
- * Generated class for the RegisterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AngularFireDatabase } from 'angularfire2/database';
+
 
 @IonicPage()
 @Component({
@@ -22,12 +18,12 @@ export class RegisterPage implements OnInit {
   regisForm: FormGroup;
   user: User;
   buyerInfo: Buyer;
-
+  userData = [];
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService) {
   }
 
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad RegisterPage');
   }
 
   ngOnInit(){
@@ -54,11 +50,6 @@ export class RegisterPage implements OnInit {
 
   regis(){
     this.user = this.regisForm.value;
-    console.log(this.regisForm.value.email);
-    console.log(this.user);
-    
-    // this.navCtrl.push(LoginPage);
-    // console.log(this.regisForm.value);
     this.authService.signup(this.regisForm.value.email, this.regisForm.value.password, this.user, this.buyerInfo);
   }
 }

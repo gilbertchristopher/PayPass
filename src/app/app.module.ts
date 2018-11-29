@@ -6,6 +6,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { QRScanner } from '@ionic-native/qr-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -58,7 +61,8 @@ import { HttpClientModule } from '@angular/common/http';
       autoFocusAssist: false,
       tabsHideOnSubPages: true,
     }),
-    AgmCoreModule.forRoot({apiKey:'AIzaSyDynK315YlFfzTZyQ8ckV5Vzeg6SkomBeE'})
+    AgmCoreModule.forRoot({apiKey:'AIzaSyDynK315YlFfzTZyQ8ckV5Vzeg6SkomBeE'}),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -87,6 +91,7 @@ import { HttpClientModule } from '@angular/common/http';
     BarcodeScanner,
     QRScanner,
     Geolocation,
+    // AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
