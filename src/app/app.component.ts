@@ -1,22 +1,20 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AuthService } from '../services/authService';
 import firebase from 'firebase';
 
-
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
-import { AngularFireModule } from 'angularfire2';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = LoginPage;
-  // rootPage:any = TabsPage;
+  rootPage: any;
+  isSignin = false;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private authService: AuthService) {
     platform.ready().then(() => {
@@ -39,12 +37,19 @@ export class MyApp {
     // Get a reference to the database service
     // var database = firebase.database();
     firebase.auth().onAuthStateChanged(user => {
-      //kalo ada user nya mau ngapain...
+      if(user){
+        console.log(user)
+        this.rootPage = TabsPage;
+        this.isSignin = true;
+      }
+      else{
+        console.log("haha")
+        this.rootPage = LoginPage;
+        this.isSignin = false;
+      }
+    }, () => {
+      this.rootPage = LoginPage;
     });
-  }
-
-  logout() {
-    this.authService.logout();
   }
 }
 
