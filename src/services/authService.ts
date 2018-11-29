@@ -3,10 +3,11 @@ import { User } from "../data/user.interface";
 import { Buyer } from "../data/buyer.interface";
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ToastController } from "ionic-angular";
 
 @Injectable()
 export class AuthService {
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private toastCtrl: ToastController) {
 
     }
 
@@ -37,6 +38,12 @@ export class AuthService {
     }
 
     storeUser(user: User) {
+        let toast = this.toastCtrl.create({
+            message: "Register success",
+            duration: 3000,
+            position: 'bottom'
+
+        });
         // console.log("store ", user.id);
         // console.log("user ", user)
         if(user.lastname == null) user.lastname = "";
@@ -53,6 +60,8 @@ export class AuthService {
                 console.log("error")
             } else {
                 // Data saved successfully!
+                
+                toast.present();
                 console.log("success")
             }
         });

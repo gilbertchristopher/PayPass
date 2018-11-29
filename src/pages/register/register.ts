@@ -43,8 +43,10 @@ export class RegisterPage implements OnInit {
     })
   }
 
+  
+
   goToSignInPage(){
-    this.navCtrl.push(LoginPage);
+    this.navCtrl.popToRoot();
   }
 
   regis(){

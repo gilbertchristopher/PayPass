@@ -40,7 +40,7 @@
           <ion-list> -->
             <!--  -->
 
-            <button ion-button full color="secondary" [disabled]="!regisForm.valid" type="submit">Register</button>
+            <button ion-button full color="secondary" [disabled]="!regisForm.valid" (click)="goToSignInPage()" type="submit">Register</button>
             <span style="color:white;">Have an account?
               <button class="background-transparent-100" (click)="goToSignInPage()">
                 <strong style="color:yellow">Sign In</strong>
