@@ -13,51 +13,24 @@
               <ion-label stacked>Email</ion-label>
               <ion-input type="text" formControlName="email"></ion-input>
             </ion-item>
-            <!-- </ion-list>
-          
-          <ion-list> -->
-            <!-- <ion-item class="text-field-regis" style="border-width: 0px;">
-              <ion-label stacked>Username</ion-label>
-              <ion-input type="text" formControlName="usernameInput"></ion-input>
-            </ion-item> -->
-            <!-- </ion-list>
-          
-          <ion-list> -->
+            <ion-item class="text-field-regis" style="border-width: 0px;">
+              <ion-label stacked>Firstname</ion-label>
+              <ion-input type="text" formControlName="firstname"></ion-input>
+            </ion-item> 
+            <ion-item class="text-field-regis" style="border-width: 0px;">
+              <ion-label stacked>Lastname</ion-label>
+              <ion-input type="text" formControlName="lastname"></ion-input>
+            </ion-item>
+            <ion-item class="text-field-regis" style="border-width: 0px;">
+              <ion-label stacked>Handphone</ion-label>
+              <ion-input type="number" formControlName="phoneNumber"></ion-input>
+            </ion-item>
             <ion-item class="text-field-regis" style="border-width: 0px;">
               <ion-label stacked>Password</ion-label>
               <ion-input type="password" formControlName="password"></ion-input>
             </ion-item>
-
-            <!-- <ion-item class="text-field-regis" style="border-width: 0px;">
-              <ion-label stacked>Confirm Password</ion-label>
-              <ion-input type="password" formControlName="passwordInput"></ion-input>
-            </ion-item> -->
-            <!-- </ion-list>
-          
-
             
-          <ion-list> -->
-            <!-- <ion-item class="text-field-regis" style="border-width: 0px;">
-              <ion-label stacked>Firstname</ion-label>
-              <ion-input type="text" formControlName="firstnameInput"></ion-input>
-            </ion-item> -->
-            <!-- </ion-list>
           
-          <ion-list> -->
-            <!-- <ion-item class="text-field-regis" style="border-width: 0px;">
-              <ion-label stacked>Lastname</ion-label>
-              <ion-input type="text" formControlName="lastnameInput"></ion-input>
-            </ion-item> -->
-            <!-- </ion-list>
-          
-          <ion-list> -->
-            <!-- <ion-item class="text-field-regis" style="border-width: 0px;">
-              <ion-label stacked>Date of Birth</ion-label>
-              <ion-input type="date" formControlName="dobInput"></ion-input>
-            </ion-item> -->
-            <!-- </ion-list>
-          
-          <ion-list> -->
             <!-- <ion-item class="text-field-regis" style="border-width: 0px;">
               <ion-label stacked>Address</ion-label>
               <ion-input type="text" formControlName="addressInput"></ion-input>
@@ -65,12 +38,9 @@
             <!-- </ion-list>
 
           <ion-list> -->
-            <!-- <ion-item class="text-field-regis" style="border-width: 0px;">
-              <ion-label stacked>Handphone</ion-label>
-              <ion-input type="number" formControlName="handphoneInput"></ion-input>
-            </ion-item> -->
+            <!--  -->
 
-            <button ion-button full color="secondary"  type="submit">Register</button>
+            <button ion-button full color="secondary" [disabled]="!regisForm.valid" (click)="goToSignInPage()" type="submit">Register</button>
             <span style="color:white;">Have an account?
               <button class="background-transparent-100" (click)="goToSignInPage()">
                 <strong style="color:yellow">Sign In</strong>

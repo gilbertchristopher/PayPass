@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { StoreDetailPage } from '../store-detail/store-detail';
+// import 'firebase/firestore';
 
 @Component({
   selector: 'page-home',
@@ -10,7 +11,8 @@ export class HomePage {
   isSearchbarOpened = false;
 
   constructor(public navCtrl: NavController) {
-
+    // creating instance of firebase
+    
   }
 
   onSearch(event){
