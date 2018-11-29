@@ -35,10 +35,9 @@ export class MyApp {
       messagingSenderId: "534497429105"
     };
     firebase.initializeApp(config);
-    AngularFireModule.initializeApp(config);
 
     // Get a reference to the database service
-    var database = firebase.database();
+    // var database = firebase.database();
     firebase.auth().onAuthStateChanged(user => {
       //kalo ada user nya mau ngapain...
     });

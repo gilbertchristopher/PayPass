@@ -39,10 +39,14 @@ export class AuthService {
     storeUser(user: User) {
         // console.log("store ", user.id);
         // console.log("user ", user)
-        firebase.database().ref('userInfo/' + user.id).set({
+        if(user.lastname == null) user.lastname = "";
+        firebase.database().ref('user/' + user.id).set({
             "email": user.email,
             "password": user.password,
-            "role": user.role
+            "role": user.role,
+            "firstname": user.firstname,
+            "lastname": user.lastname,
+            "phoneNumber": user.phoneNumber,
         }, function (error) {
             if (error) {
                 // The write failed...

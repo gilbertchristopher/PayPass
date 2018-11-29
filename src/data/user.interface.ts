@@ -3,10 +3,12 @@ export interface User{
     email: string;
     password: string;
     role: string;
+    firstname: string;
+    lastname: string;
+    phoneNumber: string;
     // address: string;
     // city: string;
     // regency: string;
-    // phone: string;
     // long: number;
     // lat: number;
     // profilePic: string; // base64

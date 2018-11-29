@@ -6,8 +6,6 @@ import { AuthService } from '../../services/authService';
 import { User } from '../../data/user.interface';
 import { Buyer } from '../../data/buyer.interface';
 
-import { AngularFireDatabase } from 'angularfire2/database';
-
 
 @IonicPage()
 @Component({
@@ -33,11 +31,12 @@ export class RegisterPage implements OnInit {
 
   private initializeForm(){
     this.regisForm = new FormGroup({
-      email: new FormControl(null, Validators.compose([Validators.required])),
-      // usernameInput: new FormControl(null, Validators.compose([Validators.required])),
+      email: new FormControl(null, Validators.compose([Validators.required, Validators.email])),
+      firstname: new FormControl(null, Validators.compose([Validators.required])),
+      lastname: new FormControl(null),
+      phoneNumber: new FormControl(null, Validators.compose([Validators.required])),
       password: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)])),
-      // firstnameInput: new FormControl(null, Validators.compose([Validators.required])),
-      // lastnameInput: new FormControl(null, Validators.compose([Validators.required])),
+      
       // dobInput: new FormControl(null, Validators.compose([Validators.required])),
       // addressInput: new FormControl(null, Validators.compose([Validators.required])),
       // handphoneInput: new FormControl(null, Validators.compose([Validators.required]))
@@ -50,6 +49,7 @@ export class RegisterPage implements OnInit {
 
   regis(){
     this.user = this.regisForm.value;
+    console.log(this.user)
     this.authService.signup(this.regisForm.value.email, this.regisForm.value.password, this.user, this.buyerInfo);
   }
 }
