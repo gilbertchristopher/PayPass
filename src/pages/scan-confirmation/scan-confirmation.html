@@ -6,13 +6,23 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>scanConfirmationPage</ion-title>
+  <ion-navbar color="theme">
+    <ion-title>Scan Confirmation</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content text-center>
+  <ion-grid style="height: 100%">
+    <ion-row align-items-center justify-content-center style="height: 100%">
+      <ion-col>
+        <h1>Confirmation</h1>Please Scan The Store QR Code First
+        <button ion-button block color="theme" (click)="showBarcodeScanner()" style="border-width: 3px; border-color: #05BCFF;"
+          icon-start>
+          <ion-icon name="qr-scanner"></ion-icon>Scan
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
