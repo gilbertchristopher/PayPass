@@ -13,7 +13,6 @@ import { ShopPage } from '../pages/shop/shop';
 import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
 import { HistoryPage } from '../pages/history/history';
-import { ScanConfirmationPage } from '../pages/scan-confirmation/scan-confirmation';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { HistoryDetailsPage } from '../pages/history-details/history-details';
 
@@ -48,7 +47,6 @@ import { BuyerService } from '../services/buyerService';
     ShopPage,
     ProfilePage,
     HistoryPage,
-    ScanConfirmationPage,
     StoreDetailPage,
     ProductPage,
     AddProductPage,
@@ -81,7 +79,6 @@ import { BuyerService } from '../services/buyerService';
     ShopPage,
     ProfilePage,
     HistoryPage,
-    ScanConfirmationPage,
     StoreDetailPage,
     ProductPage,
     AddProductPage,

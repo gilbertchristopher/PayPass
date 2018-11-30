@@ -6,10 +6,22 @@
 
 </ion-header>
 
-<ion-content *ngIf="!isStoreFound">
-  
+<ion-content *ngIf="!isStoreFound" text-center>
+  <ion-grid style="height: 100%">
+    <ion-row align-items-center justify-content-center style="height: 100%">
+      <ion-col>
+        <h4 no-margin>Please Scan</h4>
+        <h4 no-margin>The Store QR Code First</h4>
+        <button ion-button margin-top block color="theme" (click)="scanQRCode()" style="height: 50px;"
+          icon-start>
+          <ion-icon name="qr-scanner"></ion-icon>Scan
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
-<ion-content *ngIf="isStoreFound">
+
+<ion-content *ngIf="isStoreFound" style="padding-top: 80px; padding-bottom: 100px;">
   <div padding-left>
     <h1>Shopping Cart</h1>
     Lotte Mart, Alam Sutera
