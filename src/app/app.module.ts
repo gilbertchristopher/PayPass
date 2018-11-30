@@ -6,7 +6,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
 
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -25,6 +24,7 @@ import { RegistersellerPage } from '../pages/registerseller/registerseller';
 import { StoreInformationPage } from '../pages/store-information/store-information';
 
 import { AgmCoreModule } from '@agm/core';
+
 
 import { AuthService } from '../services/authService';
 import { ProductService } from '../services/productService';

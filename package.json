@@ -21,6 +21,7 @@
     "@angular/http": "5.2.11",
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
+    "@ionic-native/android-permissions": "^4.17.0",
     "@ionic-native/barcode-scanner": "^4.17.0",
     "@ionic-native/core": "~4.15.0",
     "@ionic-native/geolocation": "^4.17.0",
