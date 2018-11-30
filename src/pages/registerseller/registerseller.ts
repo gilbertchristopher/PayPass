@@ -35,10 +35,10 @@ export class RegistersellerPage {
       emailInput: new FormControl(null, Validators.compose([Validators.required])),
       usernameInput: new FormControl(null, Validators.compose([Validators.required])),
       passwordInput: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)])),
-      firstnameInput: new FormControl(null, Validators.compose([Validators.required])),
-      lastnameInput: new FormControl(null, Validators.compose([Validators.required])),
-      dobInput: new FormControl(null, Validators.compose([Validators.required])),
-      addressInput: new FormControl(null, Validators.compose([Validators.required])),
+      // firstnameInput: new FormControl(null, Validators.compose([Validators.required])),
+      // lastnameInput: new FormControl(null, Validators.compose([Validators.required])),
+      // dobInput: new FormControl(null, Validators.compose([Validators.required])),
+      // addressInput: new FormControl(null, Validators.compose([Validators.required])),
       handphoneInput: new FormControl(null, Validators.compose([Validators.required]))
     })
   }
