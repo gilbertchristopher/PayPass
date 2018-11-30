@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
-<<<<<<< HEAD
 import { CheckoutPage } from "../checkout/checkout";
-=======
 import { BuyerService } from '../../services/buyerService';
->>>>>>> 0db1c95eed56b9c11d11bb20a53091ff21bffa24
 
 @IonicPage()
 @Component({
