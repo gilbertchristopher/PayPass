@@ -54,6 +54,7 @@ export class AuthService {
             "firstname": user.firstname,
             "lastname": user.lastname,
             "phoneNumber": user.phoneNumber,
+            "isStoreFound": false,
         }, function (error) {
             if (error) {
                 // The write failed...
@@ -68,4 +69,5 @@ export class AuthService {
         // return this.http.put("https://paypass-id.firebaseio.com/" + user.id + "/userInfo", user);
         // return this.http.put("https://paypass-id.firebaseio.com/" + user.id + "/buyerInfo", buyer);
     }
+    
 }

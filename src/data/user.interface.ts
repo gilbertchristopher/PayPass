@@ -1,3 +1,5 @@
+import { Buyer } from './buyer.interface';
+
 export interface User{
     id: string;
     email: string;
@@ -12,4 +14,5 @@ export interface User{
     // long: number;
     // lat: number;
     // profilePic: string; // base64
+    buyer: Buyer;
 }
