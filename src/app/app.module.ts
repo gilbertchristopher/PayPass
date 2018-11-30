@@ -34,11 +34,13 @@ import { StoreService } from '../services/storeService';
 import { Loc } from '../services/location';
 import { HttpClientModule } from '@angular/common/http';
 import { BuyerService } from '../services/buyerService';
+import { HomeSellerPage } from '../pages/home-seller/home-seller';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    HomeSellerPage,
     RegisrolePage,
     RegisterPage,
     RegistersellerPage,
@@ -71,6 +73,7 @@ import { BuyerService } from '../services/buyerService';
   entryComponents: [
     MyApp,
     HomePage,
+    HomeSellerPage,
     RegisrolePage,
     RegisterPage,
     RegistersellerPage,

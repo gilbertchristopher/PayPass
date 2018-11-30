@@ -8,6 +8,7 @@ import { AuthService } from '../../services/authService';
 import { BuyerService } from '../../services/buyerService';
 import { Buyer } from '../../data/buyer.interface';
 import { ScanConfirmationPage } from '../scan-confirmation/scan-confirmation';
+import { HomeSellerPage } from '../home-seller/home-seller';
 
 
 /**
@@ -28,16 +29,17 @@ import { ScanConfirmationPage } from '../scan-confirmation/scan-confirmation';
     <ion-tab [root]="profilePage" tabTitle = "Profile" tabIcon ="people"></ion-tab>
   </ion-tabs>
   <ion-tabs *ngIf="isSeller">
-    <ion-tab [root]="homePage" tabTitle = "Home" tabIcon="home"></ion-tab>
+    <ion-tab [root]="homeSellerPage" tabTitle = "Home" tabIcon="home"></ion-tab>
     <ion-tab [root]="productPage" tabTitle = "Product" tabIcon="basket"></ion-tab>
     <ion-tab [root]="profilePage" tabTitle = "Profile" tabIcon ="people"></ion-tab>
   </ion-tabs>
   `,
 })
-// <ion-tab [root]="productPage" tabTitle = "Product" tabIcon="basket"></ion-tab>
+
 export class TabsPage {
 
   homePage = HomePage;
+  homeSellerPage = HomeSellerPage;
   shopPage = ShopPage;
   profilePage = ProfilePage;
   productPage = ProductPage;
