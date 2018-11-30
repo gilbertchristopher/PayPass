@@ -48,19 +48,16 @@ export class LoginPage implements OnInit {
 
     loading.present();
 
-    setTimeout(() => {
+    this.authService.signin(this.loginForm.value.emailInput, this.loginForm.value.passwordInput). then((userData) => {
+      // success login
+    }).catch((error) => {
       loading.dismiss();
-      // this.navCtrl.push(TabsPage);
-    }, 5000);
+      this.presentFailedLoginToast();
+    });
   }
 
   login() {
-    // this.presentLoading();
-    this.authService.signin(this.loginForm.value.emailInput, this.loginForm.value.passwordInput).then((userData) => {
-      this.presentLoginLoading();
-    }).catch((error) => {
-      this.presentFailedLoginToast();
-    });
+    this.presentLoginLoading();
   }
 
   goToSignUpPage() {
