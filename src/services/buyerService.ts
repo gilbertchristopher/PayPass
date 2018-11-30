@@ -30,11 +30,12 @@ export class BuyerService {
         return this.buyerData;
     }
 
-    updateBuyerData(){
+    updateBuyerData(buyerUpdateData: any){
         this.userId = this.authService.getActiveUser().uid;
         const userRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId);
 
-        // userRef.update()
-
+        userRef.update(buyerUpdateData).then(res => {
+            console.log(res);
+        });
     }
 }

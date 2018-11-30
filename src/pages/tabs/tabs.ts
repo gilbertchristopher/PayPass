@@ -6,15 +6,6 @@ import { ProfilePage } from '../profile/profile';
 import { ProductPage } from '../product/product';
 import { AuthService } from '../../services/authService';
 import { BuyerService } from '../../services/buyerService';
-import { ScanConfirmationPage } from '../scan-confirmation/scan-confirmation';
-
-
-/**
- * Generated class for the TabsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -36,7 +27,6 @@ export class TabsPage {
   profilePage = ProfilePage;
   productPage = ProductPage;
   buyerData: any;
-  scanConfirmationPage = ScanConfirmationPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private buyerService: BuyerService) {
   }
