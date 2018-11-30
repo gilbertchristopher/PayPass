@@ -5,6 +5,8 @@ page-register {
         background-size: cover; 
         background-repeat: no-repeat; 
         background-position: center;
+        background-attachment: fixed;
+        // background-color: aqua;
         top: 0;
     }
     .background-transparent-100{
@@ -16,7 +18,8 @@ page-register {
     }
 
     .list1{
-        padding-top: 200px;
+        padding: 0%;
+        // padding-top: 0px;
         // padding-bottom: 50pt;
     }
 }
