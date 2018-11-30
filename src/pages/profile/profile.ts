@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { AuthService } from '../../services/authService';
 import { LoginPage } from '../login/login';
 import { HistoryPage } from '../history/history';
+import { BuyerService } from '../../services/buyerService';
+import { EditProfilePage } from '../edit-profile/edit-profile';
 
 
 @IonicPage()
@@ -12,7 +14,11 @@ import { HistoryPage } from '../history/history';
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private buyerService: BuyerService) {
+  }
+
+  ionViewWillEnter(){
+    console.log(this.buyerService.buyerData)
   }
 
   logout(){
@@ -24,5 +30,10 @@ export class ProfilePage {
   history(){
     console.log("history")
     this.navCtrl.push(HistoryPage);
+  }
+
+  editProfile(){
+    console.log("editProfile")
+    this.navCtrl.push(EditProfilePage);
   }
 }
