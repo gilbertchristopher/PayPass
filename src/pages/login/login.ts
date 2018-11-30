@@ -4,6 +4,7 @@ import { TabsPage } from '../tabs/tabs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisrolePage } from '../regisrole/regisrole';
 import { AuthService } from '../../services/authService';
+import { BuyerService } from '../../services/buyerService';
 
 
 
@@ -16,7 +17,7 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController, private buyerService: BuyerService) {
   }
 
   ngOnInit() {
@@ -48,7 +49,7 @@ export class LoginPage implements OnInit {
 
     loading.present();
 
-    this.authService.signin(this.loginForm.value.emailInput, this.loginForm.value.passwordInput). then((userData) => {
+    this.authService.signin(this.loginForm.value.emailInput, this.loginForm.value.passwordInput).then((userData) => {
       // success login
     }).catch((error) => {
       loading.dismiss();

@@ -1,22 +1,26 @@
 import { Component } from '@angular/core';
-import { Platform, NavController } from 'ionic-angular';
+import { Platform, NavController, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { AuthService } from '../services/authService';
 import firebase from 'firebase';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+import { BuyerService } from '../services/buyerService';
+import { AuthService } from '../services/authService';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [AuthService]
 })
 export class MyApp {
   rootPage: any;
   isSignin = false;
+  userData1: any;
+  userData2: any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private authService: AuthService) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private buyerService: BuyerService, private loadingCtrl: LoadingController) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -37,12 +41,22 @@ export class MyApp {
     // Get a reference to the database service
     // var database = firebase.database();
     firebase.auth().onAuthStateChanged(user => {
-      if(user){
-        console.log(user)
+      if (user) {
         this.rootPage = TabsPage;
         this.isSignin = true;
+        let loader = this.loadingCtrl.create({
+          spinner: 'circles',
+          content: 'Loading, fetch data...'
+        });
+        loader.present();
+        this.buyerService.requestBuyerData().then((buyerInfo) => {
+          this.userData1 = buyerInfo;
+          console.log(this.userData1);
+          loader.dismiss();
+        });
+
       }
-      else{
+      else {
         console.log("haha")
         this.rootPage = LoginPage;
         this.isSignin = false;
