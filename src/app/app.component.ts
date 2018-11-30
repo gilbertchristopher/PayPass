@@ -16,7 +16,6 @@ import { AuthService } from '../services/authService';
 })
 export class MyApp {
   rootPage: any;
-  isSignin = false;
   userData1: any;
   userData2: any;
 
@@ -42,8 +41,6 @@ export class MyApp {
     // var database = firebase.database();
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.rootPage = TabsPage;
-        this.isSignin = true;
         let loader = this.loadingCtrl.create({
           spinner: 'circles',
           content: 'Loading, fetch data...'
@@ -53,13 +50,13 @@ export class MyApp {
           this.userData1 = buyerInfo;
           console.log(this.userData1);
           loader.dismiss();
+          this.rootPage = TabsPage;
         });
 
       }
       else {
-        console.log("haha")
+        console.log("logout")
         this.rootPage = LoginPage;
-        this.isSignin = false;
       }
     }, () => {
       this.rootPage = LoginPage;
