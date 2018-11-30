@@ -5,9 +5,9 @@ import { ShopPage } from '../shop/shop';
 import { ProfilePage } from '../profile/profile';
 import { ProductPage } from '../product/product';
 import { AuthService } from '../../services/authService';
-import firebase from 'firebase';
 import { BuyerService } from '../../services/buyerService';
 import { Buyer } from '../../data/buyer.interface';
+import { ScanConfirmationPage } from '../scan-confirmation/scan-confirmation';
 
 
 /**
@@ -24,7 +24,7 @@ import { Buyer } from '../../data/buyer.interface';
   `
   <ion-tabs>
     <ion-tab [root]="homePage" tabTitle = "Home" tabIcon="home"></ion-tab>
-    <ion-tab [root]="shopPage" tabTitle = "Shop" tabIcon="basket"></ion-tab>
+    <ion-tab [root]="scanConfirmationPage" tabTitle = "Product" tabIcon="basket"></ion-tab>
     <ion-tab [root]="profilePage" tabTitle = "Profile" tabIcon ="people"></ion-tab>
   </ion-tabs>
   `,
@@ -37,6 +37,7 @@ export class TabsPage {
   profilePage = ProfilePage;
   productPage = ProductPage;
   buyerData: any;
+  scanConfirmationPage = ScanConfirmationPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private buyerService: BuyerService) {
   }
