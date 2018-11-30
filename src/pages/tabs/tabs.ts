@@ -12,9 +12,14 @@ import { BuyerService } from '../../services/buyerService';
   selector: 'page-tabs',
   template: 
   `
-  <ion-tabs>
+  <ion-tabs *ngIf="isBuyer">
     <ion-tab [root]="homePage" tabTitle = "Home" tabIcon="home"></ion-tab>
     <ion-tab [root]="shopPage" tabTitle = "Shop" tabIcon="basket"></ion-tab>
+    <ion-tab [root]="profilePage" tabTitle = "Profile" tabIcon ="people"></ion-tab>
+  </ion-tabs>
+  <ion-tabs *ngIf="isSeller">
+    <ion-tab [root]="homePage" tabTitle = "Home" tabIcon="home"></ion-tab>
+    <ion-tab [root]="productPage" tabTitle = "Product" tabIcon="basket"></ion-tab>
     <ion-tab [root]="profilePage" tabTitle = "Profile" tabIcon ="people"></ion-tab>
   </ion-tabs>
   `,
@@ -27,12 +32,24 @@ export class TabsPage {
   profilePage = ProfilePage;
   productPage = ProductPage;
   buyerData: any;
+  isBuyer: boolean;
+  isSeller: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private buyerService: BuyerService) {
+    this.isBuyer = this.isSeller = false;
+  
   }
 
-  ionViewDidLoad() {
-    this.buyerData = this.buyerService.requestBuyerData();
+  ionViewWillEnter() {
+    this.buyerData = this.buyerService.getBuyerData();
+    if(this.buyerData.role == "Buyer"){
+      this.isBuyer = true;
+      this.isSeller =false;
+    }
+    else if(this.buyerData.role == "Seller"){
+      this.isSeller = true;
+      this.isBuyer = false;
+    }
   }
 
 }

@@ -4,6 +4,7 @@ import { AuthService } from '../../services/authService';
 import { LoginPage } from '../login/login';
 import { HistoryPage } from '../history/history';
 import { BuyerService } from '../../services/buyerService';
+import { EditProfilePage } from '../edit-profile/edit-profile';
 
 
 @IonicPage()
@@ -29,5 +30,10 @@ export class ProfilePage {
   history(){
     console.log("history")
     this.navCtrl.push(HistoryPage);
+  }
+
+  editProfile(){
+    console.log("editProfile")
+    this.navCtrl.push(EditProfilePage);
   }
 }
