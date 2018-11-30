@@ -6,8 +6,10 @@
 
 </ion-header>
 
-
-<ion-content>
+<ion-content *ngIf="!isStoreFound">
+  
+</ion-content>
+<ion-content *ngIf="isStoreFound">
   <div padding-left>
     <h1>Shopping Cart</h1>
     Lotte Mart, Alam Sutera
@@ -57,8 +59,13 @@
       </ion-card>
     </ion-item>
   </ion-list>
+  <div *ngIf="productResult">
+    <p>{{ productResult.cancelled }}</p>
+    <p>{{ productResult.format }}</p>
+    <p>{{ productResult.text }}</p>
+  </div>
   <ion-fab right bottom>
-    <button ion-fab color="theme" (click)="showBarcodeScanner()">
+    <button ion-fab color="theme" (click)="scanBarcode()">
       <ion-icon name="add"></ion-icon>
     </button>
     

@@ -20,11 +20,12 @@ import { ProductPage } from '../product/product';
   `
   <ion-tabs>
     <ion-tab [root]="homePage" tabTitle = "Home" tabIcon="home"></ion-tab>
-    <ion-tab [root]="productPage" tabTitle = "Product" tabIcon="basket"></ion-tab>
+    <ion-tab [root]="shopPage" tabTitle = "Shop" tabIcon="basket"></ion-tab>
     <ion-tab [root]="profilePage" tabTitle = "Profile" tabIcon ="people"></ion-tab>
   </ion-tabs>
   `,
 })
+// <ion-tab [root]="productPage" tabTitle = "Product" tabIcon="basket"></ion-tab>
 export class TabsPage {
 
   homePage = HomePage;
