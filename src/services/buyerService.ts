@@ -11,28 +11,13 @@ export class BuyerService {
     userId: any;
 
     constructor(private authService: AuthService) {
-        // this.fireAuth = firebase.auth();
-        // this.userId = this.authService.getActiveUser();
-        // this.userProfile = firebase.database().ref('user/' + this.userId);
     }
 
-    async viewBuyerData(){
-        this.userId = this.authService.getActiveUser().uid;
-        const userRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId);
-
-        var userProfile = await userRef.on("value", snapshot => {
-            this.buyerData = snapshot.val();
-            console.log(this.buyerData);
-        });
-        console.log(this.buyerData)
-        // return userRef
-    }
     async requestBuyerData() {
         this.userId = this.authService.getActiveUser().uid;
         const userRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId);
 
         const userProfile = await userRef.on("value", (snapshot) => {
-            // this.buyerData.id = userId;
             console.log(snapshot.val());
             this.buyerData = snapshot.val();
         })   
@@ -43,5 +28,13 @@ export class BuyerService {
     getBuyerData(){
         console.log(this.buyerData);
         return this.buyerData;
+    }
+
+    updateBuyerData(){
+        this.userId = this.authService.getActiveUser().uid;
+        const userRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId);
+
+        // userRef.update()
+
     }
 }

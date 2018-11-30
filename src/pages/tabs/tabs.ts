@@ -6,7 +6,6 @@ import { ProfilePage } from '../profile/profile';
 import { ProductPage } from '../product/product';
 import { AuthService } from '../../services/authService';
 import { BuyerService } from '../../services/buyerService';
-import { Buyer } from '../../data/buyer.interface';
 import { ScanConfirmationPage } from '../scan-confirmation/scan-confirmation';
 
 
@@ -24,12 +23,12 @@ import { ScanConfirmationPage } from '../scan-confirmation/scan-confirmation';
   `
   <ion-tabs>
     <ion-tab [root]="homePage" tabTitle = "Home" tabIcon="home"></ion-tab>
-    <ion-tab [root]="scanConfirmationPage" tabTitle = "Product" tabIcon="basket"></ion-tab>
+    <ion-tab [root]="shopPage" tabTitle = "Shop" tabIcon="basket"></ion-tab>
     <ion-tab [root]="profilePage" tabTitle = "Profile" tabIcon ="people"></ion-tab>
   </ion-tabs>
   `,
 })
-// <ion-tab [root]="productPage" tabTitle = "Product" tabIcon="basket"></ion-tab>
+
 export class TabsPage {
 
   homePage = HomePage;
@@ -43,13 +42,7 @@ export class TabsPage {
   }
 
   ionViewDidLoad() {
-    
-    this.buyerData = this.buyerService.viewBuyerData()
-    // let userId = this.authService.getActiveUser().uid;
-    // this.buyerData = this.buyerService.getBuyerData()
-    // console.log(this.buyerData)
-    // console.log("user: " + userId);
-    console.log('ionViewDidLoad TabsPage');
+    this.buyerData = this.buyerService.requestBuyerData();
   }
 
 }
