@@ -6,13 +6,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
 
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ShopPage } from '../pages/shop/shop';
 import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
+import { HistoryPage } from '../pages/history/history';
+import { ScanConfirmationPage } from '../pages/scan-confirmation/scan-confirmation';
+import { HistoryDetailsPage } from '../pages/history-details/history-details';
 
 import { StoreDetailPage } from '../pages/store-detail/store-detail';
 import { AddProductPage } from '../pages/add-product/add-product';
@@ -25,11 +27,13 @@ import { StoreInformationPage } from '../pages/store-information/store-informati
 
 import { AgmCoreModule } from '@agm/core';
 
+
 import { AuthService } from '../services/authService';
 import { ProductService } from '../services/productService';
 import { StoreService } from '../services/storeService';
 import { Loc } from '../services/location';
 import { HttpClientModule } from '@angular/common/http';
+import { BuyerService } from '../services/buyerService';
 
 @NgModule({
   declarations: [
@@ -42,11 +46,14 @@ import { HttpClientModule } from '@angular/common/http';
     TabsPage,
     ShopPage,
     ProfilePage,
+    HistoryPage,
+    ScanConfirmationPage,
     StoreDetailPage,
     ProductPage,
     AddProductPage,
     EditProductPage,
     StoreInformationPage,
+    HistoryDetailsPage,
   ],
   imports: [
     BrowserModule,
@@ -71,11 +78,14 @@ import { HttpClientModule } from '@angular/common/http';
     TabsPage,
     ShopPage,
     ProfilePage,
+    HistoryPage,
+    ScanConfirmationPage,
     StoreDetailPage,
     ProductPage,
     AddProductPage,
     EditProductPage,
     StoreInformationPage,
+    HistoryDetailsPage,
   ],
   providers: [
     StatusBar,
@@ -83,6 +93,7 @@ import { HttpClientModule } from '@angular/common/http';
     AuthService,
     ProductService,
     StoreService,
+    BuyerService,
     Loc,
     BarcodeScanner,
     Geolocation,

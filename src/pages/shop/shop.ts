@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 
 @IonicPage()
 @Component({
@@ -9,19 +9,49 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 })
 export class ShopPage {
   productQty: number = 1;
+  productResult = {};
+  storeResult = {};
+  options: BarcodeScannerOptions;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, private toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShopPage');
   }
 
-  showBarcodeScanner(){
+  async scanBarcode() {
     this.barcodeScanner.scan().then(barcodeData => {
       console.log('Barcode data', barcodeData);
-     }).catch(err => {
-         console.log('Error', err);
-     });
+      this.productResult = barcodeData;
+      let toast = this.toastCtrl.create({
+        message: barcodeData.cancelled + " " + barcodeData.format + " " + barcodeData.text,
+        duration: 10000,
+        position: "bottom"
+      });
+      toast.present();
+    }).catch(err => {
+      console.log('Error ', err);
+    });
+  }
+
+  async scanQRCode() {
+    this.options = {
+      prompt: 'Scan a barcode to see the result!'
+    }
+
+    this.barcodeScanner.scan(this.options).then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+      this.storeResult = barcodeData;
+      let toast = this.toastCtrl.create({
+        message: barcodeData.cancelled + " " + barcodeData.format + " " + barcodeData.text,
+        duration: 10000,
+        position: "bottom"
+      });
+      toast.present();
+      // this.isStoreFound = true;
+    }).catch(err => {
+      console.log('Error ', err)
+    })
   }
 }

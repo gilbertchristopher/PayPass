@@ -45,7 +45,19 @@
         </button>
       </span>
 
+<<<<<<< HEAD
       <!-- </ion-col> -->
+=======
+            <button ion-button full color="secondary" [disabled]="!regisForm.valid" type="submit">Register</button>
+            <span style="color:white;">Have an account?
+              <button class="background-transparent-100" (click)="goToSignInPage()" type="button">
+                <strong style="color:yellow">Sign In</strong>
+              </button>
+            </span>
+          </ion-list>
+        </form>
+      </ion-col>
+>>>>>>> d4af3abeb4a8443c4e716c500c01a26981be948c
     </ion-row>
   </ion-grid>
 </ion-content>
