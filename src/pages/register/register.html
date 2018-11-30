@@ -1,11 +1,9 @@
 <ion-content text-center>
   <ion-grid class="background-login">
     <ion-row align-items-center justify-content-center style="height: 50%">
-      <!-- <ion-col> -->
-
-      <ion-content style="margin-top: 70%">
-        <ion-col>
-          <ion-scroll scrollX="true" style="white-space: nowrap; height: 155%; border-radius: 5px">
+      <ion-content style="margin-top: 70%" >
+        <ion-col> 
+          <ion-scroll scrollX="true" style="white-space: nowrap; height: 120%;">
             <form [formGroup]="regisForm" (ngSubmit)="regis()">
               <ion-list class="list1">
 
@@ -44,9 +42,6 @@
           <strong style="color:yellow">Sign In</strong>
         </button>
       </span>
-          </ion-list>
-        </form>
-      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

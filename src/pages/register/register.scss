@@ -9,6 +9,14 @@ page-register {
         // background-color: aqua;
         top: 0;
     }
+    .logo-buyer{
+        background-image: url('../../assets/imgs/PayPassLogo_Transaparent.png');
+        background-position: center;
+        background-attachment: fixed;
+        height: 100%;
+        background-repeat: no-repeat;
+    }
+
     .background-transparent-100{
         background: rgba(255, 255, 255, 0);
     }
