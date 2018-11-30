@@ -4,6 +4,7 @@ import { HomePage } from '../home/home';
 import { ShopPage } from '../shop/shop';
 import { ProfilePage } from '../profile/profile';
 import { ProductPage } from '../product/product';
+import { ScanConfirmationPage } from '../scan-confirmation/scan-confirmation';
 
 
 /**
@@ -20,7 +21,7 @@ import { ProductPage } from '../product/product';
   `
   <ion-tabs>
     <ion-tab [root]="homePage" tabTitle = "Home" tabIcon="home"></ion-tab>
-    <ion-tab [root]="productPage" tabTitle = "Product" tabIcon="basket"></ion-tab>
+    <ion-tab [root]="scanConfirmationPage" tabTitle = "Product" tabIcon="basket"></ion-tab>
     <ion-tab [root]="profilePage" tabTitle = "Profile" tabIcon ="people"></ion-tab>
   </ion-tabs>
   `,
@@ -30,7 +31,7 @@ export class TabsPage {
   homePage = HomePage;
   shopPage = ShopPage;
   profilePage = ProfilePage;
-  productPage = ProductPage;
+  scanConfirmationPage = ScanConfirmationPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

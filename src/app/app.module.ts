@@ -12,6 +12,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { ShopPage } from '../pages/shop/shop';
 import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
+import { HistoryPage } from '../pages/history/history';
+import { ScanConfirmationPage } from '../pages/scan-confirmation/scan-confirmation'
 
 import { StoreDetailPage } from '../pages/store-detail/store-detail';
 import { AddProductPage } from '../pages/add-product/add-product';
@@ -42,6 +44,8 @@ import { HttpClientModule } from '@angular/common/http';
     TabsPage,
     ShopPage,
     ProfilePage,
+    HistoryPage,
+    ScanConfirmationPage,
     StoreDetailPage,
     ProductPage,
     AddProductPage,
@@ -71,6 +75,8 @@ import { HttpClientModule } from '@angular/common/http';
     TabsPage,
     ShopPage,
     ProfilePage,
+    HistoryPage,
+    ScanConfirmationPage,
     StoreDetailPage,
     ProductPage,
     AddProductPage,

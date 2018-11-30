@@ -35,7 +35,7 @@
     <ion-row>
         <h1>History</h1><br><br>See your transaction history
     </ion-row>
-    <button ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;">Show History</button>
+    <button ion-button block color="theme" (click)="history()" style="border-width: 3px; border-color: #05BCFF;">Show History</button>
 
   </ion-card>
   <button ion-button block color="danger" (click)="logout()" style="border-width: 3px; border-color: #05BCFF;">Log Out</button>
