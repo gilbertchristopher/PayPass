@@ -6,16 +6,6 @@ import { ProfilePage } from '../profile/profile';
 import { ProductPage } from '../product/product';
 import { AuthService } from '../../services/authService';
 import { BuyerService } from '../../services/buyerService';
-import { Buyer } from '../../data/buyer.interface';
-import { ScanConfirmationPage } from '../scan-confirmation/scan-confirmation';
-
-
-/**
- * Generated class for the TabsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -34,7 +24,7 @@ import { ScanConfirmationPage } from '../scan-confirmation/scan-confirmation';
   </ion-tabs>
   `,
 })
-// <ion-tab [root]="productPage" tabTitle = "Product" tabIcon="basket"></ion-tab>
+
 export class TabsPage {
 
   homePage = HomePage;
@@ -42,7 +32,6 @@ export class TabsPage {
   profilePage = ProfilePage;
   productPage = ProductPage;
   buyerData: any;
-  scanConfirmationPage = ScanConfirmationPage;
   isBuyer: boolean;
   isSeller: boolean;
 
