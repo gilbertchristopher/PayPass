@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ShopPage } from '../shop/shop';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 /**
  * Generated class for the ScanConfirmationPage page.
@@ -15,11 +17,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ScanConfirmationPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ScanConfirmationPage');
+  }
+
+  showBarcodeScanner(){
+    this.barcodeScanner.scan().then(barcodeData => {
+      this.navCtrl.push(ShopPage);
+      console.log('Barcode data', barcodeData);
+     }).catch(err => {
+         console.log('Error', err);
+     });
   }
 
 }
