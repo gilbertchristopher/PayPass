@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
+import { CheckoutPage } from "../checkout/checkout";
 import { BuyerService } from '../../services/buyerService';
 
 @IonicPage()
@@ -61,5 +62,9 @@ export class ShopPage {
     }).catch(err => {
       console.log('Error ', err)
     })
+  }
+
+  checkout(){
+    this.navCtrl.push(CheckoutPage);
   }
 }
