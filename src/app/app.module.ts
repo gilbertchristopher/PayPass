@@ -13,7 +13,7 @@ import { ShopPage } from '../pages/shop/shop';
 import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
 import { HistoryPage } from '../pages/history/history';
-import { ScanConfirmationPage } from '../pages/scan-confirmation/scan-confirmation';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { HistoryDetailsPage } from '../pages/history-details/history-details';
 
 import { StoreDetailPage } from '../pages/store-detail/store-detail';
@@ -47,12 +47,12 @@ import { BuyerService } from '../services/buyerService';
     ShopPage,
     ProfilePage,
     HistoryPage,
-    ScanConfirmationPage,
     StoreDetailPage,
     ProductPage,
     AddProductPage,
     EditProductPage,
     StoreInformationPage,
+    EditProfilePage,
     HistoryDetailsPage,
   ],
   imports: [
@@ -79,12 +79,12 @@ import { BuyerService } from '../services/buyerService';
     ShopPage,
     ProfilePage,
     HistoryPage,
-    ScanConfirmationPage,
     StoreDetailPage,
     ProductPage,
     AddProductPage,
     EditProductPage,
     StoreInformationPage,
+    EditProfilePage,
     HistoryDetailsPage,
   ],
   providers: [
