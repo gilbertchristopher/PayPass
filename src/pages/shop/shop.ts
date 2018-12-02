@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
-import { BuyerService } from '../../services/buyerService';
+import { UserService } from '../../services/buyerService';
 
 @IonicPage()
 @Component({
@@ -12,12 +12,12 @@ export class ShopPage {
   productQty: number = 1;
   productResult = {};
   storeResult = {};
-  isStoreFound: boolean;
+  isStoreFound: string;
   options: BarcodeScannerOptions;
   buyerData: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, private toastCtrl: ToastController, private buyerService: BuyerService) {
-    this.buyerData = this.buyerService.getBuyerData();
+  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, private toastCtrl: ToastController, private userService: UserService) {
+    this.buyerData = this.userService.getUserData();
     this.isStoreFound = this.buyerData.isStoreFound;
     let toast = this.toastCtrl.create({
       message: this.isStoreFound.toString(),
@@ -25,6 +25,10 @@ export class ShopPage {
       position: "bottom"
     });
     toast.present();
+
+    if(this.isStoreFound != ""){
+      this.storeResult = userService.readStoreData(this.isStoreFound);
+    }
   }
 
   async scanBarcode() {
@@ -49,17 +53,29 @@ export class ShopPage {
 
     this.barcodeScanner.scan(this.options).then(barcodeData => {
       console.log('Barcode data', barcodeData);
-      this.storeResult = barcodeData;
-      let toast = this.toastCtrl.create({
-        message: barcodeData.cancelled + " " + barcodeData.format + " " + barcodeData.text,
-        duration: 5000,
-        position: "bottom"
+      // buat kalo belum ada data transaction di toko itu
+      this.userService.readStoreData(barcodeData.text).then((storeInfo) => {
+        this.storeResult = storeInfo;
+        console.log(this.storeResult);
+        // let toast = this.toastCtrl.create({
+        //   message: barcodeData.cancelled + " " + barcodeData.format + " " + barcodeData.text,
+        //   duration: 5000,
+        //   position: "bottom"
+        // });
+        // toast.present();
+        this.isStoreFound = barcodeData.text;
+        this.userService.updateUserData({ isStoreFound: barcodeData.text });
       });
-      toast.present();
-      this.isStoreFound = true;
-      this.buyerService.updateBuyerData({isStoreFound: true});
     }).catch(err => {
       console.log('Error ', err)
     })
+  }
+
+  addProductQuantity(product: any) {
+
+  }
+
+  substractProductQty(product: any) {
+
   }
 }

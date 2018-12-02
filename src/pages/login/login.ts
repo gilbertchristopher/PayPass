@@ -4,7 +4,7 @@ import { TabsPage } from '../tabs/tabs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisrolePage } from '../regisrole/regisrole';
 import { AuthService } from '../../services/authService';
-import { BuyerService } from '../../services/buyerService';
+import { UserService } from '../../services/buyerService';
 
 
 
@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController, private buyerService: BuyerService) {
+    private toastCtrl: ToastController, private buyerService: UserService) {
   }
 
   ngOnInit() {

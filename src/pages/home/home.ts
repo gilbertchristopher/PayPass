@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { StoreDetailPage } from '../store-detail/store-detail';
-import { BuyerService } from '../../services/buyerService';
+import { UserService } from '../../services/buyerService';
 
 @Component({
   selector: 'page-home',
@@ -9,16 +9,16 @@ import { BuyerService } from '../../services/buyerService';
 })
 export class HomePage {
   isSearchbarOpened = false;
-  buyerData: any;
+  userData: any;
 
-  constructor(public navCtrl: NavController, private buyerService: BuyerService) {
+  constructor(public navCtrl: NavController, private userService: UserService) {
 
     
   }
 
   ionViewDidLoad(){
-    this.buyerData = this.buyerService.getBuyerData()
-    console.log(this.buyerData)
+    this.userData = this.userService.getUserData()
+    console.log(this.userData)
   }
 
   onSearch(event){
