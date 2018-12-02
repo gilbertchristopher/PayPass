@@ -5,8 +5,18 @@ page-register {
         background-size: cover; 
         background-repeat: no-repeat; 
         background-position: center;
+        background-attachment: fixed;
+        // background-color: aqua;
         top: 0;
     }
+    .logo-buyer{
+        background-image: url('../../assets/imgs/PayPassLogo_Transaparent.png');
+        background-position: center;
+        background-attachment: fixed;
+        height: 100%;
+        background-repeat: no-repeat;
+    }
+
     .background-transparent-100{
         background: rgba(255, 255, 255, 0);
     }
@@ -16,7 +26,8 @@ page-register {
     }
 
     .list1{
-        padding-top: 200px;
+        padding: 0%;
+        // padding-top: 0px;
         // padding-bottom: 50pt;
     }
 }
