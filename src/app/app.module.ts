@@ -64,7 +64,7 @@ import { UserService } from '../services/buyerService';
     // IonicModule.forRoot(MyApp)  default
     IonicModule.forRoot(MyApp, {
       scrollPadding: false,
-      scrollAssist: true,
+      scrollAssist: false,
       autoFocusAssist: false,
       tabsHideOnSubPages: true,
     }),
