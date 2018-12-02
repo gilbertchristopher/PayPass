@@ -76,6 +76,13 @@
     <p>{{ productResult.format }}</p>
     <p>{{ productResult.text }}</p>
   </div>
+  <ion-grid style="position: absolute; left: 0; bottom: 0">
+    <ion-row>
+      <ion-col col-10>
+        <button ion-button style="width: 100%" (click)="checkout()" >Checkout</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-fab right bottom>
     <button ion-fab color="theme" (click)="scanBarcode()">
       <ion-icon name="add"></ion-icon>
