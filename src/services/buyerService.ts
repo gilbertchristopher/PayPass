@@ -92,8 +92,9 @@ export class UserService {
                             });
                             toast.present();
                         });
+                        resolve({"storeData": this.storeData, "transactionId": this.transactionId});
                     });
-                    resolve(true);
+                    
                 });
             }
             else {
