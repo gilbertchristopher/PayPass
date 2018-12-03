@@ -4,9 +4,8 @@ import { HomePage } from '../home/home';
 import { ShopPage } from '../shop/shop';
 import { ProfilePage } from '../profile/profile';
 import { ProductPage } from '../product/product';
-import { AuthService } from '../../services/authService';
-import { BuyerService } from '../../services/buyerService';
 import { HomeSellerPage } from '../home-seller/home-seller';
+import { UserService } from '../../services/buyerService';
 
 @IonicPage()
 @Component({
@@ -37,13 +36,13 @@ export class TabsPage {
   isBuyer: boolean;
   isSeller: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private buyerService: BuyerService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private buyerService: UserService) {
     this.isBuyer = this.isSeller = false;
   
   }
 
   ionViewWillEnter() {
-    this.buyerData = this.buyerService.getBuyerData();
+    this.buyerData = this.buyerService.getUserData();
     if(this.buyerData.role == "Buyer"){
       this.isBuyer = true;
       this.isSeller =false;

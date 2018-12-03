@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -34,8 +35,8 @@ import { ProductService } from '../services/productService';
 import { StoreService } from '../services/storeService';
 import { Loc } from '../services/location';
 import { HttpClientModule } from '@angular/common/http';
-import { BuyerService } from '../services/buyerService';
 import { HomeSellerPage } from '../pages/home-seller/home-seller';
+import { UserService } from '../services/buyerService';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { HomeSellerPage } from '../pages/home-seller/home-seller';
       tabsHideOnSubPages: true,
     }),
     AgmCoreModule.forRoot({apiKey:'AIzaSyDynK315YlFfzTZyQ8ckV5Vzeg6SkomBeE'}),
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -99,7 +101,7 @@ import { HomeSellerPage } from '../pages/home-seller/home-seller';
     AuthService,
     ProductService,
     StoreService,
-    BuyerService,
+    UserService,
     Loc,
     BarcodeScanner,
     Geolocation,
