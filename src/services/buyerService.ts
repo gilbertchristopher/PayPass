@@ -3,14 +3,16 @@ import { AuthService } from './authService';
 import { Injectable } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { ProductStore } from '../data/productstore.interface';
+import { ProductTransaction } from '../data/producttransaction.interface';
 
 @Injectable()
 export class UserService {
     userData: any;
     userId: string;
-    productData: any;
+    productData: ProductStore[];
     storeData: any;
-    productList: any[];
+    productList: ProductTransaction[];
     transactionId: string;
 
     constructor(private authService: AuthService, private toastCtrl: ToastController, private storage: Storage) {
@@ -65,16 +67,23 @@ export class UserService {
                     // status terdiri dari pending, cancelled, success
                     transDateRef.push({ "date": date, "time": time, "status": "pending" }).then((res) => {
                         this.transactionId = res.key;
+
+                        // masukkin transactionId ke localstorage
                         this.storage.set('transactionId', this.transactionId);
+
+                        // update transactionIdNow ke firebase
+                        this.updateUserData({ "transactionIdNow": this.transactionId });
+
                         this.showToast(this.transactionId)
+                        // masukkin storeData ke firebase pada bagian transaction
                         const transactionRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/' + this.transactionId + '/store/' + storeId);
                         transactionRef.set(this.storeData).then(() => {
-                            // let toast = this.toastCtrl.create({
-                            //     message: "Store found!",
-                            //     duration: 3000,
-                            //     position: "bottom"
-                            // });
-                            // toast.present();
+                            let toast = this.toastCtrl.create({
+                                message: "Store found!",
+                                duration: 3000,
+                                position: "bottom"
+                            });
+                            toast.present();
                         }).catch((err) => {
                             let toast = this.toastCtrl.create({
                                 message: "Store doesn't found!",
@@ -82,27 +91,23 @@ export class UserService {
                                 position: "bottom"
                             });
                             toast.present();
-                            console.log(err);
                         });
                     });
                     resolve(true);
                 });
             }
             else {
-                // this.storage.set('transactionId', this.transactionId);
-                this.showToast("read product data in transaction " + transactionId)
+                // this.showToast("read product data in transaction " + transactionId)
                 const transactionRef = firebase.database().ref('user/' + this.userId + '/transactions/' + transactionId + '/products/');
-                return new Promise((resolve) =>
-                    transactionRef.on("value", snapshot => {
-                        this.productList = snapshot.val();
-                        this.showToast(snapshot.val().name + snapshot.val().price)
-                        // this.showToast(this.productList)
-                        console.log(snapshot.val())
-                        this.productList.forEach(element => {
-                            this.showToast(element.name + " " + element.price)    
-                        });
-                        resolve(true);
-                    }));
+
+                transactionRef.on("value", snapshot => {
+                    this.productList = snapshot.val();
+                    this.showToast(snapshot.val().name + snapshot.val().price)
+                    this.productList.forEach(element => {
+                        this.showToast(element.product.price + " " + element.product.qty + " " + element.qty)
+                    });
+                    resolve(true);
+                });
                 // return this.productList;
             }
         })
@@ -142,5 +147,9 @@ export class UserService {
         userRef.update(userAddData).then(res => {
             console.log(res);
         })
+    }
+
+    transactionDone() {
+        // remove transactionIdNow from firebase
     }
 }

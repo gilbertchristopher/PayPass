@@ -6,7 +6,7 @@
 
 </ion-header>
 
-<ion-content *ngIf="!isStoreFound" text-center>
+<ion-content *ngIf="!storeId" text-center>
   <ion-grid style="height: 100%">
     <ion-row align-items-center justify-content-center style="height: 100%">
       <ion-col>
@@ -20,7 +20,7 @@
   </ion-grid>
 </ion-content>
 
-<ion-content *ngIf="isStoreFound" style="padding-top: 80px; padding-bottom: 100px;">
+<ion-content *ngIf="storeId" style="padding-top: 80px; padding-bottom: 100px;">
   <div padding-left>
     <h1>Shopping Cart</h1>
     Lotte Mart, Alam Sutera

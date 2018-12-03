@@ -14,7 +14,7 @@ import { Seller } from '../../data/seller.interface';
 export class RegistersellerPage {
   regisForm: FormGroup;
   user: User;
-  sellerInfo: Seller;
+  sellerInfo: any;
   userData = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService) {
   }
