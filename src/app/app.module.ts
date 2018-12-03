@@ -13,8 +13,9 @@ import { ShopPage } from '../pages/shop/shop';
 import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
 import { HistoryPage } from '../pages/history/history';
-import { ScanConfirmationPage } from '../pages/scan-confirmation/scan-confirmation';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { HistoryDetailsPage } from '../pages/history-details/history-details';
+import { CheckoutPage } from '../pages/checkout/checkout';
 
 import { StoreDetailPage } from '../pages/store-detail/store-detail';
 import { AddProductPage } from '../pages/add-product/add-product';
@@ -47,13 +48,14 @@ import { BuyerService } from '../services/buyerService';
     ShopPage,
     ProfilePage,
     HistoryPage,
-    ScanConfirmationPage,
     StoreDetailPage,
     ProductPage,
     AddProductPage,
     EditProductPage,
     StoreInformationPage,
+    EditProfilePage,
     HistoryDetailsPage,
+    CheckoutPage,
   ],
   imports: [
     BrowserModule,
@@ -79,13 +81,14 @@ import { BuyerService } from '../services/buyerService';
     ShopPage,
     ProfilePage,
     HistoryPage,
-    ScanConfirmationPage,
     StoreDetailPage,
     ProductPage,
     AddProductPage,
     EditProductPage,
     StoreInformationPage,
+    EditProfilePage,
     HistoryDetailsPage,
+    CheckoutPage,
   ],
   providers: [
     StatusBar,
