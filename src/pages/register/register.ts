@@ -35,10 +35,10 @@ export class RegisterPage implements OnInit {
       firstname: new FormControl(null, Validators.compose([Validators.required])),
       lastname: new FormControl(null),
       phoneNumber: new FormControl(null, Validators.compose([Validators.required])),
-      password: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)]))
+      password: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)])),
       
       // dobInput: new FormControl(null, Validators.compose([Validators.required])),
-      // address: new FormControl(null, Validators.compose([Validators.required]))
+      address: new FormControl(null, Validators.compose([Validators.required]))
       // handphoneInput: new FormControl(null, Validators.compose([Validators.required]))
     })
   }

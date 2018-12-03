@@ -41,8 +41,8 @@ export class RegistersellerPage {
       firstname: new FormControl(null, Validators.compose([Validators.required])),
       lastname: new FormControl(null),
       phoneNumber: new FormControl(null, Validators.compose([Validators.required])),
-      password: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)]))
-      // address: new FormControl(null, Validators.compose([Validators.required]))
+      password: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)])),
+      address: new FormControl(null, Validators.compose([Validators.required]))
       // emailInput: new FormControl(null, Validators.compose([Validators.required])),
       // usernameInput: new FormControl(null, Validators.compose([Validators.required])),
       // passwordInput: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)])),
