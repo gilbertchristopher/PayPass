@@ -38,8 +38,8 @@ export class RegistersellerPage {
   private initializeForm(){
     this.regisForm = new FormGroup({
       email: new FormControl(null, Validators.compose([Validators.required, Validators.email])),
-      firstname: new FormControl(null, Validators.compose([Validators.required])),
-      lastname: new FormControl(null),
+      fullname: new FormControl(null, Validators.compose([Validators.required])),
+      storename: new FormControl(null, Validators.compose([Validators.required])),
       phoneNumber: new FormControl(null, Validators.compose([Validators.required])),
       password: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)])),
       address: new FormControl(null, Validators.compose([Validators.required]))

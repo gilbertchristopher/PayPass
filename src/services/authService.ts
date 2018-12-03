@@ -69,6 +69,7 @@ export class AuthService {
             "lastname": user.lastname,
             "phoneNumber": user.phoneNumber,
             "address": user.address,
+            // "storeName": user.storeName,
             "isStoreFound": false,
         }, function (error) {
             if (error) {

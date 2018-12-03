@@ -1,44 +1,69 @@
 <ion-content text-center>
-    <ion-grid class="background-login">
-      <img style="width: 50%; margin-left: 25%;" src="../../assets/imgs/PayPassLogo.png">
-      <ion-row align-items-center justify-content-center style="height: 100%;">
-        <ion-col>
-          <form [formGroup]="regisForm" (ngSubmit)="regis()">
-            <ion-list>
-              <ion-item class="text-field-regis" style="border-width: 0px;">
-                <ion-label floating>Firstname</ion-label>
-                <ion-input type="text" formControlName="firstname"></ion-input>
-              </ion-item>
-              <ion-item class="text-field-regis" style="border-width: 0px;">
-                <ion-label floating>Lastname</ion-label>
-                <ion-input type="text" formControlName="lastname"></ion-input>
-              </ion-item>
-              <ion-item class="text-field-regis" style="border-width: 0px;">
-                <ion-label floating>Email</ion-label>
-                <ion-input type="text" formControlName="email"></ion-input>
-              </ion-item>
-              <ion-item class="text-field-regis" style="border-width: 0px;">
-                <ion-label floating>Handphone</ion-label>
-                <ion-input type="number" formControlName="phoneNumber"></ion-input>
-              </ion-item>
-              <ion-item class="text-field-regis" style="border-width: 0px;">
-                <ion-label floating>Password</ion-label>
-                <ion-input type="password" formControlName="password"></ion-input>
-              </ion-item>
-              <ion-item class="text-field-regis" style="border-width: 0px;">
-                <ion-label floating>Address</ion-label>
-                <ion-input type="text" formControlName="address"></ion-input>
-              </ion-item>
-            </ion-list>
-            <button ion-button full color="secondary" [disabled]="!regisForm.valid" type="submit">Register</button>
-          </form>
-  
-          <span style="color:white;">Have an account?
-            <button class="background-transparent-100" (click)="goToSignInPage()">
-              <strong style="color:yellow">Sign In</strong>
-            </button>
-          </span>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-content>
+  <ion-grid class="background-login">
+    <img style="width: 50%; margin-left: 25%;" src="../../assets/imgs/PayPassLogo.png">
+    <ion-row align-items-center justify-content-center style="height: 100%;">
+      <ion-col>
+        <form [formGroup]="regisForm" (ngSubmit)="regis()">
+          <ion-list>
+            <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
+              <ion-label>
+                <ion-icon name="person"></ion-icon>
+              </ion-label>
+              <ion-input type="text" placeholder="First Name" formControlName="firstname"></ion-input>
+            </ion-item>
+            <br>
+            <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
+              <ion-label>
+                <ion-icon name="person"></ion-icon>
+              </ion-label>
+              <ion-input type="text" placeholder="Last Name" formControlName="lastname"></ion-input>
+            </ion-item>
+            <br>
+            <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
+              <ion-label>
+                <ion-icon name="mail"></ion-icon>
+              </ion-label>
+              <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+            </ion-item>
+            <br>
+            <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
+              <ion-label>
+                <ion-icon name="lock"></ion-icon>
+              </ion-label>
+              <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+            </ion-item>
+            <br>
+            <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
+              <ion-label>
+                <ion-icon name="phone-portrait"></ion-icon>
+              </ion-label>
+              <ion-input type="number" placeholder="Phone Number" formControlName="phoneNumber"></ion-input>
+            </ion-item>
+            <br>
+            <ion-row class="text-field-regis">
+              <ion-col col-10>
+                <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
+                  <ion-label>
+                    <ion-icon name="locate"></ion-icon>
+                  </ion-label>
+                  <ion-input type="text-area" placeholder="Address" formControlName="address"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col col-2>
+                <button ion-button color="light" (click)="openMap()">
+                  <ion-icon name="pin"></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-list>
+          <button ion-button full color="secondary" [disabled]="!regisForm.valid" type="submit">Register</button>
+        </form>
+        <span style="color:white;">Have an account?
+          <button class="background-transparent-100" (click)="goToSignInPage()">
+            <strong style="color:yellow">Sign In</strong>
+          </button>
+        </span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

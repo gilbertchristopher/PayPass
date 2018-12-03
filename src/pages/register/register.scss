@@ -9,6 +9,7 @@ page-register {
         // background-color: aqua;
         top: 0;
     }
+
     .logo-buyer{
         background-image: url('../../assets/imgs/PayPassLogo_Transaparent.png');
         background-position: center;
@@ -20,9 +21,10 @@ page-register {
     .background-transparent-100{
         background: rgba(255, 255, 255, 0);
     }
+
     .text-field-regis{
         background: rgba(255, 255, 255, 0.5); 
-        border-radius: 5px;
+        border-radius: 0px;
     }
 
     .list1{
