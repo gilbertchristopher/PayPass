@@ -54,7 +54,8 @@ export class AuthService {
             "firstname": user.firstname,
             "lastname": user.lastname,
             "phoneNumber": user.phoneNumber,
-            "isStoreFound": false,
+            "transactionIdNow": "",
+            "storeIdNow": "",
         }, function (error) {
             if (error) {
                 // The write failed...

@@ -13,5 +13,6 @@ export interface Buyer{
     long: number;
     lat: number;
     dateOfBirth: Date;
-    isStoreFound: boolean;
+    storeIdNow: string;
+    transactionIdNow: string;
 }

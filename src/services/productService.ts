@@ -1,4 +1,3 @@
-import { Store } from '../data/store.interface';
 import { Product } from '../data/product.interface';
 import { AuthService } from './authService';
 import { Injectable } from '@angular/core';
