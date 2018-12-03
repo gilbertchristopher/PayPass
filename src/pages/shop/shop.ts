@@ -110,9 +110,8 @@ export class ShopPage {
     this.barcodeScanner.scan(this.options).then(barcodeData => {
       // buat kalo belum ada data transaction di toko itu
       this.userService.readStoreData(barcodeData.text, false, null).then((storeInfo) => {
-        this.storeResult = storeInfo;
-        console.log(this.storeResult);
-
+        this.storeResult = storeInfo['storeData'];
+        this.transactionId = storeInfo['transactionId']
         this.storeId = barcodeData.text;
         this.userService.updateUserData({ storeIdNow: barcodeData.text });
       });
