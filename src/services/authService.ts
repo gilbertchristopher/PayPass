@@ -68,14 +68,8 @@ export class AuthService {
             "firstname": user.firstname,
             "lastname": user.lastname,
             "phoneNumber": user.phoneNumber,
-<<<<<<< HEAD
-            "address": user.address,
-            // "storeName": user.storeName,
-            "isStoreFound": false,
-=======
             "transactionIdNow": "",
             "storeIdNow": "",
->>>>>>> 9f57a0e14a009eb96338023b4fbc90e14cb10e23
         }, function (error) {
             if (error) {
                 // The write failed...
