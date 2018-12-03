@@ -1,0 +1,33 @@
+<ion-header>
+
+  <ion-navbar color="theme" style="height: 60px;">
+    <ion-title>Toko A</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-card color="light" no-margin padding>
+    <ion-icon name="time"><span><strong style="color: green;"> OPEN</strong></span> UNTIL 21:00 TODAY</ion-icon>
+  </ion-card>
+  <ion-card color="light" no-margin padding>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <agm-map [latitude]="lat" [longitude]="lng" [zoom]="16">
+            <agm-marker [latitude]="marker.lat" [longitude]="marker.lng">
+            </agm-marker>
+          </agm-map>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+</ion-content>

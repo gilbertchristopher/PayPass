@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AuthService } from '../../services/authService';
+import { LoginPage } from '../login/login';
+import { HistoryPage } from '../history/history';
+import { UserService } from '../../services/buyerService';
+import { EditProfilePage } from '../edit-profile/edit-profile';
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +14,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private userService: UserService) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+  ionViewWillEnter(){
+    console.log(this.userService.userData)
   }
 
+  logout(){
+    console.log("logout")
+    this.authService.logout();
+    this.navCtrl.setRoot(LoginPage);
+  }
+
+  history(){
+    console.log("history")
+    this.navCtrl.push(HistoryPage);
+  }
+
+  editProfile(){
+    console.log("editProfile")
+    this.navCtrl.push(EditProfilePage);
+  }
 }
