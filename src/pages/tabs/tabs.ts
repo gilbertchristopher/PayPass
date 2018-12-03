@@ -4,7 +4,6 @@ import { HomePage } from '../home/home';
 import { ShopPage } from '../shop/shop';
 import { ProfilePage } from '../profile/profile';
 import { ProductPage } from '../product/product';
-import { AuthService } from '../../services/authService';
 import { UserService } from '../../services/buyerService';
 
 @IonicPage()
@@ -35,7 +34,7 @@ export class TabsPage {
   isBuyer: boolean;
   isSeller: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private buyerService: UserService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private buyerService: UserService) {
     this.isBuyer = this.isSeller = false;
   
   }

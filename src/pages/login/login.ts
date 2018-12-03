@@ -1,11 +1,8 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisrolePage } from '../regisrole/regisrole';
 import { AuthService } from '../../services/authService';
-import { UserService } from '../../services/buyerService';
-
 
 
 @IonicPage()
@@ -17,7 +14,7 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController, private buyerService: UserService) {
+    private toastCtrl: ToastController) {
   }
 
   ngOnInit() {

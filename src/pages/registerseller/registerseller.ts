@@ -1,16 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
-import { LoginPage } from '../login/login';
 import { AuthService } from '../../services/authService';
 import { User } from '../../data/user.interface';
 import { Seller } from '../../data/seller.interface';
-/**
- * Generated class for the RegistersellerPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({

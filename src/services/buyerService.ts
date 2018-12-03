@@ -1,18 +1,28 @@
 import firebase from 'firebase';
 import { AuthService } from './authService';
 import { Injectable } from '@angular/core';
-import { ToastController, DateTime } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class UserService {
     userData: any;
-    userId: any;
+    userId: string;
     productData: any;
     storeData: any;
-    totalTransaction: number;
+    productList: any[];
+    transactionId: string;
 
-    constructor(private authService: AuthService, private toastCtrl: ToastController) {
+    constructor(private authService: AuthService, private toastCtrl: ToastController, private storage: Storage) {
+    }
+
+    showToast(message: string) {
+        let toast = this.toastCtrl.create({
+            message: message,
+            duration: 10000,
+            position: "bottom"
+        });
+        toast.present();
     }
 
     requestUserData() {
@@ -39,57 +49,80 @@ export class UserService {
         });
     }
 
-    readStoreData(storeId: string) {
+    readStoreData(storeId: string, isStoreFound: boolean, transactionId: string) {
         return new Promise((resolve) => {
-            const userRef: firebase.database.Reference = firebase.database().ref('user/' + storeId);
-            const transDateRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/transactionId/');
-            const transTotalRef: firebase.database.Reference = firebase.database().ref('user/');
-            let date = new Date();
-            let time = date.getTime();
+            if (!isStoreFound) {
+                const userRef: firebase.database.Reference = firebase.database().ref('user/' + storeId);
+                let datetime = new Date();
+                let date = datetime.getDate() + "/" + datetime.getMonth() + "/" + datetime.getFullYear();
+                let time = datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds();
 
-            transDateRef.set({ "date": date, "time": time, "isDone": false }).then((res) => {
-                let toast = this.toastCtrl.create({
-                    message: res + " " + date + " " + time,
-                    duration: 3000,
-                    position: "bottom"
-                });
-                toast.present();
-            });
-            transTotalRef.on("value", snapshot => {
-                this.totalTransaction = snapshot.val().transactionTotal;
-                transTotalRef.update({"transactionTotal": (this.totalTransaction + 1)});
+
                 userRef.on("value", (snapshot) => {
                     this.storeData = snapshot.val();
-                    const transactionRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/trasactions/transactionId/store/trans' + (this.totalTransaction + 1) + "/" + storeId);
-        
-                    transactionRef.set(this.storeData).then(() => {
-                        let toast = this.toastCtrl.create({
-                            message: "Store found!",
-                            duration: 3000,
-                            position: "bottom"
+
+                    const transDateRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/');
+                    // status terdiri dari pending, cancelled, success
+                    transDateRef.push({ "date": date, "time": time, "status": "pending" }).then((res) => {
+                        this.transactionId = res.key;
+                        this.storage.set('transactionId', this.transactionId);
+                        this.showToast(this.transactionId)
+                        const transactionRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/' + this.transactionId + '/store/' + storeId);
+                        transactionRef.set(this.storeData).then(() => {
+                            // let toast = this.toastCtrl.create({
+                            //     message: "Store found!",
+                            //     duration: 3000,
+                            //     position: "bottom"
+                            // });
+                            // toast.present();
+                        }).catch((err) => {
+                            let toast = this.toastCtrl.create({
+                                message: "Store doesn't found!",
+                                duration: 3000,
+                                position: "bottom"
+                            });
+                            toast.present();
+                            console.log(err);
                         });
-                        toast.present();
-                    }).catch((err) => {
-                        let toast = this.toastCtrl.create({
-                            message: "Store doesn't found!",
-                            duration: 3000,
-                            position: "bottom"
-                        });
-                        toast.present();
-                        console.log(err);
                     });
                     resolve(true);
-                })
-            })
-            
+                });
+            }
+            else {
+                // this.storage.set('transactionId', this.transactionId);
+                this.showToast("read product data in transaction " + transactionId)
+                const transactionRef = firebase.database().ref('user/' + this.userId + '/transactions/' + transactionId + '/products/');
+                return new Promise((resolve) =>
+                    transactionRef.on("value", snapshot => {
+                        this.productList = snapshot.val();
+                        this.showToast(snapshot.val().name + snapshot.val().price)
+                        // this.showToast(this.productList)
+                        console.log(snapshot.val())
+                        this.productList.forEach(element => {
+                            this.showToast(element.name + " " + element.price)    
+                        });
+                        resolve(true);
+                    }));
+                // return this.productList;
+            }
         })
+
+
     }
 
-    readStoreData2(storeId: string, products: any) {
-        const storeRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transcations/.../products/');
-        storeRef.update(products).then(res => {
+    addProductToTransaction(storeId: string, products: any, productId: string, transactionId: string) {
+        const storeRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/' + transactionId + '/products/' + productId);
+        storeRef.set(products).then(res => {
             console.log(res);
-        })
+        });
+        let product = products;
+        product['id'] = productId;
+        // this.productList.push(product);
+        // this.showToast(this.productList);
+    }
+
+    getAllProductTransaction() {
+
     }
 
     readProductData(storeId: string) {
