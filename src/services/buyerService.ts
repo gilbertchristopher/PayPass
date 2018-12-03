@@ -65,7 +65,7 @@ export class UserService {
 
                     const transDateRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/');
                     // status terdiri dari pending, cancelled, success
-                    transDateRef.push({ "date": date, "time": time, "status": "pending" }).then((res) => {
+                    transDateRef.push({ "date": date, "time": time, "status": "pending", "storeId": storeId }).then((res) => {
                         this.transactionId = res.key;
 
                         // masukkin transactionId ke localstorage
@@ -74,27 +74,19 @@ export class UserService {
                         // update transactionIdNow ke firebase
                         this.updateUserData({ "transactionIdNow": this.transactionId });
 
-                        this.showToast(this.transactionId)
-                        // masukkin storeData ke firebase pada bagian transaction
-                        const transactionRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/' + this.transactionId + '/store/' + storeId);
-                        transactionRef.set(this.storeData).then(() => {
-                            let toast = this.toastCtrl.create({
-                                message: "Store found!",
-                                duration: 3000,
-                                position: "bottom"
-                            });
-                            toast.present();
-                        }).catch((err) => {
-                            let toast = this.toastCtrl.create({
-                                message: "Store doesn't found!",
-                                duration: 3000,
-                                position: "bottom"
-                            });
-                            toast.present();
+                        // masukkin data store ke localstorage
+                        this.storage.set('storeData', this.storeData);
+
+                        // tampilin toast success
+                        let toast = this.toastCtrl.create({
+                            message: "Store found!",
+                            duration: 3000,
+                            position: "bottom"
                         });
+                        toast.present();
+                
                         resolve({"storeData": this.storeData, "transactionId": this.transactionId});
-                    });
-                    
+                    })
                 });
             }
             else {

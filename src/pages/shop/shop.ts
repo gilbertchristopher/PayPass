@@ -61,7 +61,10 @@ export class ShopPage {
         });
         // this.showToast(this.transactionId + " " + this.productResult);
       });
-
+      this.storage.get('storeData').then(value => {
+        this.storeResult = value;
+      })
+      // this.showToast(this.storeResult.email + " " + this.storeResult.firstname)
     }
   }
 
