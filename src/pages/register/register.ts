@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
-import { LoginPage } from '../login/login';
 import { AuthService } from '../../services/authService';
 import { User } from '../../data/user.interface';
 import { Buyer } from '../../data/buyer.interface';

@@ -2,5 +2,5 @@ export interface Product{
     id: String;
     productName: String;
     productDesc: String;
-    productPic: String; // base64
+    // productPic: String; // base64
 }

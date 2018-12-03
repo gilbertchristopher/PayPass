@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, NavController, LoadingController } from 'ionic-angular';
+import { Platform, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -7,7 +7,7 @@ import firebase from 'firebase';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
-import { BuyerService } from '../services/buyerService';
+import { UserService } from '../services/buyerService';
 import { AuthService } from '../services/authService';
 
 @Component({
@@ -19,7 +19,7 @@ export class MyApp {
   userData1: any;
   userData2: any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private buyerService: BuyerService, private loadingCtrl: LoadingController) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private buyerService: UserService, private loadingCtrl: LoadingController) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -46,7 +46,7 @@ export class MyApp {
           content: 'Loading, fetch data...'
         });
         loader.present();
-        this.buyerService.requestBuyerData().then((buyerInfo) => {
+        this.buyerService.requestUserData().then((buyerInfo) => {
           this.userData1 = buyerInfo;
           console.log(this.userData1);
           loader.dismiss();
