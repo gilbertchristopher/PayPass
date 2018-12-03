@@ -16,7 +16,7 @@
   <!-- <ion-searchbar placeholder="Search Your Product" (ionInput)="onInput($event)"></ion-searchbar> -->
   <hr style="margin-bottom: 2px" />
   <ion-list>
-    <ion-item-sliding>
+    <ion-item-sliding *ngFor = "let product of sellerData.products, let i = index">
       <ion-item> 
         <ion-row>
           <ion-col col-3>
@@ -24,7 +24,7 @@
           </ion-col>
           <ion-col col-9>
             <h3><strong>Beras Kembang 20 kg</strong></h3>
-            <p>Beras setra ramos</p>
+            <p>{{product[product.key].price}}</p>
           </ion-col>
         </ion-row>
       </ion-item>
