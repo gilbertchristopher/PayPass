@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'firebase';
+import { AuthService } from '../../services/authService';
+import { UserService } from '../../services/buyerService';
 
 
 @IonicPage()
@@ -13,7 +15,9 @@ export class EditProfilePage implements OnInit {
   editProfileForm: FormGroup;
   user: User;
   userData = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  buyerData: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService,  private buyerService: UserService) {
+    this.buyerData = this.buyerService.getUserData();
   }
 
   ionViewDidLoad() {
