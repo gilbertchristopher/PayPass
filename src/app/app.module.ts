@@ -35,6 +35,7 @@ import { ProductService } from '../services/productService';
 import { StoreService } from '../services/storeService';
 import { Loc } from '../services/location';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeSellerPage } from '../pages/home-seller/home-seller';
 import { UserService } from '../services/buyerService';
 import { ChooseLocationPage } from '../pages/choose-location/choose-location';
 
@@ -42,6 +43,7 @@ import { ChooseLocationPage } from '../pages/choose-location/choose-location';
   declarations: [
     MyApp,
     HomePage,
+    HomeSellerPage,
     RegisrolePage,
     RegisterPage,
     RegistersellerPage,
@@ -77,6 +79,7 @@ import { ChooseLocationPage } from '../pages/choose-location/choose-location';
   entryComponents: [
     MyApp,
     HomePage,
+    HomeSellerPage,
     RegisrolePage,
     RegisterPage,
     RegistersellerPage,

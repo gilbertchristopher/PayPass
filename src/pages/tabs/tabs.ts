@@ -4,6 +4,7 @@ import { HomePage } from '../home/home';
 import { ShopPage } from '../shop/shop';
 import { ProfilePage } from '../profile/profile';
 import { ProductPage } from '../product/product';
+import { HomeSellerPage } from '../home-seller/home-seller';
 import { UserService } from '../../services/buyerService';
 
 @IonicPage()
@@ -17,7 +18,7 @@ import { UserService } from '../../services/buyerService';
     <ion-tab [root]="profilePage" tabTitle = "Profile" tabIcon ="people"></ion-tab>
   </ion-tabs>
   <ion-tabs *ngIf="isSeller">
-    <ion-tab [root]="homePage" tabTitle = "Home" tabIcon="home"></ion-tab>
+    <ion-tab [root]="homeSellerPage" tabTitle = "Home" tabIcon="home"></ion-tab>
     <ion-tab [root]="productPage" tabTitle = "Product" tabIcon="basket"></ion-tab>
     <ion-tab [root]="profilePage" tabTitle = "Profile" tabIcon ="people"></ion-tab>
   </ion-tabs>
@@ -27,6 +28,7 @@ import { UserService } from '../../services/buyerService';
 export class TabsPage {
 
   homePage = HomePage;
+  homeSellerPage = HomeSellerPage;
   shopPage = ShopPage;
   profilePage = ProfilePage;
   productPage = ProductPage;
