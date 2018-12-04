@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'firebase';
 import { AuthService } from '../../services/authService';
 import { UserService } from '../../services/buyerService';
+import { ChooseLocationPage } from '../choose-location/choose-location';
 
 
 @IonicPage()
@@ -47,6 +48,10 @@ export class EditProfilePage implements OnInit {
   
   edit(){
 
+  }
+
+  openMaps(){
+    this.navCtrl.push(ChooseLocationPage);
   }
 
 }
