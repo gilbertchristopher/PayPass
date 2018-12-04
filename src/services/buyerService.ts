@@ -95,13 +95,11 @@ export class UserService {
 
                 transactionRef.on("value", snapshot => {
                     this.productList = snapshot.val();
-                    this.showToast(snapshot.val().name + snapshot.val().price)
-                    this.productList.forEach(element => {
-                        this.showToast(element.product.price + " " + element.product.qty + " " + element.qty)
-                    });
-                    resolve(true);
+                    // for(let i in this.productList){
+                    //     console.log(this.productList[i])
+                    // }
+                    resolve(snapshot.val());
                 });
-                // return this.productList;
             }
         })
 
