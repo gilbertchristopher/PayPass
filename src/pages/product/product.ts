@@ -6,6 +6,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import firebase from 'firebase';
 import { Product } from '../../data/product.interface';
 import { AuthService } from '../../services/authService';
+import { UserService } from '../../services/buyerService';
+import { ProductStore } from '../../data/productstore.interface';
 
 @IonicPage()
 @Component({
@@ -15,13 +17,28 @@ import { AuthService } from '../../services/authService';
 export class ProductPage {
   isSearchbarOpened = false;
   productData: Product;
+  sellerData : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, private authService: AuthService,
-      private toastCtrl: ToastController) {
-  }
+  productsData: ProductStore[];
+  items: Product[];
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProductPage');
+  constructor(public navCtrl: NavController, public navParams: NavParams, private buyerService:UserService, private authService:AuthService,
+    private toastCtrl: ToastController, private barcodeScanner: BarcodeScanner) {
+    this.sellerData = this.buyerService.getUserData();
+
+    const storeRef = firebase.database().ref('user/'+this.authService.getActiveUser().uid+'/products');
+    storeRef.on("value", snapshot => {
+      let foo = snapshot.val();
+       this.items = [];
+      for(let i in foo){
+        console.log(foo[i].product);
+        this.items.push(foo[i].product);
+        //console.log(items);
+      }
+      for(let item of this.items){
+        console.log(item);
+      }
+    });
   }
 
   async addProduct() {

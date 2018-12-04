@@ -11,14 +11,17 @@ import { EditProfilePage } from '../edit-profile/edit-profile';
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
+  
 })
 export class ProfilePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private userService: UserService) {
+  buyerData: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService,  private buyerService: UserService) {
+    this.buyerData = this.buyerService.getUserData();
   }
 
   ionViewWillEnter(){
-    console.log(this.userService.userData)
+    console.log(this.buyerService.userData)
+    
   }
 
   logout(){

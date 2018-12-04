@@ -8,7 +8,8 @@ export interface User{
     firstname: string;
     lastname: string;
     phoneNumber: string;
-    // address: string;
+    address: string;
+    storeName: string;
     // city: string;
     // regency: string;
     // long: number;
