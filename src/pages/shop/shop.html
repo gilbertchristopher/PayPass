@@ -24,11 +24,11 @@
   <div padding-left>
     <h1>Shopping Cart</h1>
     Lotte Mart, Alam Sutera
-    <!-- {{ storeResult.address }} -->
+    <!-- {{ storeResult.storeName }} -->
   </div>
 
-  <ion-list *ngIf="productResult != null">
-    <ion-card color="light" *ngFor="let product of productResult">
+  <ion-list >
+    <ion-card color="light" *ngFor="let product of products">
       <ion-grid>
         <ion-row>
           <ion-col col-3>
@@ -36,7 +36,7 @@
           </ion-col>
           <ion-col col-9>
             <ion-card-header no-padding padding-bottom>
-              <strong>{{ product.name }}</strong>
+              <strong>{{ product.product.name }}</strong>
             </ion-card-header>
             <ion-card-content no-padding padding-bottom>Rp {{ product.price }}</ion-card-content>
             <ion-item>

@@ -13,12 +13,12 @@ import { ProductTransaction } from '../../data/producttransaction.interface';
   templateUrl: 'shop.html',
 })
 export class ShopPage {
-  productList: ProductTransaction[];
+  productList: {};
+  products: any[] = [];
   productQty: number = 1;
   storeResult: any;
   productResult: ProductTransaction[];
   productData: ProductTransaction;
-  // isStoreFound: string;
   storeId: string;
   transactionId: string;
   options: BarcodeScannerOptions;
@@ -26,42 +26,65 @@ export class ShopPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, private toastCtrl: ToastController, private userService: UserService, private storage: Storage) {
     this.buyerData = this.userService.getUserData();
-    storage.get('productList').then(products => {
-      this.productList.push(products);
-    })
+    // storage.get('productList').then(products => {
+    //   this.productList.push(products);
+    // })
     this.transactionId = this.buyerData.transactionIdNow;
     this.storeId = this.buyerData.storeIdNow;
 
-    if (this.transactionId != "") {
-      this.userService.readStoreData(this.storeId, true, this.transactionId).then(res => {
-        this.showToast(this.transactionId + " " + res);
-      })
+    this.showToast(this.transactionId + " " + this.storeId)
+
+    // if (this.transactionId != "") {
+    //   this.userService.readStoreData(this.storeId, true, this.transactionId).then(res => {
+    //     this.showToast(this.transactionId + " " + res);
+    //     this.productList = res;
+        // this.products = [];
+        // for(let i in res){
+        //   this.products.push(this.productList[i]);
+        //   console.log(res[i])
+        //   this.showToast(this.transactionId + ' ' + res[i].product.desc)
+        // }
+        // for(let i in this.productList){
+        //   this.products.push(this.productList[i])
+        //   console.log(this.productList[i])
+        //   this.showToast(this.transactionId + " " + this.productList[i].product.name);
+        // }
+      // })
       // ambil transaction id sekarang dari local storage
-      this.storage.get('transactionId').then(res => {
-        this.transactionId = res;
+      // this.storage.get('transactionId').then(res => {
+      //   this.transactionId = res;
         // this.userService.readStoreData(this.storeId, true, this.transactionId).then(res => {
         //   // this.productResult.push(res);
         //   this.showToast(this.transactionId + " " + res);
-        });
-        
       // });
 
-    }
+      // });
+
+    // }
   }
 
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     if (this.transactionId != "") {
       // ambil transaction id sekarang dari local storage
+      this.showToast(this.transactionId + " " + this.storeId)
       this.storage.get('transactionId').then(res => {
-        this.transactionId = res;
+        // this.transactionId = res;
         this.userService.readStoreData(this.storeId, true, this.transactionId).then(res => {
-          // this.productResult.push(res);
-          this.showToast(this.transactionId + " " + res);
+          this.productList = res;
+          console.log(res)
+          this.products = [];
+          for (let i in this.productList) {
+            this.products.push(this.productList[i])
+            console.log(this.productList[i])
+            this.showToast(this.transactionId + " " + this.productList[i].product.name);
+          }
         });
-        // this.showToast(this.transactionId + " " + this.productResult);
       });
-
+      this.storage.get('storeData').then(value => {
+        this.storeResult = value;
+      })
+      // this.showToast(this.storeResult.email + " " + this.storeResult.storeName)
     }
   }
 
@@ -76,28 +99,17 @@ export class ShopPage {
 
   async scanBarcode() {
     this.barcodeScanner.scan().then(barcodeData => {
-      // this.showToast(barcodeData.cancelled + " " + barcodeData.format + " " + barcodeData.text + " " + this.isStoreFound + " " + this.transactionId)
-
-
       const storeRef = firebase.database().ref('user/' + this.storeId + '/products/' + barcodeData.text);
       storeRef.on('value', product => {
         this.productData = product.val();
-
         this.productData['qty'] = 1;
-
-        // this.showToast(this.productData.name + " " + this.productData.desc + " " + this.productData.price + " " + this.productData.qty );
-        // this.productList.push(product.val());
         this.userService.addProductToTransaction(this.storeId, this.productData, product.key, this.transactionId);
 
-        // this.storage.set('productList', this.productList).then(() => {
-        //   this.showToast("Product has stored in the cart.");
-        // }).catch(() => {
-        //   this.showToast("Product doesn't found in this store.");
-        // })
+        this.showToast("Product has stored in the cart.");
       })
 
     }).catch(err => {
-
+      this.showToast("Product doesn't found in this store.");
       console.log('Error ', err);
     });
   }

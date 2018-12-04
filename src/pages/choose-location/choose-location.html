@@ -14,15 +14,17 @@
 
 
 <ion-content padding>
-  <div *ngIf = "!!marker">
-  <agm-map
-    [latitude]="lat"
-    [longitude]="lng"
-    [zoom]="16"
-    (mapClick)="onSetMarker($event)">
-  <agm-marker [latitude]="marker.lat" [longitude]="marker.lng">
-  </agm-marker>
-  </agm-map>
- <div #map id="map"></div>
-</div>
+  <!-- <div *ngIf="!!marker"> -->
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="16" (mapClick)="onSetMarker($event)">
+          <agm-marker [latitude]="marker.lat" [longitude]="marker.lng">
+          </agm-marker>
+        </agm-map>
+        <div #map id="map"></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- </div> -->
 </ion-content>
