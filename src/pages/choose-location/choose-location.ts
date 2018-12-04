@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Loc } from '../../services/location';
 import { Geolocation } from '@ionic-native/geolocation';
 import { google } from '@agm/core/services/google-maps-types';
@@ -27,12 +27,13 @@ export class ChooseLocationPage {
   lng = 106.631889;
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geoloc: Geolocation) {
-   
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geoloc: Geolocation, private toastCtrl: ToastController) {
+    this.marker = new Loc();
+    this.onLocate();
   }
 
   onSetMarker(event: any){
-    this.marker = new Loc();
+    
 
     this.marker.setLocation(event.coords.lat, event.coords.lng);
     
@@ -42,7 +43,13 @@ export class ChooseLocationPage {
     this.geoloc.getCurrentPosition()
     .then(
       currLocation => {
-        console.log(currLocation);
+        // console.log(currLocation);
+        let toast = this.toastCtrl.create({
+          message: currLocation.coords.latitude + " " + currLocation.coords.longitude,
+          duration: 3000,
+          position: 'bottom',
+        }) 
+        toast.present();
         this.lat = currLocation.coords.latitude;
         this.lng = currLocation.coords.longitude;
         this.marker.setLocation(this.lat, this.lng);
@@ -50,7 +57,13 @@ export class ChooseLocationPage {
     )
     .catch(
       error => {
-        console.log(error);
+        let toast = this.toastCtrl.create({
+          message: error,
+          duration: 3000,
+          position: 'bottom',
+        }) 
+        toast.present();
+        
       }
     )
   }
