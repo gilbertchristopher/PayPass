@@ -22,6 +22,7 @@ export class EditProfilePage implements OnInit {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditProfilePage');
+  
   }
 
   ngOnInit(){
