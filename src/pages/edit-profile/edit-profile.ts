@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'firebase';
 import { AuthService } from '../../services/authService';
 import { UserService } from '../../services/buyerService';
 import { ChooseLocationPage } from '../choose-location/choose-location';
+import { Loc } from '../../services/location';
 
 
 @IonicPage()
@@ -17,10 +18,16 @@ export class EditProfilePage implements OnInit {
   user: User;
   userData = [];
   buyerData: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService,  private buyerService: UserService) {
+  marker: Loc;
+  lat = -6.178306;
+  lng = 106.631889;
+  
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService,  private buyerService: UserService, private modalCtrl: ModalController) {
     this.buyerData = this.buyerService.getUserData();
   }
 
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditProfilePage');
   
@@ -45,13 +52,24 @@ export class EditProfilePage implements OnInit {
       // handphoneInput: new FormControl(null, Validators.compose([Validators.required]))
     })
   }
-  
-  edit(){
+  onOpenMap() {
+    let modal = this.modalCtrl.create(ChooseLocationPage, {'lat': this.lat, 'lng': this.lng});
+    modal.present();
 
-  }
+    modal.onDidDismiss(
+      (marker: Loc) => {
+        if(marker){
+          this.marker = marker;
+          this.lat = this.marker.lat;
+          this.lng = this.marker.lng;
+          console.log(this.marker);
 
-  openMaps(){
-    this.navCtrl.push(ChooseLocationPage);
+          
+        }
+      }
+    );
   }
+ 
+
 
 }
