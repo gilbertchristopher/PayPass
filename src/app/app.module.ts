@@ -36,6 +36,7 @@ import { StoreService } from '../services/storeService';
 import { Loc } from '../services/location';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../services/buyerService';
+import { ChooseLocationPage } from '../pages/choose-location/choose-location';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { UserService } from '../services/buyerService';
     EditProfilePage,
     HistoryDetailsPage,
     CheckoutPage,
+    ChooseLocationPage,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +93,7 @@ import { UserService } from '../services/buyerService';
     EditProfilePage,
     HistoryDetailsPage,
     CheckoutPage,
+    ChooseLocationPage,
   ],
   providers: [
     StatusBar,
@@ -101,8 +104,8 @@ import { UserService } from '../services/buyerService';
     UserService,
     Loc,
     BarcodeScanner,
-    Geolocation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Geolocation
   ]
 })
 export class AppModule {}
