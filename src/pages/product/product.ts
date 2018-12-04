@@ -4,6 +4,9 @@ import { AddProductPage } from '../add-product/add-product';
 import { EditProductPage } from '../edit-product/edit-product';
 import { UserService } from '../../services/buyerService';
 import { ProductStore } from '../../data/productstore.interface';
+import { AuthService } from '../../services/authService';
+import firebase from 'firebase';
+import { Product } from '../../data/product.interface';
 
 
 @IonicPage()
@@ -16,27 +19,29 @@ export class ProductPage {
   sellerData : any;
   productData: ProductStore;
   productsData: ProductStore[];
+  items: Product[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private buyerService:UserService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private buyerService:UserService, private authService:AuthService) {
     this.sellerData = this.buyerService.getUserData();
-    console.log(this.sellerData);
-    console.log(this.sellerData.products);
-    for(let product of this.sellerData.products){
-      this.productData.price = product.price;
-      this.productData.qty = product.qty;
-      this.productData.product.productName = product.product.name;
-      this.productData.product.productDesc = product.product.desc;
-      this.productData.product.id = product.key;
-      this.productsData.push(this.productData)
-    }
-    for(let product of this.productsData){
-      console.log(product)
-    }
-    // console.log(this.sellerData.products[]);
+
+    const storeRef = firebase.database().ref('user/'+this.authService.getActiveUser().uid+'/products');
+    storeRef.on("value", snapshot => {
+      let foo = snapshot.val();
+       this.items = [];
+      for(let i in foo){
+        console.log(foo[i].product);
+        this.items.push(foo[i].product);
+        //console.log(items);
+      }
+      for(let item of this.items){
+        console.log(item);
+      }
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductPage');
+
   }
 
   addProduct() {
