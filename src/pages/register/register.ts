@@ -50,7 +50,8 @@ export class RegisterPage implements OnInit {
 
   regis(){
     this.user = this.regisForm.value;
+    console.log("masukkk pak eko");
     console.log(this.user)
-    this.authService.signup(this.regisForm.value.email, this.regisForm.value.password, this.user, this.buyerInfo);
+    this.authService.signupBuyer(this.regisForm.value.email, this.regisForm.value.password, this.user);
   }
 }
