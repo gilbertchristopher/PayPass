@@ -11,12 +11,26 @@ export class AuthService {
 
     }
 
-    signup(email: string, password: string, user: User, buyer: Buyer) {
+    signupBuyer(email: string, password: string, user: User) {
+        return firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((userData) => {
+                // console.log("user before ", user);
+                user.id = userData.user.uid;
+                user.role = "Buyer";
+                // console.log("user after ", user);
+                // buyer.user = user;
+                this.storeUser(user);
+            }).catch((error) => {
+                console.log("error ", error);
+            });
+    }
+
+    signupSeller(email: string, password: string, user: User) {
         return firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userData) => {
                 console.log("user before ", user);
                 user.id = userData.user.uid;
-                user.role = "Buyer";
+                user.role = "Seller";
                 console.log("user after ", user);
                 // buyer.user = user;
                 this.storeUser(user);

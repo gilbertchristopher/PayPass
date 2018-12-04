@@ -1,7 +1,7 @@
 page-register {
     .background-login{
         height: 100%; 
-        background-image: url('../../assets/imgs/BackgroundLoginPage_LebihTransparan.png'); 
+        background-image: url('../../assets/imgs/Background_Polos.png'); 
         background-size: cover; 
         background-repeat: no-repeat; 
         background-position: center;
@@ -9,6 +9,7 @@ page-register {
         // background-color: aqua;
         top: 0;
     }
+
     .logo-buyer{
         background-image: url('../../assets/imgs/PayPassLogo_Transaparent.png');
         background-position: center;
@@ -20,9 +21,10 @@ page-register {
     .background-transparent-100{
         background: rgba(255, 255, 255, 0);
     }
+
     .text-field-regis{
         background: rgba(255, 255, 255, 0.5); 
-        border-radius: 5px;
+        border-radius: 0px;
     }
 
     .list1{
