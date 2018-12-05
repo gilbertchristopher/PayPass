@@ -35,6 +35,7 @@ import { ProductService } from '../services/productService';
 import { StoreService } from '../services/storeService';
 import { Loc } from '../services/location';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeSellerPage } from '../pages/home-seller/home-seller';
 import { UserService } from '../services/buyerService';
 import { ChooseLocationPage } from '../pages/choose-location/choose-location';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
@@ -43,6 +44,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
   declarations: [
     MyApp,
     HomePage,
+    HomeSellerPage,
     RegisrolePage,
     RegisterPage,
     RegistersellerPage,
@@ -78,6 +80,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
   entryComponents: [
     MyApp,
     HomePage,
+    HomeSellerPage,
     RegisrolePage,
     RegisterPage,
     RegistersellerPage,
