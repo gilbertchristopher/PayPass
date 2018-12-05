@@ -56,7 +56,7 @@ export class UserService {
             if (!isStoreFound) {
                 const userRef: firebase.database.Reference = firebase.database().ref('user/' + storeId);
                 let datetime = new Date();
-                let date = datetime.getDate() + "/" + datetime.getMonth() + "/" + datetime.getFullYear();
+                let date = datetime.getDate() + "/" + (datetime.getMonth() + 1) + "/" + datetime.getFullYear();
                 let time = datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds();
 
 
