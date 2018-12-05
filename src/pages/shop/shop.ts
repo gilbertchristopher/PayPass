@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { CheckoutPage } from "../checkout/checkout";
 import { UserService } from '../../services/buyerService';
@@ -24,7 +24,8 @@ export class ShopPage {
   options: BarcodeScannerOptions;
   buyerData: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, private toastCtrl: ToastController, private userService: UserService, private storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, 
+      private toastCtrl: ToastController, private userService: UserService, private storage: Storage, private alertCtrl: AlertController) {
     this.buyerData = this.userService.getUserData();
     // storage.get('productList').then(products => {
     //   this.productList.push(products);
@@ -63,7 +64,6 @@ export class ShopPage {
     // }
   }
 
-
   ionViewWillEnter() {
     if (this.transactionId != "") {
       // ambil transaction id sekarang dari local storage
@@ -75,6 +75,7 @@ export class ShopPage {
           console.log(res)
           this.products = [];
           for (let i in this.productList) {
+            this.productList[i].id = i;
             this.products.push(this.productList[i])
             console.log(this.productList[i])
             this.showToast(this.transactionId + " " + this.productList[i].product.name);
@@ -103,6 +104,7 @@ export class ShopPage {
       storeRef.on('value', product => {
         this.productData = product.val();
         this.productData['qty'] = 1;
+        this.products.push(this.productData);
         this.userService.addProductToTransaction(this.storeId, this.productData, product.key, this.transactionId);
 
         this.showToast("Product has stored in the cart.");
@@ -132,13 +134,37 @@ export class ShopPage {
     })
   }
 
-  addProductQuantity(product: any) {
-
+  addProductQuantity(index: any) {
+    this.products[index].qty = this.products[index].qty + 1;
   }
 
-  substractProductQty(product: any) {
-
+  substractProductQuantity(index: any) {
+    if(this.products[index].qty == 1){
+      let alert = this.alertCtrl.create({
+        title: 'Remove Product From Cart',
+        message: 'Do you want to remove this product?',
+        buttons: [
+          {
+            text: 'No',
+            role: 'no',
+            handler: () => {
+              console.log('No');
+            }
+          },
+          {
+            text: 'Yes',
+            handler: () => {
+              this.products.splice(index, 1);
+            }
+          }
+        ]
+      });
+      alert.present();
+    }
+    else
+      this.products[index].qty = this.products[index].qty - 1;
   }
+
   checkout() {
     // const transactionRef = firebase.database().ref('user/' + this.buyerData.id + '/transactions/' + this.transactionId + '/products/');
     // transactionRef.set(this.productList)
