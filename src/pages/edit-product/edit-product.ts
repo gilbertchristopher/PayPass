@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import firebase from 'firebase';
+import { ProductStore } from '../../data/productstore.interface';
+import { ProductService } from '../../services/productService';
 
 
 @IonicPage()
@@ -11,8 +12,12 @@ import firebase from 'firebase';
 })
 export class EditProductPage {
   editProductForm: FormGroup;
+  //addProductForm: FormGroup;
+  productStore: ProductStore;
+  product: any;
+  uid: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private productService: ProductService) {
     //console.log(navParams.data);
   }
 
@@ -35,6 +40,9 @@ export class EditProductPage {
   }
 
   editProduct() {
-    console.log("sesuatu");
+    this.product = {desc: this.editProductForm.value.productDescriptionInput, name: this.editProductForm.value.productNameInput};
+    this.productStore = {product: this.product, qty: this.editProductForm.value.productQtyInput, price: this.editProductForm.value.productPriceInput};
+    this.productService.editProductToStore(this.productStore, this.editProductForm.value.productIDInput);
+    this.navCtrl.pop();
   }
 }
