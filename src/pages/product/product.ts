@@ -32,7 +32,9 @@ export class ProductPage {
        this.items = [];
       for(let i in foo){
         console.log(foo[i].product);
-        this.items.push(foo[i].product);
+        foo[i].id = i;
+        console.log(foo[i].product.id);
+        this.items.push(foo[i]);
         //console.log(items);
       }
       for(let item of this.items){
@@ -82,8 +84,8 @@ export class ProductPage {
     
   }
 
-  editProduct() {
-    this.navCtrl.push(EditProductPage);
+  editProduct(product:any) {
+    this.navCtrl.push(EditProductPage,product);
   }
 
   deleteProduct() {
