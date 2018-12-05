@@ -37,6 +37,7 @@ import { Loc } from '../services/location';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../services/buyerService';
 import { ChooseLocationPage } from '../pages/choose-location/choose-location';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { ChooseLocationPage } from '../pages/choose-location/choose-location';
     Loc,
     BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Geolocation
+    Geolocation,
+    NativeGeocoder,
   ]
 })
 export class AppModule {}
