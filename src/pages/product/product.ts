@@ -8,6 +8,8 @@ import { Product } from '../../data/product.interface';
 import { AuthService } from '../../services/authService';
 import { UserService } from '../../services/buyerService';
 import { ProductStore } from '../../data/productstore.interface';
+import { AlertController } from 'ionic-angular';
+import { ProductService } from '../../services/productService';
 
 @IonicPage()
 @Component({
@@ -23,7 +25,7 @@ export class ProductPage {
   items: Product[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private buyerService:UserService, private authService:AuthService,
-    private toastCtrl: ToastController, private barcodeScanner: BarcodeScanner) {
+    private toastCtrl: ToastController, private barcodeScanner: BarcodeScanner, private alertCtrl: AlertController, private productService: ProductService) {
     this.sellerData = this.buyerService.getUserData();
 
     const storeRef = firebase.database().ref('user/'+this.authService.getActiveUser().uid+'/products');
@@ -85,11 +87,33 @@ export class ProductPage {
   }
 
   editProduct(product:any) {
+    console.log(product);
     this.navCtrl.push(EditProductPage,product);
   }
 
-  deleteProduct() {
-    
+  deleteProduct(productDelete:any) {
+    console.log(productDelete);
+    let alert = this.alertCtrl.create({
+      title: 'Confirm Delete',
+      message: 'Do you want to delete this product?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'no',
+          handler: () => {
+            console.log('No');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            console.log(productDelete);
+            this.productService.removeproduct(productDelete);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 }
