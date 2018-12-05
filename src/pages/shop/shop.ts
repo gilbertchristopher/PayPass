@@ -33,7 +33,22 @@ export class ShopPage {
     this.transactionId = this.buyerData.transactionIdNow;
     this.storeId = this.buyerData.storeIdNow;
 
-    this.showToast(this.transactionId + " " + this.storeId)
+    this.showToast(this.transactionId + " " + this.storeId);
+    // this.storage.remove('cartShop');
+    if (this.transactionId != "") {
+      // ambil transaction id sekarang dari local storage
+      this.storage.get('cartShop').then(value => {
+        if(value != ""){
+          this.products = [];
+          for (let index = 0; index < value.length; index++) {
+            this.products.push(value[index]);
+          }
+        }
+        console.log("cartshop", value)
+      }).catch(err => {
+        console.log("cart error", err)
+      })
+    }
 
     // if (this.transactionId != "") {
     //   this.userService.readStoreData(this.storeId, true, this.transactionId).then(res => {
@@ -64,30 +79,38 @@ export class ShopPage {
     // }
   }
 
-  ionViewWillEnter() {
-    if (this.transactionId != "") {
-      // ambil transaction id sekarang dari local storage
-      this.showToast(this.transactionId + " " + this.storeId)
-      this.storage.get('transactionId').then(res => {
-        // this.transactionId = res;
-        this.userService.readStoreData(this.storeId, true, this.transactionId).then(res => {
-          this.productList = res;
-          console.log(res)
-          this.products = [];
-          for (let i in this.productList) {
-            this.productList[i].id = i;
-            this.products.push(this.productList[i])
-            console.log(this.productList[i])
-            this.showToast(this.transactionId + " " + this.productList[i].product.name);
-          }
-        });
-      });
-      this.storage.get('storeData').then(value => {
-        this.storeResult = value;
-      })
-      // this.showToast(this.storeResult.email + " " + this.storeResult.storeName)
-    }
-  }
+  // ionViewWillEnter() {
+  //   if (this.transactionId != "") {
+  //     // ambil transaction id sekarang dari local storage
+  //     this.storage.get('cartShop').then(value => {
+  //       if(value != ""){
+
+  //       }
+  //       console.log("cartshop", value)
+  //     }).catch(err => {
+  //       console.log("cart error", err)
+  //     })
+  //     // this.showToast(this.transactionId + " " + this.storeId)
+  //     // this.storage.get('transactionId').then(res => {
+  //     //   // this.transactionId = res;
+  //     //   this.userService.readStoreData(this.storeId, true, this.transactionId).then(res => {
+  //     //     this.productList = res;
+  //     //     console.log(res)
+  //     //     this.products = [];
+  //     //     for (let i in this.productList) {
+  //     //       this.productList[i].id = i;
+  //     //       this.products.push(this.productList[i])
+  //     //       console.log(this.productList[i])
+  //     //       this.showToast(this.transactionId + " " + this.productList[i].product.name);
+  //     //     }
+  //     //   });
+  //     // });
+  //     // this.storage.get('storeData').then(value => {
+  //     //   this.storeResult = value;
+  //     // })
+  //     // this.showToast(this.storeResult.email + " " + this.storeResult.storeName)
+  //   }
+  // }
 
   showToast(message: string) {
     let toast = this.toastCtrl.create({
@@ -100,16 +123,20 @@ export class ShopPage {
 
   async scanBarcode() {
     this.barcodeScanner.scan().then(barcodeData => {
-      const storeRef = firebase.database().ref('user/' + this.storeId + '/products/' + barcodeData.text);
-      storeRef.on('value', product => {
-        this.productData = product.val();
-        this.productData['qty'] = 1;
-        this.products.push(this.productData);
-        this.userService.addProductToTransaction(this.storeId, this.productData, product.key, this.transactionId);
+      if(barcodeData.text != ""){
+        const storeRef = firebase.database().ref('user/' + this.storeId + '/products/' + barcodeData.text);
+        storeRef.on('value', product => {
+          this.productData = product.val();
+          this.productData['qty'] = 1;
+          this.productData['id'] = barcodeData.text;
+          console.log('productData ', this.productData);
+          this.products.push(this.productData);
+          this.storage.set('cartShop', this.products);
+          // this.userService.addProductToTransaction(this.storeId, this.productData, product.key, this.transactionId);
 
-        this.showToast("Product has stored in the cart.");
-      })
-
+          this.showToast("Product has stored in the cart.");
+        })
+      }
     }).catch(err => {
       this.showToast("Product doesn't found in this store.");
       console.log('Error ', err);
@@ -136,6 +163,7 @@ export class ShopPage {
 
   addProductQuantity(index: any) {
     this.products[index].qty = this.products[index].qty + 1;
+    this.storage.set('cartShop', this.products);
   }
 
   substractProductQuantity(index: any) {
@@ -155,14 +183,17 @@ export class ShopPage {
             text: 'Yes',
             handler: () => {
               this.products.splice(index, 1);
+              this.storage.set('cartShop',this.products);
             }
           }
         ]
       });
       alert.present();
     }
-    else
+    else {
       this.products[index].qty = this.products[index].qty - 1;
+      this.storage.set('cartShop', this.products);
+    }
   }
 
   checkout() {
@@ -173,6 +204,7 @@ export class ShopPage {
     // if(this.productList.length > 0) this.productList.splice(0, this.productList.length-1);
     this.storage.remove('productList');
     this.storage.remove('transactionId');
+    this.storage.remove('cartShop');
     this.transactionId = null;
     this.navCtrl.push(CheckoutPage);
   }
