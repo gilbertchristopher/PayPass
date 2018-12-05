@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
 import { ProductTransaction } from '../../data/producttransaction.interface';
 
+
 @IonicPage()
 @Component({
   selector: 'page-shop',
@@ -24,7 +25,8 @@ export class ShopPage {
   options: BarcodeScannerOptions;
   buyerData: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, private toastCtrl: ToastController, private userService: UserService, private storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, private toastCtrl: ToastController, 
+    private userService: UserService, private storage: Storage) {
     this.buyerData = this.userService.getUserData();
     // storage.get('productList').then(products => {
     //   this.productList.push(products);
