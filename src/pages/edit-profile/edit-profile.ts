@@ -19,6 +19,7 @@ export class EditProfilePage implements OnInit {
   userData = [];
   buyerData: any;
   marker: Loc;
+  address: any;
   lat = -6.178306;
   lng = 106.631889;
   
@@ -57,14 +58,14 @@ export class EditProfilePage implements OnInit {
     modal.present();
 
     modal.onDidDismiss(
-      (marker: Loc) => {
+      (marker: Loc, data: any) => {
         if(marker){
           this.marker = marker;
           this.lat = this.marker.lat;
           this.lng = this.marker.lng;
           console.log(this.marker);
-
-          
+          console.log(data);
+          this.address = data;
         }
       }
     );

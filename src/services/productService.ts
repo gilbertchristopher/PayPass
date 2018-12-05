@@ -43,6 +43,24 @@ export class ProductService {
         })
     }
 
+    editProductToStore(product: ProductStore, id: string){
+        let uid = this.authSvc.getActiveUser().uid;
+        let loading = this.loadingCtrl.create({
+            spinner: 'circles',
+            content: 'Loading, Please Wait...',
+            dismissOnPageChange: true,
+        });
+      
+        loading.present();
+        const productRef: firebase.database.Reference = firebase.database().ref('user/' + uid + '/products/' + id);
+
+        productRef.update(product).then(res => {
+            loading.dismiss();
+        }).catch(err => {
+            loading.dismiss();
+        })
+    }
+
     // productList(token: string) {
     //     const uid = this.authSvc.getActiveUser().uid;
     //     return this.http
