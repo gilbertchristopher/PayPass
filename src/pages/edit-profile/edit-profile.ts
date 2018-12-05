@@ -24,14 +24,8 @@ export class EditProfilePage implements OnInit {
   lng = 106.631889;
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService,  private buyerService: UserService, private modalCtrl: ModalController) {
-    this.buyerData = this.buyerService.getUserData();
-  }
-
-  
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EditProfilePage');
-  
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService,  private userService: UserService, private modalCtrl: ModalController) {
+    this.buyerData = this.userService.getUserData();
   }
 
   ngOnInit(){
@@ -58,19 +52,22 @@ export class EditProfilePage implements OnInit {
     modal.present();
 
     modal.onDidDismiss(
-      (marker: Loc, data: any) => {
-        if(marker){
-          this.marker = marker;
+      (data: any) => {
+        if(data.marker){
+          this.marker = data.marker;
           this.lat = this.marker.lat;
           this.lng = this.marker.lng;
-          console.log(this.marker);
-          console.log(data);
-          this.address = data;
+          this.address = data.address;
         }
       }
     );
   }
  
+  edit(){
+    this.buyerData = {"email": this.editProfileForm.value.email, "firstname": this.editProfileForm.value.firstname, "lastname":this.editProfileForm.value.lastname, "phoneNumber": this.editProfileForm.value.phoneNumber, "address": this.editProfileForm.value.addressInput, "dateOfBirth": this.editProfileForm.value.dateOfBirth}
+    this.userService.updateUserData(this.buyerData);
+    this.navCtrl.pop();
+  }
 
 
 }

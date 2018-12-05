@@ -6,12 +6,6 @@ import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResul
 
 import { google } from '@agm/core/services/google-maps-types';
 
-/**
- * Generated class for the ChooseLocationPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -21,80 +15,81 @@ import { google } from '@agm/core/services/google-maps-types';
 export class ChooseLocationPage {
 
   @ViewChild('map') mapElement;
-  map:any;
+  map: any;
 
 
   marker: Loc;
   lat = -6.178306;
   lng = 106.631889;
-  
+  address: string;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geoloc: Geolocation, private toastCtrl: ToastController, private modalCtrl: ModalController, private viewCtrl: ViewController, private nativeGeocoder: NativeGeocoder) {
     this.marker = new Loc();
     this.onLocate();
   }
 
-  onSetMarker(event: any){
-    
-
+  onSetMarker(event: any) {
     this.marker.setLocation(event.coords.lat, event.coords.lng);
-    
   }
 
-  onLocate(){
+  onLocate() {
     this.geoloc.getCurrentPosition()
-    .then(
-      currLocation => {
-        // console.log(currLocation);
-        let toast = this.toastCtrl.create({
-          message: currLocation.coords.latitude + " " + currLocation.coords.longitude,
-          duration: 3000,
-          position: 'bottom',
-        }) 
-        toast.present();
-        this.lat = currLocation.coords.latitude;
-        this.lng = currLocation.coords.longitude;
-        this.marker.setLocation(this.lat, this.lng);
-      }
-    )
-    .catch(
-      error => {
-        let toast = this.toastCtrl.create({
-          message: error,
-          duration: 3000,
-          position: 'bottom',
-        }) 
-        toast.present();
-        
-      }
-    )
-  }
-  
-  onSubmit(){
-    console.log(this.marker);
+      .then(
+        currLocation => {
+          this.lat = currLocation.coords.latitude;
+          this.lng = currLocation.coords.longitude;
+          this.marker.setLocation(this.lat, this.lng);
+        }
+      )
+      .catch(
+        error => {
+          let toast = this.toastCtrl.create({
+            message: error,
+            duration: 3000,
+            position: 'bottom',
+          })
+          toast.present();
 
+        }
+      )
+  }
+
+  onSubmit() {
     let options: NativeGeocoderOptions = {
       useLocale: true,
       maxResults: 5
     };
-  
+
 
     this.nativeGeocoder.reverseGeocode(this.lat, this.lng, options)
-    .then((result: NativeGeocoderReverseResult[]) => {
-      console.log(JSON.stringify(result[0]))
-      let toast = this.toastCtrl.create({message: JSON.stringify(result[0].countryName), duration: 3000, position: "bottom"})
-      toast.present();
-      this.viewCtrl.dismiss(this.marker, JSON.stringify(result[0]))
-    }).catch((error: any) => console.log(error));
+      .then((result: NativeGeocoderReverseResult[]) => {
+        this.address = this.generateAddress(result[0]);
+        
+        this.viewCtrl.dismiss({marker: this.marker, "data": JSON.stringify(result[0]), "address": this.address})
+      }).catch((error: any) => console.log(error));
 
   }
 
-  cancel(){
+  generateAddress(addressObj) {
+    let obj = [];
+    let address = "";
+    for (let key in addressObj) {
+      obj.push(addressObj[key]);
+    }
+    obj.reverse();
+    for (let val in obj) {
+      if (obj[val].length)
+        address += obj[val] + ', ';
+    }
+    return address.slice(0, -2);
+  }
+
+  cancel() {
     this.viewCtrl.dismiss();
-    
   }
 
-  
+
 
   ionViewDidLoad() {
     // // console.log('ionViewDidLoad ChooseLocationPage');

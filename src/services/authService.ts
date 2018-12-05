@@ -33,7 +33,7 @@ export class AuthService {
                 user.role = "Seller";
                 console.log("user after ", user);
                 // buyer.user = user;
-                this.storeUser(user);
+                this.storeSeller(user);
             }).catch((error) => {
                 console.log("error ", error);
             });
@@ -50,6 +50,34 @@ export class AuthService {
     getActiveUser() {
         return firebase.auth().currentUser;
     }
+
+    storeSeller(user: User){
+        let toast = this.toastCtrl.create({
+            message: "Register success",
+            duration: 3000,
+            position: 'bottom'
+        })
+        firebase.database().ref('user/' + user.id).set({
+            "email": user.email,
+            "password": user.password,
+            "role": user.role,
+            "fullname": user.fullname,
+            "storename": user.storename,
+            "phoneNumber": user.phoneNumber,
+            "address": user.address,
+        }, function (error) {
+            if (error) {
+                // The write failed...
+                console.log("error")
+            } else {
+                // Data saved successfully!
+                
+                toast.present();
+                console.log("success")
+            }
+        });
+    }
+    
 
     storeUser(user: User) {
         let toast = this.toastCtrl.create({
@@ -70,7 +98,7 @@ export class AuthService {
             "phoneNumber": user.phoneNumber,
             "transactionIdNow": "",
             "storeIdNow": "",
-        }, function (error) {
+        }   , function (error) {
             if (error) {
                 // The write failed...
                 console.log("error")

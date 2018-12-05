@@ -56,7 +56,7 @@ export class UserService {
             if (!isStoreFound) {
                 const userRef: firebase.database.Reference = firebase.database().ref('user/' + storeId);
                 let datetime = new Date();
-                let date = datetime.getDate() + "/" + datetime.getMonth() + "/" + datetime.getFullYear();
+                let date = datetime.getDate() + "/" + (datetime.getMonth() + 1) + "/" + datetime.getFullYear();
                 let time = datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds();
 
 
@@ -90,14 +90,10 @@ export class UserService {
                 });
             }
             else {
-                // this.showToast("read product data in transaction " + transactionId)
                 const transactionRef = firebase.database().ref('user/' + this.userId + '/transactions/' + transactionId + '/products/');
 
                 transactionRef.on("value", snapshot => {
                     this.productList = snapshot.val();
-                    // for(let i in this.productList){
-                    //     console.log(this.productList[i])
-                    // }
                     resolve(snapshot.val());
                 });
             }

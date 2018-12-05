@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
 import { ProductTransaction } from '../../data/producttransaction.interface';
 
+
 @IonicPage()
 @Component({
   selector: 'page-shop',
@@ -36,7 +37,7 @@ export class ShopPage {
     this.showToast(this.transactionId + " " + this.storeId);
     // this.storage.remove('cartShop');
     if (this.transactionId != "") {
-      // ambil transaction id sekarang dari local storage
+      // ambil cart shop sekarang dari local storage
       this.storage.get('cartShop').then(value => {
         if(value != ""){
           this.products = [];
@@ -48,6 +49,14 @@ export class ShopPage {
       }).catch(err => {
         console.log("cart error", err)
       })
+
+      // this.storage.get('storeData').then(value => {
+      //   for(let i in value){
+      //     this.showToast(value[i].storeName + " " + value[i].email);
+      //     this.storeResult = value[i];
+      //   }
+      //   // this.storeResult = value;
+      // })
     }
 
     // if (this.transactionId != "") {
@@ -197,11 +206,8 @@ export class ShopPage {
   }
 
   checkout() {
-    // const transactionRef = firebase.database().ref('user/' + this.buyerData.id + '/transactions/' + this.transactionId + '/products/');
-    // transactionRef.set(this.productList)
     this.showToast("Checkout Success");
     // this.userService.addProductToTransaction(this.isStoreFound, this.productList)
-    // if(this.productList.length > 0) this.productList.splice(0, this.productList.length-1);
     this.storage.remove('productList');
     this.storage.remove('transactionId');
     this.storage.remove('cartShop');
