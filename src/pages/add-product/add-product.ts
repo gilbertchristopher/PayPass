@@ -35,7 +35,7 @@ export class AddProductPage implements OnInit{
   }
 
   addProduct() {
-    this.product = {desc: this.addProductForm.value.productNameInput, name: this.addProductForm.value.productDescriptionInput};
+    this.product = {desc: this.addProductForm.value.productDescriptionInput, name: this.addProductForm.value.productNameInput};
     this.productStore = {product: this.product, qty: this.addProductForm.value.productQtyInput, price: this.addProductForm.value.productPriceInput};
     this.productService.addProductToStore(this.productStore, this.addProductForm.value.productIDInput);
     this.navCtrl.pop();

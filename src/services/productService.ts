@@ -18,7 +18,10 @@ export class ProductService {
     }
 
     removeproduct(product: Product){
-        this.productData.splice(this.productData.indexOf(product), 1);
+        let uid = this.authSvc.getActiveUser().uid;
+        const storeRef = firebase.database().ref('user/' + uid + '/products/');
+        storeRef.child(product.id).remove();
+        //this.productData.splice(this.productData.indexOf(product), 1);
     }
 
     getAllproduct(){
