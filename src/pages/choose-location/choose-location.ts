@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ModalController, ViewController } from 'ionic-angular';
 import { Loc } from '../../services/location';
 import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
+
 import { google } from '@agm/core/services/google-maps-types';
 
 /**
@@ -27,7 +29,7 @@ export class ChooseLocationPage {
   lng = 106.631889;
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geoloc: Geolocation, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geoloc: Geolocation, private toastCtrl: ToastController, private modalCtrl: ModalController, private viewCtrl: ViewController, private nativeGeocoder: NativeGeocoder) {
     this.marker = new Loc();
     this.onLocate();
   }
@@ -67,6 +69,32 @@ export class ChooseLocationPage {
       }
     )
   }
+  
+  onSubmit(){
+    console.log(this.marker);
+
+    let options: NativeGeocoderOptions = {
+      useLocale: true,
+      maxResults: 5
+    };
+  
+
+    this.nativeGeocoder.reverseGeocode(this.lat, this.lng, options)
+    .then((result: NativeGeocoderReverseResult[]) => {
+      console.log(JSON.stringify(result[0]))
+      let toast = this.toastCtrl.create({message: JSON.stringify(result[0].countryName), duration: 3000, position: "bottom"})
+      toast.present();
+      this.viewCtrl.dismiss(this.marker, JSON.stringify(result[0]))
+    }).catch((error: any) => console.log(error));
+
+  }
+
+  cancel(){
+    this.viewCtrl.dismiss();
+    
+  }
+
+  
 
   ionViewDidLoad() {
     // // console.log('ionViewDidLoad ChooseLocationPage');
