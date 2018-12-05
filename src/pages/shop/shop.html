@@ -23,8 +23,7 @@
 <ion-content *ngIf="storeId" style="padding-top: 80px; padding-bottom: 100px;">
   <div padding-left>
     <h1>Shopping Cart</h1>
-    Lotte Mart, Alam Sutera
-    <!-- {{ storeResult.storeName }} -->
+    <!-- {{ storeResult.storeName }}, Alam Sutera -->
   </div>
 
   <ion-list >
@@ -41,9 +40,9 @@
             <ion-card-content no-padding padding-bottom>Rp {{ product.price }}</ion-card-content>
             <ion-item>
               <div text-right>
-                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;">-</button>
-                <input text-center type="number" value="{{productQty}}" style="width: 30px; height: 30px; align-self: center; border-radius: 4px;">
-                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;">+</button>
+                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;" (click)="substractProductQty(product)">-</button>
+                <input text-center type="number" value="{{product.qty}}" style="width: 30px; height: 30px; align-self: center; border-radius: 4px;">
+                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;" (click)="addProductQty(product)">+</button>
               </div>
             </ion-item>
           </ion-col>
@@ -51,55 +50,6 @@
       </ion-grid>
     </ion-card>
   </ion-list>
-  <!-- <ion-list>
-    <ion-item>
-      <ion-card color="light">
-        <ion-grid>
-          <ion-row>
-            <ion-col col-3>
-              <img src="../../assets/imgs/icon.png" style="width: 70px; height: 70px; border-radius: 4px;">
-            </ion-col>
-            <ion-col col-9>
-              <ion-card-header no-padding padding-bottom>
-                <strong>Sprite per dus</strong>
-              </ion-card-header>
-              <ion-card-content no-padding padding-bottom>Rp 100.000</ion-card-content>
-              <div text-right>
-                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;">-</button>
-                <input text-center type="number" value="{{productQty}}" style="width: 30px; height: 30px; align-self: center; border-radius: 4px;">
-                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;">+</button>
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-      <ion-card color="light">
-        <ion-grid>
-          <ion-row>
-            <ion-col col-3>
-              <img src="../../assets/imgs/logo.png" style="width: 70px; height: 70px; border-radius: 4px;">
-            </ion-col>
-            <ion-col col-9>
-              <ion-card-header no-padding padding-bottom>
-                <strong>Coca Cola per dus</strong>
-              </ion-card-header>
-              <ion-card-content no-padding padding-bottom>Rp 100.000</ion-card-content>
-              <div text-right>
-                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;">-</button>
-                <input text-center type="number" value="{{productQty}}" style="width: 30px; height: 30px; align-self: center; border-radius: 4px;">
-                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;">+</button>
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-    </ion-item>
-  </ion-list> -->
-  <div *ngIf="productResult">
-    <p>{{ productResult.cancelled }}</p>
-    <p>{{ productResult.format }}</p>
-    <p>{{ productResult.text }}</p>
-  </div>
   <ion-grid style="position: absolute; left: 0; bottom: 0">
     <ion-row>
       <ion-col col-10>
