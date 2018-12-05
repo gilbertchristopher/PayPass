@@ -13,8 +13,8 @@
 <ion-content>
   <h1 padding-left>Store Lists</h1>
   <ion-list>
-    <ion-item>
-      <ion-card (click)="goToStoreDetailPage()">
+    <ion-item *ngFor = "let Store of seller">
+      <ion-card (click)="goToStoreDetailPage(Store)" no-margin>
         <ion-grid>
           <ion-row>
             <ion-col col-3 class="image-card-list">
@@ -22,14 +22,14 @@
             </ion-col>
             <ion-col col-9>
               <ion-card-header>
-                <strong>Toko A</strong>
+                <strong> {{ Store.storeName }}</strong>
               </ion-card-header>
-              <ion-card-content>Gading Serpong, Tangerang</ion-card-content>
+              <ion-card-content>Phone Number : {{ Store.phoneNumber }}</ion-card-content>
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-card>
-      <ion-card>
+      <!-- <ion-card>
         <ion-grid>
           <ion-row>
             <ion-col col-3 class="image-card-list">
@@ -103,7 +103,7 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-      </ion-card>
+      </ion-card> -->
     </ion-item>
   </ion-list>
 </ion-content>
