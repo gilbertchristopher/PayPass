@@ -82,6 +82,8 @@ export class ChooseLocationPage {
     this.nativeGeocoder.reverseGeocode(this.lat, this.lng, options)
     .then((result: NativeGeocoderReverseResult[]) => {
       console.log(JSON.stringify(result[0]))
+      let toast = this.toastCtrl.create({message: JSON.stringify(result[0].countryName), duration: 3000, position: "bottom"})
+      toast.present();
       this.viewCtrl.dismiss(this.marker, JSON.stringify(result[0]))
     }).catch((error: any) => console.log(error));
 
