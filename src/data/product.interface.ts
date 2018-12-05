@@ -1,6 +1,6 @@
 export interface Product{
-    id: String;
-    productName: String;
-    productDesc: String;
+    id: string;
+    productName: string;
+    productDesc: string;
     // productPic: String; // base64
 }
