@@ -33,34 +33,6 @@ export class ShopPage {
     this.storeId = this.buyerData.storeIdNow;
 
     this.showToast(this.transactionId + " " + this.storeId)
-
-    // if (this.transactionId != "") {
-    //   this.userService.readStoreData(this.storeId, true, this.transactionId).then(res => {
-    //     this.showToast(this.transactionId + " " + res);
-    //     this.productList = res;
-        // this.products = [];
-        // for(let i in res){
-        //   this.products.push(this.productList[i]);
-        //   console.log(res[i])
-        //   this.showToast(this.transactionId + ' ' + res[i].product.desc)
-        // }
-        // for(let i in this.productList){
-        //   this.products.push(this.productList[i])
-        //   console.log(this.productList[i])
-        //   this.showToast(this.transactionId + " " + this.productList[i].product.name);
-        // }
-      // })
-      // ambil transaction id sekarang dari local storage
-      // this.storage.get('transactionId').then(res => {
-      //   this.transactionId = res;
-        // this.userService.readStoreData(this.storeId, true, this.transactionId).then(res => {
-        //   // this.productResult.push(res);
-        //   this.showToast(this.transactionId + " " + res);
-      // });
-
-      // });
-
-    // }
   }
 
 
@@ -69,20 +41,21 @@ export class ShopPage {
       // ambil transaction id sekarang dari local storage
       this.showToast(this.transactionId + " " + this.storeId)
       this.storage.get('transactionId').then(res => {
-        // this.transactionId = res;
         this.userService.readStoreData(this.storeId, true, this.transactionId).then(res => {
           this.productList = res;
-          console.log(res)
+          
           this.products = [];
           for (let i in this.productList) {
             this.products.push(this.productList[i])
-            console.log(this.productList[i])
-            this.showToast(this.transactionId + " " + this.productList[i].product.name);
           }
         });
       });
       this.storage.get('storeData').then(value => {
-        this.storeResult = value;
+        for(let i in value){
+          this.showToast(value[i].storeName + " " + value[i].email);
+          this.storeResult = value[i];
+        }
+        // this.storeResult = value;
       })
       // this.showToast(this.storeResult.email + " " + this.storeResult.storeName)
     }
@@ -133,18 +106,21 @@ export class ShopPage {
   }
 
   addProductQuantity(product: any) {
-
+    this.products[this.products.indexOf(product)].qty = this.products[this.products.indexOf(product)].qty + 1;
   }
 
   substractProductQty(product: any) {
-
+    if(this.products[this.products.indexOf(product)].qty > 1){
+      this.products[this.products.indexOf(product)].qty = this.products[this.products.indexOf(product)].qty - 1;
+    }
+    else{
+      this.products.splice(this.products.indexOf(product), 1);
+    }
+    
   }
   checkout() {
-    // const transactionRef = firebase.database().ref('user/' + this.buyerData.id + '/transactions/' + this.transactionId + '/products/');
-    // transactionRef.set(this.productList)
     this.showToast("Checkout Success");
     // this.userService.addProductToTransaction(this.isStoreFound, this.productList)
-    // if(this.productList.length > 0) this.productList.splice(0, this.productList.length-1);
     this.storage.remove('productList');
     this.storage.remove('transactionId');
     this.transactionId = null;
