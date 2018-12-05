@@ -56,7 +56,7 @@ export class UserService {
             if (!isStoreFound) {
                 const userRef: firebase.database.Reference = firebase.database().ref('user/' + storeId);
                 let datetime = new Date();
-                let date = datetime.getDate() + "/" + datetime.getMonth() + "/" + datetime.getFullYear();
+                let date = datetime.getDate() + "/" + (datetime.getMonth() + 1) + "/" + datetime.getFullYear();
                 let time = datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds();
 
 
@@ -65,7 +65,7 @@ export class UserService {
 
                     const transDateRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/');
                     // status terdiri dari pending, cancelled, success
-                    transDateRef.push({ "date": date, "time": time, "status": "pending" }).then((res) => {
+                    transDateRef.push({ "date": date, "time": time, "status": "pending", "storeId": storeId }).then((res) => {
                         this.transactionId = res.key;
 
                         // masukkin transactionId ke localstorage
@@ -74,42 +74,28 @@ export class UserService {
                         // update transactionIdNow ke firebase
                         this.updateUserData({ "transactionIdNow": this.transactionId });
 
-                        this.showToast(this.transactionId)
-                        // masukkin storeData ke firebase pada bagian transaction
-                        const transactionRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/' + this.transactionId + '/store/' + storeId);
-                        transactionRef.set(this.storeData).then(() => {
-                            let toast = this.toastCtrl.create({
-                                message: "Store found!",
-                                duration: 3000,
-                                position: "bottom"
-                            });
-                            toast.present();
-                        }).catch((err) => {
-                            let toast = this.toastCtrl.create({
-                                message: "Store doesn't found!",
-                                duration: 3000,
-                                position: "bottom"
-                            });
-                            toast.present();
+                        // masukkin data store ke localstorage
+                        this.storage.set('storeData', this.storeData);
+
+                        // tampilin toast success
+                        let toast = this.toastCtrl.create({
+                            message: "Store found!",
+                            duration: 3000,
+                            position: "bottom"
                         });
+                        toast.present();
+                
                         resolve({"storeData": this.storeData, "transactionId": this.transactionId});
-                    });
-                    
+                    })
                 });
             }
             else {
-                // this.showToast("read product data in transaction " + transactionId)
                 const transactionRef = firebase.database().ref('user/' + this.userId + '/transactions/' + transactionId + '/products/');
 
                 transactionRef.on("value", snapshot => {
                     this.productList = snapshot.val();
-                    this.showToast(snapshot.val().name + snapshot.val().price)
-                    this.productList.forEach(element => {
-                        this.showToast(element.product.price + " " + element.product.qty + " " + element.qty)
-                    });
-                    resolve(true);
+                    resolve(snapshot.val());
                 });
-                // return this.productList;
             }
         })
 

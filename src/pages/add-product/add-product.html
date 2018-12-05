@@ -14,11 +14,15 @@
           <ion-list>
             <ion-item class="text-field-login">
               <ion-label stacked><strong>ID</strong></ion-label>
-              <ion-input type="text" placeholder="Product ID" formControlName="productIDInput"></ion-input>
+              <ion-input type="text" placeholder="Product ID" formControlName="productIDInput" readonly="true"></ion-input>
             </ion-item>
             <ion-item class="text-field-login">
               <ion-label stacked><strong>Name</strong></ion-label>
-              <ion-input type="text" placeholder="Product Name" formControlName="productNameInput"></ion-input>
+              <ion-input type="text" placeholder="Product Name" formControlName="productNameInput" readonly="true"></ion-input>
+            </ion-item>
+            <ion-item class="text-field-login">
+              <ion-label stacked><strong>Description</strong></ion-label>
+              <ion-input type="text" placeholder="Product Description" formControlName="productDescriptionInput" readonly="true"></ion-input>
             </ion-item>
             <ion-item class="text-field-login">
               <ion-label stacked><strong>Quantity</strong></ion-label>
@@ -27,10 +31,6 @@
             <ion-item class="text-field-login">
               <ion-label stacked><strong>Price</strong></ion-label>
               <ion-input type="number" placeholder="Product Price" formControlName="productPriceInput"></ion-input>
-            </ion-item>
-            <ion-item class="text-field-login">
-              <ion-label stacked><strong>Description</strong></ion-label>
-              <ion-input type="text" placeholder="Product Description" formControlName="productDescriptionInput"></ion-input>
             </ion-item>
           </ion-list>
           <button ion-button full color="theme" [disabled]="!addProductForm.valid" type="submit">Add Product</button>

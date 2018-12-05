@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'firebase';
+import { AuthService } from '../../services/authService';
+import { UserService } from '../../services/buyerService';
+import { ChooseLocationPage } from '../choose-location/choose-location';
+import { Loc } from '../../services/location';
 
 
 @IonicPage()
@@ -13,11 +17,15 @@ export class EditProfilePage implements OnInit {
   editProfileForm: FormGroup;
   user: User;
   userData = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  buyerData: any;
+  marker: Loc;
+  address: any;
+  lat = -6.178306;
+  lng = 106.631889;
+  
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EditProfilePage');
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService,  private userService: UserService, private modalCtrl: ModalController) {
+    this.buyerData = this.userService.getUserData();
   }
 
   ngOnInit(){
@@ -39,9 +47,27 @@ export class EditProfilePage implements OnInit {
       // handphoneInput: new FormControl(null, Validators.compose([Validators.required]))
     })
   }
-  
-  edit(){
+  onOpenMap() {
+    let modal = this.modalCtrl.create(ChooseLocationPage, {'lat': this.lat, 'lng': this.lng});
+    modal.present();
 
+    modal.onDidDismiss(
+      (data: any) => {
+        if(data.marker){
+          this.marker = data.marker;
+          this.lat = this.marker.lat;
+          this.lng = this.marker.lng;
+          this.address = data.address;
+        }
+      }
+    );
   }
+ 
+  edit(){
+    this.buyerData = {"email": this.editProfileForm.value.email, "firstname": this.editProfileForm.value.firstname, "lastname":this.editProfileForm.value.lastname, "phoneNumber": this.editProfileForm.value.phoneNumber, "address": this.editProfileForm.value.addressInput, "dateOfBirth": this.editProfileForm.value.dateOfBirth}
+    this.userService.updateUserData(this.buyerData);
+    this.navCtrl.pop();
+  }
+
 
 }

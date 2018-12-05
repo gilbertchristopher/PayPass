@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
 import { IonicStorageModule } from '@ionic/storage';
+import { Push } from '@ionic-native/push';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -35,12 +36,16 @@ import { ProductService } from '../services/productService';
 import { StoreService } from '../services/storeService';
 import { Loc } from '../services/location';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeSellerPage } from '../pages/home-seller/home-seller';
 import { UserService } from '../services/buyerService';
+import { ChooseLocationPage } from '../pages/choose-location/choose-location';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    HomeSellerPage,
     RegisrolePage,
     RegisterPage,
     RegistersellerPage,
@@ -57,6 +62,7 @@ import { UserService } from '../services/buyerService';
     EditProfilePage,
     HistoryDetailsPage,
     CheckoutPage,
+    ChooseLocationPage,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +81,7 @@ import { UserService } from '../services/buyerService';
   entryComponents: [
     MyApp,
     HomePage,
+    HomeSellerPage,
     RegisrolePage,
     RegisterPage,
     RegistersellerPage,
@@ -91,6 +98,7 @@ import { UserService } from '../services/buyerService';
     EditProfilePage,
     HistoryDetailsPage,
     CheckoutPage,
+    ChooseLocationPage,
   ],
   providers: [
     StatusBar,
@@ -101,8 +109,10 @@ import { UserService } from '../services/buyerService';
     UserService,
     Loc,
     BarcodeScanner,
+    Push,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     Geolocation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    NativeGeocoder,
   ]
 })
 export class AppModule {}

@@ -21,47 +21,21 @@
           </div>
         </ion-col>
         <ion-col col-9>
-          <strong>Toko A</strong><br>
-          Jalan Scientia Boulevard, Gading Serpong, Tangerang<br>
-          021-34567<br>
+          <strong> {{ store.storeName }}</strong><br>
+          Jalan Scientia Boulevard, Gading Serpong, Tangerang(still dumy)<br>
+          {{ store.phoneNumber }}<br>
         </ion-col>
       </ion-row>
       <button ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;" (click)="presentStoreInformationModal()">Detail</button>
     </ion-card>
     
-    <ion-row>
-      <ion-col col-6>
-        <ion-card>
+    <ion-row responsive-sm wrap>
+      <ion-col col-6 *ngFor ="let product of products">
+        <ion-card >
           <img src="../../assets/imgs/icon.png" style="height: 100px;">
-          <ion-card-header style="padding-bottom: 0;"><strong>Sprite 1 dus</strong></ion-card-header>
-          <ion-card-content style="padding-bottom: 0;">Rp 100.000</ion-card-content>
-          <ion-card-content style="padding-top: 0;">Stok: 30</ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col col-6>
-        <ion-card>
-          <img src="../../assets/imgs/icon.png" style="height: 100px;">
-          <ion-card-header style="padding-bottom: 0;"><strong>Sprite 1 dus</strong></ion-card-header>
-          <ion-card-content style="padding-bottom: 0;">Rp 100.000</ion-card-content>
-          <ion-card-content style="padding-top: 0;">Stok: 30</ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-6>
-        <ion-card>
-          <img src="../../assets/imgs/logo.png" style="height: 100px;">
-          <ion-card-header style="padding-bottom: 0;"><strong>Sprite 1 dus</strong></ion-card-header>
-          <ion-card-content style="padding-bottom: 0;">Rp 100.000</ion-card-content>
-          <ion-card-content style="padding-top: 0;">Stok: 30</ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col col-6>
-        <ion-card>
-          <img src="../../assets/imgs/icon.png" style="height: 100px;">
-          <ion-card-header style="padding-bottom: 0;"><strong>Sprite 1 dus</strong></ion-card-header>
-          <ion-card-content style="padding-bottom: 0;">Rp 100.000</ion-card-content>
-          <ion-card-content style="padding-top: 0;">Stok: 30</ion-card-content>
+          <ion-card-header style="padding-bottom: 0;"><strong>{{ product.product.name }}</strong></ion-card-header>
+          <ion-card-content style="padding-bottom: 0;">Price: Rp. {{ product.price }}</ion-card-content>
+          <ion-card-content style="padding-top: 0;">Stok: {{ product.qty }}</ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
