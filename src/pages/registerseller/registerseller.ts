@@ -22,7 +22,7 @@ export class RegistersellerPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegistersellerPage');
   }
-
+  
 
   ngOnInit(){
     this.initializeForm();
