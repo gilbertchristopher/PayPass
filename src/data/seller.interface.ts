@@ -8,8 +8,8 @@ export interface Seller{
     email: string;
     password: string;
     role: string;
-    firstname: string;
-    lastname: string;
+    fullname: string;
+    storename: string;
     phoneNumber: string;
     address: string;
     city: string;
