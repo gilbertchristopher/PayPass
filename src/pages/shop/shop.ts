@@ -107,7 +107,7 @@ export class ShopPage {
     })
   }
 
-  addProductQuantity(product: any) {
+  addProductQty(product: any) {
     this.products[this.products.indexOf(product)].qty = this.products[this.products.indexOf(product)].qty + 1;
   }
 

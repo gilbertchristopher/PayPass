@@ -100,4 +100,7 @@
         <variable name="FCM_VERSION" value="11.6.2" />
     </plugin>
     <engine name="android" spec="7.1.4" />
+    <platform name="android">
+        <resource-file src="google-services.json" target="app/google-services.json" />
+    </platform>
 </widget>
