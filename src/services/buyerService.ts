@@ -30,10 +30,20 @@ export class UserService {
     requestUserData() {
         return new Promise((resolve) => {
             this.userId = this.authService.getActiveUser().uid;
-            const userRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId);
+            const userRef: firebase.database.Reference = firebase.database().ref('buyer/' + this.userId);
             userRef.on("value", (snapshot) => {
                 this.userData = snapshot.val();
-                resolve(true);
+                if(this.userData == null || this.userData == ""){
+                  const sellerRef: firebase.database.Reference = firebase.database().ref('seller/' + this.userId);
+                  console.log("ha" , sellerRef);
+                  sellerRef.on("value", (snapshot2) => {
+                      this.userData = snapshot2.val();
+                      console.log(this.userData);
+                    })
+                  resolve(true);  
+                }
+                else
+                    resolve(true);
             })
         })
     }
