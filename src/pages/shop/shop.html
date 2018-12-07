@@ -21,9 +21,9 @@
 </ion-content>
 
 <ion-content *ngIf="storeId" style="padding-top: 80px; padding-bottom: 100px;">
-  <div padding-left>
+  <div padding-left *ngIf="storeResult != undefined">
     <h1>Shopping Cart</h1>
-    <!-- {{ storeResult.storeName }}, Alam Sutera -->
+    {{ storeResult.storeName }}, Alam Sutera
   </div>
 
   <ion-list >

@@ -11,6 +11,7 @@ import { LoginPage } from '../pages/login/login';
 import { UserService } from '../services/buyerService';
 import { AuthService } from '../services/authService';
 
+
 @Component({
   templateUrl: 'app.html',
   providers: [AuthService]
@@ -19,6 +20,7 @@ export class MyApp {
   rootPage: any;
   userData1: any;
   userData2: any;
+
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private buyerService: UserService, private loadingCtrl: LoadingController,
     private push: Push, private alertCtrl: AlertController) {
@@ -71,12 +73,12 @@ export class MyApp {
     const options: PushOptions = {
       android: {
         senderID: "534497429105",
-        titleKey: "You have new message",
-        messageKey: "Hello there! New message",
-        icon: "../../resources/android/icon/drawable-hdpi-icon.png",
-        forceShow: true,
-        sound: true,
-        vibrate: true,
+        // titleKey: "You have new message",
+        // messageKey: "Hello there! New message",
+        // icon: "../../resources/android/icon/drawable-hdpi-icon.png",
+        // forceShow: true,
+        // sound: true,
+        // vibrate: true,
       },
       ios: {
         alert: 'true',
@@ -89,28 +91,23 @@ export class MyApp {
 
 
     pushObject.on('notification').subscribe((notification: any) => {
-      let alert = this.alertCtrl.create({
-        title: 'New Notification',
-        message: notification.message,
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancel clicked');
+      if (notification.additionalData.foreground) {
+        let alert = this.alertCtrl.create({
+          title: notification.title,
+          message: notification.message,
+          buttons: [
+            {
+              text: 'See',
+              handler: () => {
+                console.log('Checkout clicked');
+              }
             }
-          },
-          {
-            text: 'See',
-            handler: () => {
-              console.log('Checkout clicked');
-            }
-          }
-          
-        ]
-      })
-      alert.present();
-      console.log('Received a notification', notification)
+          ]
+        })
+        alert.present();
+        console.log('Received a notification', notification)
+      }
+
     });
 
     pushObject.on('registration').subscribe((registration: any) => {
@@ -120,6 +117,29 @@ export class MyApp {
     pushObject.on('error').subscribe(error => {
       console.error('Error with Push plugin', error)
     });
+    // const FCM = require('fcm-node');
+    // // Replace these with your own values.
+    // const apiKey = 'replace with API key';
+    // const deviceID = 'my device id';
+    // const fcm = new FCM(apiKey);
+
+    // const message = {
+    //   to: deviceID,
+    //   data: {
+    //     title: 'Large Icon',
+    //     message: 'Loaded from assets folder.',
+    //     image: 'www/image/logo.png'
+    //   }
+    // };
+
+    // fcm.send(message, (err, response) => {
+    //   if (err) {
+    //     console.log(err);
+    //     console.log('Something has gone wrong!');
+    //   } else {
+    //     console.log('Successfully sent with response: ', response);
+    //   }
+    // });
   }
 }
 

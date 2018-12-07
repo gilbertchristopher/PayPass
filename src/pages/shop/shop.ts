@@ -28,14 +28,10 @@ export class ShopPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, 
       private toastCtrl: ToastController, private userService: UserService, private storage: Storage, private alertCtrl: AlertController) {
     this.buyerData = this.userService.getUserData();
-    // storage.get('productList').then(products => {
-    //   this.productList.push(products);
-    // })
+    
     this.transactionId = this.buyerData.transactionIdNow;
     this.storeId = this.buyerData.storeIdNow;
 
-    this.showToast(this.transactionId + " " + this.storeId);
-    // this.storage.remove('cartShop');
     if (this.transactionId != "") {
       // ambil cart shop sekarang dari local storage
       this.storage.get('cartShop').then(value => {
@@ -50,76 +46,11 @@ export class ShopPage {
         console.log("cart error", err)
       })
 
-      // this.storage.get('storeData').then(value => {
-      //   for(let i in value){
-      //     this.showToast(value[i].storeName + " " + value[i].email);
-      //     this.storeResult = value[i];
-      //   }
-      //   // this.storeResult = value;
-      // })
+      this.storage.get('storeData').then(value => {
+        this.storeResult = value;
+      })
     }
-
-    // if (this.transactionId != "") {
-    //   this.userService.readStoreData(this.storeId, true, this.transactionId).then(res => {
-    //     this.showToast(this.transactionId + " " + res);
-    //     this.productList = res;
-        // this.products = [];
-        // for(let i in res){
-        //   this.products.push(this.productList[i]);
-        //   console.log(res[i])
-        //   this.showToast(this.transactionId + ' ' + res[i].product.desc)
-        // }
-        // for(let i in this.productList){
-        //   this.products.push(this.productList[i])
-        //   console.log(this.productList[i])
-        //   this.showToast(this.transactionId + " " + this.productList[i].product.name);
-        // }
-      // })
-      // ambil transaction id sekarang dari local storage
-      // this.storage.get('transactionId').then(res => {
-      //   this.transactionId = res;
-        // this.userService.readStoreData(this.storeId, true, this.transactionId).then(res => {
-        //   // this.productResult.push(res);
-        //   this.showToast(this.transactionId + " " + res);
-      // });
-
-      // });
-
-    // }
   }
-
-  // ionViewWillEnter() {
-  //   if (this.transactionId != "") {
-  //     // ambil transaction id sekarang dari local storage
-  //     this.storage.get('cartShop').then(value => {
-  //       if(value != ""){
-
-  //       }
-  //       console.log("cartshop", value)
-  //     }).catch(err => {
-  //       console.log("cart error", err)
-  //     })
-  //     // this.showToast(this.transactionId + " " + this.storeId)
-  //     // this.storage.get('transactionId').then(res => {
-  //     //   // this.transactionId = res;
-  //     //   this.userService.readStoreData(this.storeId, true, this.transactionId).then(res => {
-  //     //     this.productList = res;
-  //     //     console.log(res)
-  //     //     this.products = [];
-  //     //     for (let i in this.productList) {
-  //     //       this.productList[i].id = i;
-  //     //       this.products.push(this.productList[i])
-  //     //       console.log(this.productList[i])
-  //     //       this.showToast(this.transactionId + " " + this.productList[i].product.name);
-  //     //     }
-  //     //   });
-  //     // });
-  //     // this.storage.get('storeData').then(value => {
-  //     //   this.storeResult = value;
-  //     // })
-  //     // this.showToast(this.storeResult.email + " " + this.storeResult.storeName)
-  //   }
-  // }
 
   showToast(message: string) {
     let toast = this.toastCtrl.create({
