@@ -57,7 +57,7 @@ export class AuthService {
             duration: 3000,
             position: 'bottom'
         })
-        firebase.database().ref('user/' + user.id).set({
+        firebase.database().ref('seller/' + user.id).set({
             "email": user.email,
             "password": user.password,
             "role": user.role,
@@ -77,7 +77,6 @@ export class AuthService {
             }
         });
     }
-    
 
     storeUser(user: User) {
         let toast = this.toastCtrl.create({
@@ -89,13 +88,14 @@ export class AuthService {
         // console.log("store ", user.id);
         // console.log("user ", user)
         if(user.lastname == null) user.lastname = "";
-        firebase.database().ref('user/' + user.id).set({
+        firebase.database().ref('buyer/' + user.id).set({
             "email": user.email,
             "password": user.password,
             "role": user.role,
             "firstname": user.firstname,
             "lastname": user.lastname,
             "phoneNumber": user.phoneNumber,
+            "address": user.address,
             "transactionIdNow": "",
             "storeIdNow": "",
         }   , function (error) {
