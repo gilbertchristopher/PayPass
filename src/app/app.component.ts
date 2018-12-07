@@ -3,6 +3,7 @@ import { Platform, LoadingController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { OneSignal } from '@ionic-native/onesignal';
 
 import firebase from 'firebase';
 
@@ -10,6 +11,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { UserService } from '../services/buyerService';
 import { AuthService } from '../services/authService';
+
+
 
 
 @Component({
@@ -23,7 +26,7 @@ export class MyApp {
 
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private buyerService: UserService, private loadingCtrl: LoadingController,
-    private push: Push, private alertCtrl: AlertController) {
+    private push: Push, private alertCtrl: AlertController, private oneSignal: OneSignal) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -42,7 +45,10 @@ export class MyApp {
     firebase.initializeApp(config);
 
     // run push notification firebase
-    this.pushSetup();
+    // this.pushSetup();
+
+    // push notification OneSignal
+    this.oneSignalSetup();
 
     // check if there is a user that has been login or not
     firebase.auth().onAuthStateChanged(user => {
@@ -66,6 +72,22 @@ export class MyApp {
     }, () => {
       this.rootPage = LoginPage;
     });
+  }
+
+  oneSignalSetup() {
+    this.oneSignal.startInit('7ae173a1-545e-4bc1-92e3-1839314e42bd', '534497429105');
+
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+
+    this.oneSignal.handleNotificationReceived().subscribe(() => {
+      // do something when notification is received
+    });
+
+    this.oneSignal.handleNotificationOpened().subscribe(() => {
+      // do something when a notification is opened
+    });
+
+    this.oneSignal.endInit();
   }
 
   pushSetup() {
