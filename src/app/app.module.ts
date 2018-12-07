@@ -40,6 +40,8 @@ import { HomeSellerPage } from '../pages/home-seller/home-seller';
 import { UserService } from '../services/buyerService';
 import { ChooseLocationPage } from '../pages/choose-location/choose-location';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import { FcmProvider } from '../providers/fcm/fcm';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @NgModule({
   declarations: [
@@ -110,9 +112,11 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
     Loc,
     BarcodeScanner,
     Push,
+    OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Geolocation,
     NativeGeocoder,
+    FcmProvider,
   ]
 })
 export class AppModule {}

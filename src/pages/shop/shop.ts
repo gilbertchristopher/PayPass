@@ -28,14 +28,10 @@ export class ShopPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, 
       private toastCtrl: ToastController, private userService: UserService, private storage: Storage, private alertCtrl: AlertController) {
     this.buyerData = this.userService.getUserData();
-    // storage.get('productList').then(products => {
-    //   this.productList.push(products);
-    // })
+    
     this.transactionId = this.buyerData.transactionIdNow;
     this.storeId = this.buyerData.storeIdNow;
 
-    this.showToast(this.transactionId + " " + this.storeId);
-    // this.storage.remove('cartShop');
     if (this.transactionId != "") {
       // ambil cart shop sekarang dari local storage
       this.storage.get('cartShop').then(value => {
@@ -48,6 +44,10 @@ export class ShopPage {
         console.log("cartshop", value)
       }).catch(err => {
         console.log("cart error", err)
+      })
+
+      this.storage.get('storeData').then(value => {
+        this.storeResult = value;
       })
     }
   }

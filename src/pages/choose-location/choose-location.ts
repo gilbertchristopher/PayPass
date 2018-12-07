@@ -19,14 +19,21 @@ export class ChooseLocationPage {
 
 
   marker: Loc;
-  lat = -6.178306;
-  lng = 106.631889;
+  lat: number;
+  lng: number;
   address: string;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geoloc: Geolocation, private toastCtrl: ToastController, private modalCtrl: ModalController, private viewCtrl: ViewController, private nativeGeocoder: NativeGeocoder) {
     this.marker = new Loc();
-    this.onLocate();
+    this.lat = this.navParams.get('lat');
+    this.lng = this.navParams.get('lng');
+    if(this.lat == null && this.lng == null){
+      this.onLocate();
+    }
+    else{
+      this.marker.setLocation(this.lat, this.lng);
+    }
   }
 
   onSetMarker(event: any) {
@@ -65,8 +72,9 @@ export class ChooseLocationPage {
     this.nativeGeocoder.reverseGeocode(this.lat, this.lng, options)
       .then((result: NativeGeocoderReverseResult[]) => {
         this.address = this.generateAddress(result[0]);
-        
-        this.viewCtrl.dismiss({marker: this.marker, "data": JSON.stringify(result[0]), "address": this.address})
+        console.log(this.address);
+        // 
+        this.viewCtrl.dismiss({"marker": this.marker, "data": JSON.stringify(result[0]), "address": this.address})
       }).catch((error: any) => console.log(error));
 
   }
