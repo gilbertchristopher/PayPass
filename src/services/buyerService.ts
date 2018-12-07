@@ -35,12 +35,10 @@ export class UserService {
                 this.userData = snapshot.val();
                 if(this.userData == null || this.userData == ""){
                   const sellerRef: firebase.database.Reference = firebase.database().ref('seller/' + this.userId);
-                  console.log("ha" , sellerRef);
                   sellerRef.on("value", (snapshot2) => {
                       this.userData = snapshot2.val();
-                      console.log(this.userData);
+                      resolve(true);  
                     })
-                  resolve(true);  
                 }
                 else
                     resolve(true);
