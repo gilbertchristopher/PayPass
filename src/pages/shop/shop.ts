@@ -64,7 +64,7 @@ export class ShopPage {
   async scanBarcode() {
     this.barcodeScanner.scan().then(barcodeData => {
       if(barcodeData.text != ""){
-        const storeRef = firebase.database().ref('user/' + this.storeId + '/products/' + barcodeData.text);
+        const storeRef = firebase.database().ref('seller/' + this.storeId + '/products/' + barcodeData.text);
         storeRef.on('value', product => {
           this.productData = product.val();
           this.productData['qty'] = 1;
@@ -94,7 +94,7 @@ export class ShopPage {
         this.storeResult = storeInfo['storeData'];
         this.transactionId = storeInfo['transactionId']
         this.storeId = barcodeData.text;
-        this.userService.updateUserData({ storeIdNow: barcodeData.text });
+        this.userService.updateUserData({ storeIdNow: barcodeData.text }, 'buyer');
       });
     }).catch(err => {
       console.log('Error ', err)

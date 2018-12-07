@@ -20,12 +20,14 @@ export class EditProfilePage implements OnInit {
   buyerData: any;
   marker: Loc;
   address: any;
+  role: string;
   lat = -6.178306;
   lng = 106.631889;
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService,  private userService: UserService, private modalCtrl: ModalController) {
     this.buyerData = this.userService.getUserData();
+    this.role = this.buyerData.role;
   }
 
   ngOnInit(){
@@ -65,7 +67,7 @@ export class EditProfilePage implements OnInit {
  
   edit(){
     this.buyerData = {"email": this.editProfileForm.value.email, "firstname": this.editProfileForm.value.firstname, "lastname":this.editProfileForm.value.lastname, "phoneNumber": this.editProfileForm.value.phoneNumber, "address": this.editProfileForm.value.addressInput, "dateOfBirth": this.editProfileForm.value.dateOfBirth}
-    this.userService.updateUserData(this.buyerData);
+    this.userService.updateUserData(this.buyerData, this.role.toLowerCase());
     this.navCtrl.pop();
   }
 
