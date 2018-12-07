@@ -28,7 +28,7 @@ export class ProductPage {
     private toastCtrl: ToastController, private barcodeScanner: BarcodeScanner, private alertCtrl: AlertController, private productService: ProductService) {
     this.sellerData = this.buyerService.getUserData();
 
-    const storeRef = firebase.database().ref('user/'+this.authService.getActiveUser().uid+'/products');
+    const storeRef = firebase.database().ref('seller/'+this.authService.getActiveUser().uid+'/products');
     storeRef.on("value", snapshot => {
       let foo = snapshot.val();
        this.items = [];
@@ -55,7 +55,7 @@ export class ProductPage {
         this.productData = product.val();
       
         //ambil data product di toko
-        const storeRef = firebase.database().ref('user/' + uid + '/products/' + barcodeData.text);
+        const storeRef = firebase.database().ref('seller/' + uid + '/products/' + barcodeData.text);
         storeRef.on('value', productStore => {
           let result = productStore.val();
           if(result == null){

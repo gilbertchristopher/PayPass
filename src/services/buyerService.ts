@@ -50,9 +50,9 @@ export class UserService {
         return this.userData;
     }
 
-    updateUserData(userUpdateData: any) {
+    updateUserData(userUpdateData: any, role: string) {
         this.userId = this.authService.getActiveUser().uid;
-        const userRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId);
+        const userRef: firebase.database.Reference = firebase.database().ref(role + '/' + this.userId);
 
         userRef.update(userUpdateData).then(res => {
             console.log(res);
@@ -62,7 +62,7 @@ export class UserService {
     readStoreData(storeId: string, isStoreFound: boolean, transactionId: string) {
         return new Promise((resolve) => {
             if (!isStoreFound) {
-                const userRef: firebase.database.Reference = firebase.database().ref('user/' + storeId);
+                const userRef: firebase.database.Reference = firebase.database().ref('buyer/' + storeId);
                 let datetime = new Date();
                 let date = datetime.getDate() + "/" + (datetime.getMonth() + 1) + "/" + datetime.getFullYear();
                 let time = datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds();
@@ -71,7 +71,7 @@ export class UserService {
                 userRef.on("value", (snapshot) => {
                     this.storeData = snapshot.val();
 
-                    const transDateRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/');
+                    const transDateRef: firebase.database.Reference = firebase.database().ref('buyer/' + this.userId + '/transactions/');
                     // status terdiri dari pending, cancelled, success
                     transDateRef.push({ "date": date, "time": time, "status": "pending", "storeId": storeId }).then((res) => {
                         this.transactionId = res.key;
@@ -80,7 +80,7 @@ export class UserService {
                         this.storage.set('transactionId', this.transactionId);
 
                         // update transactionIdNow ke firebase
-                        this.updateUserData({ "transactionIdNow": this.transactionId });
+                        this.updateUserData({ "transactionIdNow": this.transactionId }, 'buyer');
 
                         // masukkin data store ke localstorage
                         this.storage.set('storeData', this.storeData);
@@ -111,7 +111,7 @@ export class UserService {
     }
 
     addProductToTransaction(storeId: string, products: any, productId: string, transactionId: string) {
-        const storeRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/' + transactionId + '/products/' + productId);
+        const storeRef: firebase.database.Reference = firebase.database().ref('buyer/' + this.userId + '/transactions/' + transactionId + '/products/' + productId);
         storeRef.set(products).then(res => {
             console.log(res);
         });
@@ -127,7 +127,7 @@ export class UserService {
 
     readProductData(storeId: string) {
         return new Promise((resolve) => {
-            const userRef: firebase.database.Reference = firebase.database().ref('user/' + storeId + '/products');
+            const userRef: firebase.database.Reference = firebase.database().ref('seller/' + storeId + '/products');
             userRef.on("value", (snapshot) => {
                 this.productData = snapshot.val();
                 resolve(true);
@@ -137,7 +137,7 @@ export class UserService {
 
     addUserTransactionData(userAddData: any) {
         this.userId = this.authService.getActiveUser().uid;
-        const userRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/products');
+        const userRef: firebase.database.Reference = firebase.database().ref('buyer/' + this.userId + '/transactions/products');
 
         userRef.update(userAddData).then(res => {
             console.log(res);
