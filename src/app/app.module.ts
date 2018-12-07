@@ -40,6 +40,7 @@ import { HomeSellerPage } from '../pages/home-seller/home-seller';
 import { UserService } from '../services/buyerService';
 import { ChooseLocationPage } from '../pages/choose-location/choose-location';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import { RegisHourPage } from '../pages/regis-hour/regis-hour';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
     HistoryDetailsPage,
     CheckoutPage,
     ChooseLocationPage,
+    RegisHourPage,
   ],
   imports: [
     BrowserModule,
@@ -99,6 +101,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
     HistoryDetailsPage,
     CheckoutPage,
     ChooseLocationPage,
+    RegisHourPage,
   ],
   providers: [
     StatusBar,

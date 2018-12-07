@@ -22,9 +22,9 @@
         </div>
       </ion-col>
       <ion-col col-9 *ngIf ="!!buyerData">
-        <strong>{{ buyerData.firstname }}  {{ buyerData.lastname }}</strong><br>
-        {{ buyerData.email }}<br>
-        {{ buyerData.phoneNumber }}<br>
+        <strong> Name :     {{ buyerData.firstname }}  {{ buyerData.lastname }}</strong><br>
+        Email :    {{ buyerData.email }}<br>
+        Phone :    {{ buyerData.phoneNumber }}<br>
       </ion-col>
     </ion-row>
     <button ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;" (click)="editProfile()" icon-start><ion-icon name="person">
