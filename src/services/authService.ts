@@ -51,7 +51,7 @@ export class AuthService {
         return firebase.auth().currentUser;
     }
 
-    storeSeller(user: User){
+    storeSeller(user: any){
         let toast = this.toastCtrl.create({
             message: "Register success",
             duration: 3000,
@@ -65,6 +65,8 @@ export class AuthService {
             "storename": user.storename,
             "phoneNumber": user.phoneNumber,
             "address": user.address,
+            "lng": user.lng,
+            "lat": user.lat,
         }, function (error) {
             if (error) {
                 // The write failed...
@@ -78,7 +80,7 @@ export class AuthService {
         });
     }
 
-    storeUser(user: User) {
+    storeUser(user: any) {
         let toast = this.toastCtrl.create({
             message: "Register success",
             duration: 3000,
@@ -98,6 +100,8 @@ export class AuthService {
             "address": user.address,
             "transactionIdNow": "",
             "storeIdNow": "",
+            "lng": user.lng,
+            "lat": user.lastname,
         }   , function (error) {
             if (error) {
                 // The write failed...
