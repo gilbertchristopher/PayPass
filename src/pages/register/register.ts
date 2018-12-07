@@ -54,4 +54,8 @@ export class RegisterPage implements OnInit {
     console.log(this.user)
     this.authService.signupBuyer(this.regisForm.value.email, this.regisForm.value.password, this.user);
   }
+
+  openMap() {
+
+  }
 }
