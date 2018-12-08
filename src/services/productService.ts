@@ -19,7 +19,7 @@ export class ProductService {
 
     removeproduct(product: Product){
         let uid = this.authSvc.getActiveUser().uid;
-        const storeRef = firebase.database().ref('user/' + uid + '/products/');
+        const storeRef = firebase.database().ref('seller/' + uid + '/products/');
         storeRef.child(product.id).remove();
         //this.productData.splice(this.productData.indexOf(product), 1);
     }
@@ -37,7 +37,7 @@ export class ProductService {
         });
       
         loading.present();
-        const productRef: firebase.database.Reference = firebase.database().ref('user/' + uid + '/products/' + id);
+        const productRef: firebase.database.Reference = firebase.database().ref('seller/' + uid + '/products/' + id);
 
         productRef.update(product).then(res => {
             loading.dismiss();
@@ -55,7 +55,7 @@ export class ProductService {
         });
       
         loading.present();
-        const productRef: firebase.database.Reference = firebase.database().ref('user/' + uid + '/products/' + id);
+        const productRef: firebase.database.Reference = firebase.database().ref('seller/' + uid + '/products/' + id);
 
         productRef.update(product).then(res => {
             loading.dismiss();
@@ -63,10 +63,4 @@ export class ProductService {
             loading.dismiss();
         })
     }
-
-    // productList(token: string) {
-    //     const uid = this.authSvc.getActiveUser().uid;
-    //     return this.http
-    //         .put('https://ionic-quotes-app.firebaseio.com/' + uid + '/fav-quotes.json?auth=' + token, this.productData);
-    // }
 }

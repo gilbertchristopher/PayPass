@@ -3,7 +3,8 @@
     <img style="width: 50%; margin-left: 25%;" src="../../assets/imgs/PayPassLogo.png">
     <ion-row align-items-center justify-content-center style="height: 100%;">
       <ion-col>
-        <form [formGroup]="regisForm" (ngSubmit)="regis()">
+        <!-- (ngSubmit)="regis()" -->
+        <form [formGroup]="regisForm">
           <ion-list>
             <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
               <ion-label>
@@ -46,17 +47,17 @@
                   <ion-label>
                     <ion-icon name="locate"></ion-icon>
                   </ion-label>
-                  <ion-input type="text-area" placeholder="Address" formControlName="address"></ion-input>
+                  <ion-input type="text-area" placeholder="Address" formControlName="address" value="{{address}}"></ion-input>
                 </ion-item>
               </ion-col>
               <ion-col col-2>
-                <button ion-button color="light" (click)="openMap()">
+                <button ion-button color="light" (click)="onOpenMap()" type="button">
                   <ion-icon name="pin"></ion-icon>
                 </button>
               </ion-col>
             </ion-row>
           </ion-list>
-          <button ion-button full color="secondary" [disabled]="!regisForm.valid" type="submit">Register</button>
+          <button ion-button full color="secondary" (click)="regis()" [disabled]="!regisForm.valid" type="submit">Register</button>
         </form>
         <span style="color:white;">Have an account?
           <button class="background-transparent-100" (click)="goToSignInPage()">

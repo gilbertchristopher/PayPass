@@ -21,13 +21,13 @@
 </ion-content>
 
 <ion-content *ngIf="storeId" style="padding-top: 80px; padding-bottom: 100px;">
-  <div padding-left>
+  <div padding-left *ngIf="storeResult != undefined">
     <h1>Shopping Cart</h1>
-    <!-- {{ storeResult.storeName }}, Alam Sutera -->
+    {{ storeResult.storeName }}, Alam Sutera
   </div>
 
   <ion-list >
-    <ion-card color="light" *ngFor="let product of products">
+    <ion-card color="light" *ngFor="let product of products, let i = index">
       <ion-grid>
         <ion-row>
           <ion-col col-3>
@@ -37,12 +37,12 @@
             <ion-card-header no-padding padding-bottom>
               <strong>{{ product.product.name }}</strong>
             </ion-card-header>
-            <ion-card-content no-padding padding-bottom>Rp {{ product.price }}</ion-card-content>
+            <ion-card-content no-padding padding-bottom>Rp {{ product.price * product.qty}}</ion-card-content>
             <ion-item>
               <div text-right>
-                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;" (click)="substractProductQty(product)">-</button>
-                <input text-center type="number" value="{{product.qty}}" style="width: 30px; height: 30px; align-self: center; border-radius: 4px;">
-                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;" (click)="addProductQty(product)">+</button>
+                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;" (click)="substractProductQuantity(i)">-</button>
+                <input text-center type="number" value={{product.qty}} style="width: 30px; height: 30px; align-self: center; border-radius: 4px;">
+                <button ion-button color="theme" style="border-radius: 15px; height: 30px; width: 30px;" (click)="addProductQuantity(i)">+</button>
               </div>
             </ion-item>
           </ion-col>
@@ -50,7 +50,7 @@
       </ion-grid>
     </ion-card>
   </ion-list>
-  <ion-grid style="position: absolute; left: 0; bottom: 0">
+  <ion-grid style="position: fixed; left: 0; bottom: 0">
     <ion-row>
       <ion-col col-10>
         <button ion-button style="width: 100%" (click)="checkout()">Checkout</button>

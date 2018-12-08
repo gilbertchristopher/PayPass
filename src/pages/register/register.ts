@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
 import { AuthService } from '../../services/authService';
 import { User } from '../../data/user.interface';
 import { Buyer } from '../../data/buyer.interface';
+import { Loc } from '../../services/location';
+import { ChooseLocationPage } from '../choose-location/choose-location';
 
 
 @IonicPage()
@@ -13,11 +15,18 @@ import { Buyer } from '../../data/buyer.interface';
 })
 export class RegisterPage implements OnInit {
   regisForm: FormGroup;
-  user: User;
+  // user: User;
+  user: any;
   buyerInfo: Buyer;
   userData = [];
+  marker: Loc;
+  lat: number;
+  lng: number;
+  address: string;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService) {
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private modalCtrl: ModalController) {
+    this.marker = new Loc();
   }
 
   ionViewDidLoad() {
@@ -42,6 +51,24 @@ export class RegisterPage implements OnInit {
     })
   }
 
+  onOpenMap() {
+    let modal = this.modalCtrl.create(ChooseLocationPage, {'lat': this.lat, 'lng': this.lng});
+    modal.present();
+
+    modal.onDidDismiss(
+      (data: any) => {
+        
+        if(data.marker){
+          console.log(data.marker);
+          this.marker = data.marker;
+          this.lat = this.marker.lat;
+          this.lng = this.marker.lng;
+          this.address = data.address;
+          this.regisForm.value.address = data.address;
+        }
+      }
+    );
+  }
   
 
   goToSignInPage(){
@@ -50,7 +77,8 @@ export class RegisterPage implements OnInit {
 
   regis(){
     this.user = this.regisForm.value;
-    console.log("masukkk pak eko");
+    this.user.lng = this.lng;
+    this.user.lat = this.lat;
     console.log(this.user)
     this.authService.signupBuyer(this.regisForm.value.email, this.regisForm.value.password, this.user);
   }

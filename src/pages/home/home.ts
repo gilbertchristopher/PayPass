@@ -14,7 +14,7 @@ export class HomePage {
   seller: any[];
 
   constructor(public navCtrl: NavController, private userService: UserService) {
-      const storeList = firebase.database().ref('user');
+      const storeList = firebase.database().ref('seller');
       storeList.on("value", snapshot => {
         let foo = snapshot.val();
          this.seller = [];

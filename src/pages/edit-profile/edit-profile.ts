@@ -20,12 +20,18 @@ export class EditProfilePage implements OnInit {
   buyerData: any;
   marker: Loc;
   address: any;
+  role: string;
   lat = -6.178306;
   lng = 106.631889;
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService,  private userService: UserService, private modalCtrl: ModalController) {
     this.buyerData = this.userService.getUserData();
+    this.role = this.buyerData.role;
+    this.marker = new Loc();
+    this.lat = this.buyerData.lat;
+    this.lng = this.buyerData.lng;
+    this.marker.setLocation(this.lat, this.lng);
   }
 
   ngOnInit(){
@@ -53,19 +59,22 @@ export class EditProfilePage implements OnInit {
 
     modal.onDidDismiss(
       (data: any) => {
+        
         if(data.marker){
+          console.log(data.marker);
           this.marker = data.marker;
           this.lat = this.marker.lat;
           this.lng = this.marker.lng;
           this.address = data.address;
+          this.buyerData.address = this.address;
         }
       }
     );
   }
  
   edit(){
-    this.buyerData = {"email": this.editProfileForm.value.email, "firstname": this.editProfileForm.value.firstname, "lastname":this.editProfileForm.value.lastname, "phoneNumber": this.editProfileForm.value.phoneNumber, "address": this.editProfileForm.value.addressInput, "dateOfBirth": this.editProfileForm.value.dateOfBirth}
-    this.userService.updateUserData(this.buyerData);
+    this.buyerData = {"email": this.editProfileForm.value.email, "firstname": this.editProfileForm.value.firstname, "lastname":this.editProfileForm.value.lastname, "phoneNumber": this.editProfileForm.value.phoneNumber, "address": this.editProfileForm.value.addressInput, "dateOfBirth": this.editProfileForm.value.dateOfBirth, "lng": this.lng, "lat": this.lat}
+    this.userService.updateUserData(this.buyerData, this.role.toLowerCase());
     this.navCtrl.pop();
   }
 

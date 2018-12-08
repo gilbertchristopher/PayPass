@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
 import { AuthService } from '../../services/authService';
 import { User } from '../../data/user.interface';
 import { Seller } from '../../data/seller.interface';
+import { Loc } from '../../services/location';
+import { ChooseLocationPage } from '../choose-location/choose-location';
 
 
 @IonicPage()
@@ -13,10 +15,16 @@ import { Seller } from '../../data/seller.interface';
 })
 export class RegistersellerPage {
   regisForm: FormGroup;
-  user: User;
+  // user: User;
+  user: any;
   sellerInfo: any;
   userData = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService) {
+  marker: Loc;
+  lat: number;
+  lng: number;
+  address: string;
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
@@ -58,6 +66,25 @@ export class RegistersellerPage {
 
   goToSignInPage(){
     this.navCtrl.popToRoot();
+  }
+
+  onOpenMap(){
+    let modal = this.modalCtrl.create(ChooseLocationPage, {'lat': this.lat, 'lng': this.lng});
+    modal.present();
+
+    modal.onDidDismiss(
+      (data: any) => {
+        
+        if(data.marker){
+          console.log(data.marker);
+          this.marker = data.marker;
+          this.lat = this.marker.lat;
+          this.lng = this.marker.lng;
+          this.address = data.address;
+          this.regisForm.value.address = data.address;
+        }
+      }
+    );
   }
 
   regis(){
