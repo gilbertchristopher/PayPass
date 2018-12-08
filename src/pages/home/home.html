@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="theme" style="height: 60px;">
-    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" placeholder="Search Store" (search)="onSearch($event)" (ionCancel)="isSearchbarOpened=false"></ion-searchbar>
+    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" placeholder="Search Store" (ionInput)="onSearch($event)" (ionCancel)="cancelSearch()"></ion-searchbar>
     <img *ngIf="!isSearchbarOpened" src="../../assets/imgs/icon.png" style="width: 100px;">
     <ion-buttons end>
       <button ion-button icon-only *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">
@@ -22,7 +22,7 @@
             </ion-col>
             <ion-col col-9>
               <ion-card-header>
-                <strong> {{ Store.storeName }}</strong>
+                <strong> {{ Store.storename }}</strong>
               </ion-card-header>
               <ion-card-content>Phone Number : {{ Store.phoneNumber }}</ion-card-content>
             </ion-col>
