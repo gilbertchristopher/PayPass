@@ -49,14 +49,6 @@ export class RegistersellerPage {
     })
   }
 
-  // goToSignInPage(){
-  //   this.navCtrl.push(LoginPage);
-  // }
-
-  // regis(){
-  //   this.navCtrl.push(LoginPage);
-  // }
-
   goToSignInPage(){
     this.navCtrl.popToRoot();
   }
