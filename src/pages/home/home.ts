@@ -12,6 +12,7 @@ export class HomePage {
   isSearchbarOpened = false;
   userData: any;
   seller: any[];
+  loadedSeller: any[] = [];
 
   constructor(public navCtrl: NavController, private userService: UserService) {
       const storeList = firebase.database().ref('seller');
@@ -19,7 +20,8 @@ export class HomePage {
         let foo = snapshot.val();
          this.seller = [];
         for(let i in foo){
-            this.seller.push(foo[i]);
+          this.seller.push(foo[i]);
+          this.loadedSeller.push(foo[i]);
         }
       });
   }
@@ -29,11 +31,32 @@ export class HomePage {
     console.log(this.userData)
   }
 
-  onSearch(event){
-    console.log(event.target.value)
+  onSearch(search){
+    this.seller = this.loadedSeller;
+    var query = search.srcElement.value;
+    if(!query){
+      return
+    }
+    this.seller= this.seller.filter((value) => {
+      if(value.storename && query) {
+        if (value.storename.toLowerCase().indexOf(query.toLowerCase()) > -1){
+          return true;
+        }
+      }
+      if(value.address && query) {
+        if (value.address.toLowerCase().indexOf(query.toLowerCase()) > -1){
+          return true;
+        }
+      }
+    });
   }
 
   goToStoreDetailPage(store: any){
     this.navCtrl.push(StoreDetailPage, store)
+  }
+
+  cancelSearch() {
+    this.isSearchbarOpened = false;
+    this.seller = this.loadedSeller;
   }
 }
