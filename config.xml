@@ -101,5 +101,6 @@
         <variable name="FCM_VERSION" value="11.6.2" />
     </plugin>
     <plugin name="onesignal-cordova-plugin" spec="2.4.5" />
-    <engine name="android" spec="7.1.4" />
+    <engine name="android" spec="~7.1.4" />
+    <plugin name="cordova-plugin-fcm" spec="2.1.2" />
 </widget>

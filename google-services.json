@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "534497429105",
+    "firebase_url": "https://paypass-id.firebaseio.com",
+    "project_id": "paypass-id",
+    "storage_bucket": "paypass-id.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534497429105:android:8a79312d0c67c7c1",
+        "android_client_info": {
+          "package_name": "com.mobilecp.paypass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "534497429105-mcmofi2n4a49hkn5juvl4b9e67j2c0pm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOnqbRXpeC0JLJoHpzMAVE323aqOa4yV8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534497429105:android:764d2cb7da3280eb",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "534497429105-mcmofi2n4a49hkn5juvl4b9e67j2c0pm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOnqbRXpeC0JLJoHpzMAVE323aqOa4yV8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
