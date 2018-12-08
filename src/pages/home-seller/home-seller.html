@@ -7,7 +7,38 @@
 
 
 <ion-content>
-  <h1>Store A</h1>
+  <h1 padding>{{ userData.storename }}</h1>
+
+  <ion-card no-margin (click)="transactionDetails()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card-header>
+            <strong>Transaction ID : nomorTransaksi1</strong>
+          </ion-card-header>
+          <ion-card-content>Buyer : NamaPembeli1<br>
+          Tanggal : Tanggal1<br>
+          Jam : Jam1
+          </ion-card-content>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <ion-card no-margin>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card-header>
+            <strong>Transaction ID : nomorTransaksi2</strong>
+          </ion-card-header>
+          <ion-card-content>Buyer : NamaPembeli2<br>
+          Tanggal : Tanggal2<br>
+          Jam : Jam2
+          </ion-card-content>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
   <!-- <div>
     {{result}}
   </div> -->

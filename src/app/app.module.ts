@@ -40,8 +40,10 @@ import { HomeSellerPage } from '../pages/home-seller/home-seller';
 import { UserService } from '../services/buyerService';
 import { ChooseLocationPage } from '../pages/choose-location/choose-location';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import { RegisHourPage } from '../pages/regis-hour/regis-hour';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { OneSignal } from '@ionic-native/onesignal';
+import { TransactionDetailsPage } from '../pages/transaction-details/transaction-details';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { OneSignal } from '@ionic-native/onesignal';
     HistoryDetailsPage,
     CheckoutPage,
     ChooseLocationPage,
+    RegisHourPage,
+    TransactionDetailsPage,
   ],
   imports: [
     BrowserModule,
@@ -101,6 +105,8 @@ import { OneSignal } from '@ionic-native/onesignal';
     HistoryDetailsPage,
     CheckoutPage,
     ChooseLocationPage,
+    RegisHourPage,
+    TransactionDetailsPage,
   ],
   providers: [
     StatusBar,
@@ -120,4 +126,3 @@ import { OneSignal } from '@ionic-native/onesignal';
   ]
 })
 export class AppModule {}
-

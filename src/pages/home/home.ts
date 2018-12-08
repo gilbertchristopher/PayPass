@@ -19,9 +19,7 @@ export class HomePage {
         let foo = snapshot.val();
          this.seller = [];
         for(let i in foo){
-          if(foo[i].role == "Seller"){
             this.seller.push(foo[i]);
-          }
         }
       });
   }

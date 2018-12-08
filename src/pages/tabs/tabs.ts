@@ -38,11 +38,13 @@ export class TabsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private buyerService: UserService) {
     this.isBuyer = this.isSeller = false;
-  
+    
   }
 
   ionViewWillEnter() {
     this.buyerData = this.buyerService.getUserData();
+    console.log(this.buyerData);
+    
     if(this.buyerData.role == "Buyer"){
       this.isBuyer = true;
       this.isSeller =false;

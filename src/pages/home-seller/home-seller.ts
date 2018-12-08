@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { AuthService } from '../../services/authService';
+import { UserService } from '../../services/buyerService';
+import { TransactionDetailsPage } from '../transaction-details/transaction-details';
 
 @IonicPage()
 @Component({
@@ -10,9 +12,13 @@ import { AuthService } from '../../services/authService';
 })
 export class HomeSellerPage {
   resultQRCode: any;
+  userData: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private barcodeScanner: BarcodeScanner,
-            private toastCtrl: ToastController) {
+            private toastCtrl: ToastController, private userService: UserService) {
+
+              this.userData = this.userService.getUserData();
+
   }
 
   ionViewWillEnter() {
@@ -33,5 +39,11 @@ export class HomeSellerPage {
     });
     toast.present();
   }
+
+  transactionDetails(){
+    this.navCtrl.push(TransactionDetailsPage);
+  }
+
+
 
 }
