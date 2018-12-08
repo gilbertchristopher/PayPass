@@ -16,12 +16,15 @@
 <ion-content padding>
   <ion-card padding color="light">
     <ion-row> 
-      <ion-col col-3>
-        <div style="height:74px; width:74px; border-radius: 37px; border-width: 2px; border-color: #05BCFF;">
-          <img src="../../assets/imgs/profile.jpg" style="width: 70px; border-radius: 35px;">
+      <ion-col>
+        <div style="height:74px; border-radius: 37px; border-width: 2px; border-color: #05BCFF; display: flex; justify-content: center" > 
+          <img src="../../assets/imgs/profile.jpg" style="width: 70px; border-radius: 35px;" text-center>
         </div>
       </ion-col>
-      <ion-col col-9 *ngIf ="!!buyerData">
+    </ion-row>
+
+    <ion-row>
+      <ion-col *ngIf ="!!buyerData" text-center>
         <strong>{{ buyerData.firstname }}  {{ buyerData.lastname }}</strong><br>
         {{ buyerData.email }}<br>
         {{ buyerData.phoneNumber }}<br>
