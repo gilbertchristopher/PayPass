@@ -9,8 +9,7 @@
 
 <ion-content text-center>
   <ion-grid class="background-login">
-
-    <form [formGroup]="editProfileForm" (ngSubmit)="edit()">
+    <form [formGroup]="editProfileForm">
       <ion-list class="list1">
         <ion-row *ngIf ="!!buyerData" >
           <ion-col col-6 >
@@ -50,7 +49,7 @@
           </ion-col>
         </ion-row>
 
-        <button type="submit" [disabled]="!editProfileForm.valid" ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;">
+        <button type="submit" (click)="edit()" [disabled]="!editProfileForm.valid" ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;">
           Save
         </button>
 

@@ -41,6 +41,8 @@ import { UserService } from '../services/buyerService';
 import { ChooseLocationPage } from '../pages/choose-location/choose-location';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { RegisHourPage } from '../pages/regis-hour/regis-hour';
+import { FcmProvider } from '../providers/fcm/fcm';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @NgModule({
   declarations: [
@@ -113,9 +115,11 @@ import { RegisHourPage } from '../pages/regis-hour/regis-hour';
     Loc,
     BarcodeScanner,
     Push,
+    OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Geolocation,
     NativeGeocoder,
+    FcmProvider,
   ]
 })
 export class AppModule {}
