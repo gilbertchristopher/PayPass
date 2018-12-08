@@ -4,12 +4,9 @@ import { FormGroup, FormControl, Validators } from '../../../node_modules/@angul
 import { AuthService } from '../../services/authService';
 import { User } from '../../data/user.interface';
 import { Seller } from '../../data/seller.interface';
-<<<<<<< HEAD
 import { RegistersellerOpenhourPage } from '../registerseller-openhour/registerseller-openhour';
-=======
 import { Loc } from '../../services/location';
 import { ChooseLocationPage } from '../choose-location/choose-location';
->>>>>>> ba383f4b79359669c190eb025bc5340c015dd878
 
 
 @IonicPage()

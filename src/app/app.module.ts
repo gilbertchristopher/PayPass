@@ -41,14 +41,11 @@ import { HomeSellerPage } from '../pages/home-seller/home-seller';
 import { UserService } from '../services/buyerService';
 import { ChooseLocationPage } from '../pages/choose-location/choose-location';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
-<<<<<<< HEAD
 import { from } from 'rxjs/observable/from';
-=======
 import { RegisHourPage } from '../pages/regis-hour/regis-hour';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { OneSignal } from '@ionic-native/onesignal';
 import { TransactionDetailsPage } from '../pages/transaction-details/transaction-details';
->>>>>>> ba383f4b79359669c190eb025bc5340c015dd878
 
 @NgModule({
   declarations: [
@@ -72,12 +69,8 @@ import { TransactionDetailsPage } from '../pages/transaction-details/transaction
     HistoryDetailsPage,
     CheckoutPage,
     ChooseLocationPage,
-<<<<<<< HEAD
     RegistersellerOpenhourPage,
-=======
-    RegisHourPage,
     TransactionDetailsPage,
->>>>>>> ba383f4b79359669c190eb025bc5340c015dd878
   ],
   imports: [
     BrowserModule,
@@ -114,12 +107,8 @@ import { TransactionDetailsPage } from '../pages/transaction-details/transaction
     HistoryDetailsPage,
     CheckoutPage,
     ChooseLocationPage,
-<<<<<<< HEAD
     RegistersellerOpenhourPage,
-=======
-    RegisHourPage,
     TransactionDetailsPage,
->>>>>>> ba383f4b79359669c190eb025bc5340c015dd878
   ],
   providers: [
     StatusBar,
