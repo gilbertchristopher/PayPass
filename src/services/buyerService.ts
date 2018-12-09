@@ -147,4 +147,18 @@ export class UserService {
     transactionDone() {
         // remove transactionIdNow from firebase
     }
+
+    uploadPhotoUser(base64Url: string, role: string) {
+        return new Promise((resolve) => {
+            this.userId = this.authService.getActiveUser().uid;
+            const userRef: firebase.database.Reference = firebase.database().ref(role + '/' + this.userId);
+            userRef.update({
+                "profile": "data:image/jpeg;base64," + base64Url
+            }).then(() => {
+                resolve(true)
+            }).catch(err => {
+                resolve(false)
+            })
+        })
+    }
 }
