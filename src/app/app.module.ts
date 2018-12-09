@@ -46,6 +46,7 @@ import { RegisHourPage } from '../pages/regis-hour/regis-hour';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { OneSignal } from '@ionic-native/onesignal';
 import { TransactionDetailsPage } from '../pages/transaction-details/transaction-details';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import { TransactionDetailsPage } from '../pages/transaction-details/transaction
     Geolocation,
     NativeGeocoder,
     FcmProvider,
+    Camera
   ]
 })
 export class AppModule {}
