@@ -22,7 +22,8 @@ export class ProductPage {
   sellerData : any;
 
   productsData: ProductStore[];
-  items: Product[];
+  items: ProductStore[];
+  loadedItems: ProductStore[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private buyerService:UserService, private authService:AuthService,
     private toastCtrl: ToastController, private barcodeScanner: BarcodeScanner, private alertCtrl: AlertController, private productService: ProductService) {
@@ -33,14 +34,9 @@ export class ProductPage {
       let foo = snapshot.val();
        this.items = [];
       for(let i in foo){
-        console.log(foo[i].product);
         foo[i].id = i;
-        console.log(foo[i].product.id);
         this.items.push(foo[i]);
-        //console.log(items);
-      }
-      for(let item of this.items){
-        console.log(item);
+        this.loadedItems.push(foo[i]);
       }
     });
   }
@@ -116,4 +112,23 @@ export class ProductPage {
     alert.present();
   }
 
+  onSearch(search) {
+    this.items = this.loadedItems;
+    var query = search.srcElement.value;
+    if(!query){
+      return
+    }
+    this.items = this.items.filter((value) => {
+      if(value.product.name && query) {
+        if (value.product.name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+          return true;
+        }
+      }
+    });
+  }
+
+  cancelSearch() {
+    this.isSearchbarOpened = false;
+    this.items = this.loadedItems;
+  }
 }

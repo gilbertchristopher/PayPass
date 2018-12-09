@@ -27,6 +27,7 @@ import { RegisrolePage } from '../pages/regisrole/regisrole';
 import { RegisterPage } from '../pages/register/register';
 import { RegistersellerPage } from '../pages/registerseller/registerseller';
 import { StoreInformationPage } from '../pages/store-information/store-information';
+import { RegistersellerOpenhourPage } from '../pages/registerseller-openhour/registerseller-openhour';
 
 import { AgmCoreModule } from '@agm/core';
 
@@ -40,15 +41,11 @@ import { HomeSellerPage } from '../pages/home-seller/home-seller';
 import { UserService } from '../services/buyerService';
 import { ChooseLocationPage } from '../pages/choose-location/choose-location';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import { from } from 'rxjs/observable/from';
+import { RegisHourPage } from '../pages/regis-hour/regis-hour';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { OneSignal } from '@ionic-native/onesignal';
-import { GooglePlus } from '@ionic-native/google-plus';
-import { AngularFireModule} from'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-
-const firebaseConfig = {
-
-}
+import { TransactionDetailsPage } from '../pages/transaction-details/transaction-details';
 
 @NgModule({
   declarations: [
@@ -72,11 +69,13 @@ const firebaseConfig = {
     HistoryDetailsPage,
     CheckoutPage,
     ChooseLocationPage,
+    RegistersellerOpenhourPage,
+    TransactionDetailsPage,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    // AngularFireModule.initializeApp(firebaseConfig),
     // IonicModule.forRoot(MyApp)  default
     IonicModule.forRoot(MyApp, {
       scrollPadding: false,
@@ -109,6 +108,8 @@ const firebaseConfig = {
     HistoryDetailsPage,
     CheckoutPage,
     ChooseLocationPage,
+    RegistersellerOpenhourPage,
+    TransactionDetailsPage,
   ],
   providers: [
     StatusBar,
@@ -128,4 +129,3 @@ const firebaseConfig = {
   ]
 })
 export class AppModule {}
-
