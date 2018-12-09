@@ -42,6 +42,13 @@ import { ChooseLocationPage } from '../pages/choose-location/choose-location';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { OneSignal } from '@ionic-native/onesignal';
+import { GooglePlus } from '@ionic-native/google-plus';
+import { AngularFireModule} from'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+const firebaseConfig = {
+
+}
 
 @NgModule({
   declarations: [
@@ -69,6 +76,7 @@ import { OneSignal } from '@ionic-native/onesignal';
   imports: [
     BrowserModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     // IonicModule.forRoot(MyApp)  default
     IonicModule.forRoot(MyApp, {
       scrollPadding: false,
