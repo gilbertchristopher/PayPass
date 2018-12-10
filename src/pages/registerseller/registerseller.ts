@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '../../../node_modules/@angul
 import { AuthService } from '../../services/authService';
 import { User } from '../../data/user.interface';
 import { Seller } from '../../data/seller.interface';
+import { RegistersellerOpenhourPage } from '../registerseller-openhour/registerseller-openhour';
 import { Loc } from '../../services/location';
 import { ChooseLocationPage } from '../choose-location/choose-location';
 
@@ -40,7 +41,8 @@ export class RegistersellerPage {
   private initializeForm(){
     this.regisForm = new FormGroup({
       email: new FormControl(null, Validators.compose([Validators.required, Validators.email])),
-      fullname: new FormControl(null, Validators.compose([Validators.required])),
+      firstname: new FormControl(null, Validators.compose([Validators.required])),
+      lastname: new FormControl(null, Validators.compose([Validators.required])),
       storename: new FormControl(null, Validators.compose([Validators.required])),
       phoneNumber: new FormControl(null, Validators.compose([Validators.required])),
       password: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)])),
@@ -55,14 +57,6 @@ export class RegistersellerPage {
       // handphoneInput: new FormControl(null, Validators.compose([Validators.required]))
     })
   }
-
-  // goToSignInPage(){
-  //   this.navCtrl.push(LoginPage);
-  // }
-
-  // regis(){
-  //   this.navCtrl.push(LoginPage);
-  // }
 
   goToSignInPage(){
     this.navCtrl.popToRoot();
@@ -90,6 +84,7 @@ export class RegistersellerPage {
   regis(){
     this.user = this.regisForm.value;
     console.log(this.user)
-    this.authService.signupSeller(this.regisForm.value.email, this.regisForm.value.password, this.user);
+    //this.authService.signupSeller(this.regisForm.value.email, this.regisForm.value.password, this.user);
+    this.navCtrl.push(RegistersellerOpenhourPage, this.user);
   }
 }

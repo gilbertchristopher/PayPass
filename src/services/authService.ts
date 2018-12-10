@@ -11,12 +11,14 @@ export class AuthService {
 
     }
 
-    signupBuyer(email: string, password: string, user: User) {
+    signupBuyer(email: string, password: string, user: any) {
         return firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userData) => {
                 // console.log("user before ", user);
                 user.id = userData.user.uid;
                 user.role = "Buyer";
+                if(user.lng == undefined) user.lng = 106.62987113335271;
+                if(user.lat == undefined) user.lat = -6.236581450428308;
                 // console.log("user after ", user);
                 // buyer.user = user;
                 this.storeUser(user);
@@ -25,12 +27,15 @@ export class AuthService {
             });
     }
 
-    signupSeller(email: string, password: string, user: User) {
+    signupSeller(email: string, password: string, user: any) {
         return firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userData) => {
                 console.log("user before ", user);
                 user.id = userData.user.uid;
                 user.role = "Seller";
+                if(user.lng == undefined) user.lng = 106.62987113335271;
+                if(user.lat == undefined) user.lat = -6.236581450428308;
+                
                 console.log("user after ", user);
                 // buyer.user = user;
                 this.storeSeller(user);
@@ -61,7 +66,8 @@ export class AuthService {
             "email": user.email,
             "password": user.password,
             "role": user.role,
-            "fullname": user.fullname,
+            "firstname": user.firstname,
+            "lastname": user.lastname,
             "storename": user.storename,
             "phoneNumber": user.phoneNumber,
             "address": user.address,
@@ -101,7 +107,7 @@ export class AuthService {
             "transactionIdNow": "",
             "storeIdNow": "",
             "lng": user.lng,
-            "lat": user.lastname,
+            "lat": user.lat,
         }   , function (error) {
             if (error) {
                 // The write failed...

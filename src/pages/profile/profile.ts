@@ -16,11 +16,12 @@ import { EditProfilePage } from '../edit-profile/edit-profile';
 export class ProfilePage {
   buyerData: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService,  private buyerService: UserService) {
-    this.buyerData = this.buyerService.getUserData();
+    
   }
 
   ionViewWillEnter(){
     console.log(this.buyerService.userData)
+    this.buyerData = this.buyerService.getUserData();
     
   }
 
