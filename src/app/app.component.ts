@@ -64,7 +64,6 @@ export class MyApp {
           loader.dismiss();
           this.rootPage = TabsPage;
         });
-
       }
       else {
         this.rootPage = LoginPage;
