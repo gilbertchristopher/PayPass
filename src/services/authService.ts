@@ -73,6 +73,7 @@ export class AuthService {
             "address": user.address,
             "lng": user.lng,
             "lat": user.lat,
+            "operaionalHour": user.operaionalHour
         }, function (error) {
             if (error) {
                 // The write failed...
