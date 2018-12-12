@@ -14,6 +14,7 @@ import { UserService } from '../services/buyerService';
 import { AuthService } from '../services/authService';
 
 import { IntroPage } from '../pages/intro/intro';
+import { TransactionDetailsPage } from '../pages/transaction-details/transaction-details';
 
 
 
