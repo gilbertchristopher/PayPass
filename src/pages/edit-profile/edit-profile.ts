@@ -56,7 +56,7 @@ export class EditProfilePage implements OnInit {
       phoneNumber: new FormControl(null, Validators.compose([Validators.required])),
       dateOfBirth: new FormControl(null),
       addressInput: new FormControl(null, Validators.compose([Validators.required])),
-      storename: new FormControl(null, Validators.compose([Validators.required]))
+      storename: new FormControl(null)
       // password: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)])),
 
       // dobInput: new FormControl(null, Validators.compose([Validators.required])),
@@ -132,7 +132,7 @@ export class EditProfilePage implements OnInit {
       .then((base64Url) => {
         let loader = this.loadingCtrl.create({
           spinner: 'circles',
-          content: 'Updating your profile'
+          content: 'Updating your profile picture'
         });
         loader.present();
         //  this.base64Url = 'data:image/jpeg;base64,' + base64Url;

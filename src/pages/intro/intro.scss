@@ -1,0 +1,186 @@
+page-intro {
+    // .swiper-pagination-bullet-active {
+    //   background: white;
+    // }
+    .background-login{
+      height: 100%; 
+      background-image: url('../../assets/imgs/Background_Polos.png'); 
+      background-size: cover; 
+      background-repeat: no-repeat; 
+      background-position: center;
+      top: 0;
+    }
+
+    .fly-in-item-form {
+      width: 90%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-55%) translateY(-50%);
+      list-style: none;
+  }
+  .fly-in-item-form.hidden li {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  .fly-in-item-form li{
+    display: inline-block;
+    margin: 2px;
+    font-family: Raleway;
+    font-weight: 300;
+    font-size: 2em;
+    color: white;
+    opacity: 1;
+    transition: all 2.5s ease-in-out;
+  }
+  .fly-in-item-form li:last-child{
+    margin-right: 0px;
+  }
+  .fly-in-item-form.hidden li:nth-child(1){
+    transform: translateX(100px) translateY(200px);
+  }
+  .fly-in-item-form.hidden li:nth-child(2){
+    transform: translateX(-100px) translateY(-200px);
+  }
+  .fly-in-item-form.hidden li:nth-child(3){
+    transform: translateX(200px) translateY(200px);
+  }
+  .fly-in-item-form.hidden li:nth-child(4){
+    transform: translateX(-200px) translateY(-200px);
+  }
+  .fly-in-item-form.hidden li:nth-child(5){
+    transform: translateX(300px) translateY(200px);
+  }
+  .fly-in-item-form.hidden li:nth-child(6){
+    transform: translateX(-300px) translateY(-200px);
+  }
+  .fly-in-item-form.hidden li:nth-child(7){
+    transform: translateX(400px) translateY(200px);
+  }
+  .fly-in-item-form.hidden li:nth-child(8){
+    transform: translateX(-400px) translateY(-200px);
+  }
+  .fly-in-item-form.hidden li:nth-child(9){
+    transform: translateX(500px) translateY(200px);
+  }
+  .fly-in-item-form.hidden li:nth-child(10){
+    transform: translateX(-500px) translateY(-200px);
+  }
+  .fly-in-item-form.hidden li:nth-child(11){
+    transform: translateX(600px) translateY(200px);
+  }
+  .fly-in-item-form.hidden li:nth-child(12){
+    transform: translateX(-600px) translateY(-200px);
+  }
+
+  .fly-in{
+    width: 90%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    display: inline-block;
+    opacity: 1;
+    transition: all 2.5s ease;
+  }
+
+  .fly-in p{
+    color: white;
+    font-family: Raleway;
+  }
+
+  .fly-in h1{
+    color: white;
+    font-family: Raleway;
+  }
+
+  .fly-in.hidden{
+    opacity: 0;
+    transform: translateX(-50%) translateY(200px);
+  }
+
+  .slide-3{
+    width: 90%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    display: inline-block;
+    opacity: 1;
+    transition: all 2.5s ease;
+  }
+
+  .slide-3.hidden{
+    opacity: 0;
+    transform: translateX(-50%) translateY(200px);
+  }
+
+  .slide-3 h1{
+    color: white;
+    font-family: Raleway;
+  }
+
+  .slide-4{
+    width: 90%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    display: inline-block;
+    opacity: 1;
+    transition: all 2.5s ease;
+  }
+
+  .slide-4.hidden{
+    opacity: 0;
+    transform: translateX(-50%) translateY(200px);
+  }
+
+  .slide-4 h1{
+    color: white;
+    font-family: Raleway;
+  }
+
+  .slide-5{
+    width: 90%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    display: inline-block;
+    opacity: 1;
+    transition: all 2.5s ease;
+  }
+
+  .slide-5.hidden{
+    opacity: 0;
+    transform: translateX(-50%) translateY(200px);
+  }
+
+  .slide-5 h1{
+    color: white;
+    font-family: Raleway;
+  }
+
+  .slide-6{
+    width: 90%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    display: inline-block;
+    opacity: 1;
+    transition: all 2.5s ease;
+  }
+
+  .slide-6.hidden{
+    opacity: 0;
+    transform: translateX(-50%) translateY(200px);
+  }
+
+  .slide-6 h1{
+    color: white;
+    font-family: Raleway;
+  }
+
+}

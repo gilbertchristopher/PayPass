@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { HistoryDetailsPage } from '../history-details/history-details'
 
 
@@ -9,8 +9,9 @@ import { HistoryDetailsPage } from '../history-details/history-details'
   templateUrl: 'history.html',
 })
 export class HistoryPage {
+  transactionData: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
@@ -18,7 +19,8 @@ export class HistoryPage {
   }
 
   historyDetails(){
-    this.navCtrl.push(HistoryDetailsPage);
+    let storeInformationModal = this.modalCtrl.create(HistoryDetailsPage, this.transactionData);
+    storeInformationModal.present();
   }
 
 }
