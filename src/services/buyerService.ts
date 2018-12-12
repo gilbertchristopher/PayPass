@@ -214,6 +214,7 @@ export class UserService {
         return new Promise((resolve) => {
             userRef.on('value', (snapshot) => {
                 this.transactionData = snapshot.val();
+                this.transactionData.id = snapshot.val().key;
                 resolve(this.transactionData);
             });
         });
@@ -229,5 +230,25 @@ export class UserService {
                 resolve(this.transactionData);
             });
         });
+    }
+
+    changeStatusTransaction(status: string, transactionId: string, buyerId: string){
+        this.userId = this.authService.getActiveUser().uid;
+        console.log(transactionId);
+        const transactionSellerRef: firebase.database.Reference = firebase.database().ref('seller/' + this.userId + '/transactions/' + transactionId);
+        const transactionBuyerRef: firebase.database.Reference = firebase.database().ref('buyer/' + buyerId + '/transactions/' + transactionId);
+
+        transactionSellerRef.update({"status": status}).then(() => {
+            if(status == "success") this.showToast("Payment Success");
+            else if(status == "cancelled") this.showToast("Payment Cancelled");
+        }).catch(() => {
+            this.showToast("Payment Failed");
+        });
+
+        transactionBuyerRef.update({"status": status}).then(() => {
+            // success
+        }).catch(() => {
+            // failed
+        })
     }
 }
