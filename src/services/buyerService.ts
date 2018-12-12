@@ -47,6 +47,15 @@ export class UserService {
         })
     }
 
+    getStoreData(storeId: string) {
+        return new Promise((resolve) => {
+            const userRef: firebase.database.Reference = firebase.database().ref('seller/' + storeId);
+            userRef.on("value", (snapshot) => {
+                resolve(snapshot.val());
+            })
+        })
+    }
+
     getUserData() {
         return this.userData;
     }

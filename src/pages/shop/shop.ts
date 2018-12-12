@@ -33,6 +33,7 @@ export class ShopPage {
   transactionId: string;
   options: BarcodeScannerOptions;
   buyerData: any;
+  storeData: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner,
     private toastCtrl: ToastController, private userService: UserService, private storage: Storage, private alertCtrl: AlertController) {
@@ -40,6 +41,9 @@ export class ShopPage {
 
     this.transactionId = this.buyerData.transactionIdNow;
     this.storeId = this.buyerData.storeIdNow;
+    this.userService.getStoreData(this.storeId).then((store) => {
+      this.storeData = store;
+    })
 
     if (this.transactionId != "") {
       // ambil cart shop sekarang dari local storage
@@ -160,7 +164,7 @@ export class ShopPage {
       this.productCheckout[this.products[index].id] = { "qty": this.products[index].qty, "price": this.products[index].price, "product": this.products[index].product }
     }
     this.userService.addProductToTransaction(this.transactionId, this.productCheckout, this.storeId, this.buyerData);
-    this.sendNotif()
+    this.sendNotif() 
     this.showToast("Checkout Success");
     this.storage.remove('productList');
     this.storage.remove('transactionId');
