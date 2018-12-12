@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { LoginPage } from '../login/login';
+import * as $ from 'jquery';
 
 /**
  * Generated class for the IntroPage page.
@@ -18,6 +19,11 @@ import { LoginPage } from '../login/login';
 export class IntroPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    $(function(){
+      setTimeout(function(){
+        $(".fly-in-item-form").removeClass('hidden')
+      }, 500);
+    })
   }
 
   ionViewDidLoad() {

@@ -1,5 +1,76 @@
 page-intro {
-    .swiper-pagination-bullet-active {
-      background: #A713E8;
+    // .swiper-pagination-bullet-active {
+    //   background: white;
+    // }
+    .background-login{
+      height: 100%; 
+      background-image: url('../../assets/imgs/Background_Polos.png'); 
+      background-size: cover; 
+      background-repeat: no-repeat; 
+      background-position: center;
+      top: 0;
     }
+
+    .fly-in-item-form {
+      width: 90%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-55%) translateY(-50%);
+      list-style: none;
   }
+  .fly-in-item-form.hidden li {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  .fly-in-item-form li{
+    display: inline-block;
+    margin: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 2em;
+    color: white;
+    opacity: 1;
+    transition: all 2.5s ease;
+  }
+  .fly-in-item-form li:last-child{
+    margin-right: 0px;
+  }
+  .fly-in-item-form.hidden li:nth-child(1){
+    transform: translateX(150px) translateY(200px);
+  }
+  .fly-in-item-form.hidden li:nth-child(2){
+    transform: translateX(-150px) translateY(-200px);
+  }
+  .fly-in-item-form.hidden li:nth-child(3){
+    transform: translateX(500px) translateY(100px);
+  }
+  .fly-in-item-form.hidden li:nth-child(4){
+    transform: translateX(-210px) translateY(-110px);
+  }
+  .fly-in-item-form.hidden li:nth-child(5){
+    transform: translateX(350px) translateY(250px);
+  }
+  .fly-in-item-form.hidden li:nth-child(6){
+    transform: translateX(-180px) translateY(-220px);
+  }
+  .fly-in-item-form.hidden li:nth-child(7){
+    transform: translateX(100px) translateY(220px);
+  }
+  .fly-in-item-form.hidden li:nth-child(8){
+    transform: translateX(-130px) translateY(-210px);
+  }
+  .fly-in-item-form.hidden li:nth-child(9){
+    transform: translateX(175px) translateY(125px);
+  }
+  .fly-in-item-form.hidden li:nth-child(10){
+    transform: translateX(-155px) translateY(-180px);
+  }
+  .fly-in-item-form.hidden li:nth-child(11){
+    transform: translateX(125px) translateY(320px);
+  }
+  .fly-in-item-form.hidden li:nth-child(12){
+    transform: translateX(-160px) translateY(-350px);
+  }
+
+}
