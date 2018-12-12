@@ -10,11 +10,11 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <h1 padding-left>Store Lists</h1>
+<ion-content color="background">
+  <h1 padding-left>Store List</h1>
   <ion-list>
     <ion-item *ngFor = "let Store of seller">
-      <ion-card (click)="goToStoreDetailPage(Store)" no-margin>
+      <ion-card (click)="goToStoreDetailPage(Store)" no-margin color="light">
         <ion-grid>
           <ion-row>
             <ion-col col-3 class="image-card-list">
@@ -29,81 +29,6 @@
           </ion-row>
         </ion-grid>
       </ion-card>
-      <!-- <ion-card>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-3 class="image-card-list">
-              <img src="../../assets/imgs/logo.png">
-            </ion-col>
-            <ion-col col-9>
-              <ion-card-header>
-                <strong>Lotte Mart</strong>
-              </ion-card-header>
-              <ion-card-content>Alam Sutera, Tangerang</ion-card-content>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-      <ion-card>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-3 class="image-card-list">
-              <img src="../../assets/imgs/logo.png">
-            </ion-col>
-            <ion-col col-9>
-              <ion-card-header>
-                <strong>Lotte Mart</strong>
-              </ion-card-header>
-              <ion-card-content>BSD, Tangerang</ion-card-content>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-      <ion-card>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-3 class="image-card-list">
-              <img src="../../assets/imgs/logo.png">
-            </ion-col>
-            <ion-col col-9>
-              <ion-card-header>
-                <strong>Lotte Mart</strong>
-              </ion-card-header>
-              <ion-card-content>Binong, Tangerang</ion-card-content>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-      <ion-card>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-3 class="image-card-list">
-              <img src="../../assets/imgs/logo.png">
-            </ion-col>
-            <ion-col col-9>
-              <ion-card-header>
-                <strong>Lotte Mart</strong>
-              </ion-card-header>
-              <ion-card-content>Tomang, Jakarta</ion-card-content>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-      <ion-card>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-3 class="image-card-list">
-              <img src="../../assets/imgs/logo.png">
-            </ion-col>
-            <ion-col col-9>
-              <ion-card-header>
-                <strong>Lotte Mart</strong>
-              </ion-card-header>
-              <ion-card-content>Palmerah Selatan, Jakarta</ion-card-content>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card> -->
     </ion-item>
   </ion-list>
 </ion-content>
