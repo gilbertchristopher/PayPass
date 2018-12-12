@@ -42,7 +42,35 @@ export class IntroPage {
           $(".fly-in").removeClass('hidden')
         }, 500);
       });
-    }
+    };
+    if(currentIndex == 2){
+      $(function () {
+        setTimeout(function () {
+          $(".slide-3").removeClass('hidden')
+        }, 500);
+      });
+    };
+    if(currentIndex == 3){
+      $(function () {
+        setTimeout(function () {
+          $(".slide-4").removeClass('hidden')
+        }, 500);
+      });
+    };
+    if(currentIndex == 4){
+      $(function () {
+        setTimeout(function () {
+          $(".slide-5").removeClass('hidden')
+        }, 500);
+      });
+    };
+    if(currentIndex == 5){
+      $(function () {
+        setTimeout(function () {
+          $(".slide-6").removeClass('hidden')
+        }, 500);
+      });
+    };
   }
 
   navHome() {

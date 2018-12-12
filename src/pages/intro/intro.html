@@ -22,20 +22,42 @@
 
     <ion-slide>
       <div class="fly-in hidden">
-          <h1 style="color:white;">Welcome to</h1>
+          <h1>Welcome to</h1>
           <img src="assets/imgs/icon_trans.png">
-          <p>Here's what you can do with the app...</p>
+          <p>Let's get started...</p>
       </div>
-      
     </ion-slide>
 
     <ion-slide>
-      <img src="assets/imgs/BackgroundLoginPage_LebihTransparan.png">
-      <h1>Get started now!</h1>
-      <button ion-button outline small (click)="navHome()">
-        Start using the app
-      </button>
+      <div class="slide-3 hidden">
+        <img src="assets/imgs/ScanQR.png">
+        <h1>First, scan store's QR Code</h1>
+      </div>
     </ion-slide>
+
+    <ion-slide>
+      <div class="slide-4 hidden">
+        <img src="assets/imgs/ScanBarcode_02.png">
+        <h1>Next, scan the product's barcode</h1>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide-5 hidden">
+        <img src="assets/imgs/Cashier.png">
+        <h1>Then, checkout your shopping cart at cashier</h1>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+        <div class="slide-6 hidden">
+          <img src="assets/imgs/Check.png">
+          <h1>You're now all set!</h1>
+          <button ion-button outline small (click)="navHome()">
+              Shop Now
+          </button>
+        </div>
+      </ion-slide>
 
   </ion-slides>
 </ion-content>
