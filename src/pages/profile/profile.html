@@ -11,7 +11,7 @@
       <ion-col>
         <div style="height:74px; border-radius: 37px; border-width: 2px; border-color: #05BCFF; display: flex; justify-content: center" > 
           <img *ngIf ="!!buyerData.profile" [src]="buyerData.profile" style="width: 70px; border-radius: 35px;" text-center>
-          <img *ngIf ="buyerData == undefined" src="../../assets/icon/CustomerDefaultIcon.png" style="width: 70px; border-radius: 35px;" text-center>
+          <img *ngIf ="buyerData.profile == undefined" src="../../assets/icon/CustomerDefaultIcon.png" style="width: 70px; border-radius: 35px;" text-center>
         </div>
       </ion-col>
     </ion-row>
