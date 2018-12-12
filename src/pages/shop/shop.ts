@@ -170,7 +170,7 @@ export class ShopPage {
     this.storage.remove('transactionId');
     this.storage.remove('cartShop');
     this.transactionId = null;
-    this.navCtrl.push(CheckoutPage, this.storeData);
+    this.navCtrl.push(CheckoutPage, {"storename": this.storeData.storename, "address" : this.storeData.address, "phoneNumber": this.storeData.phoneNumber,});
   }
 
   sendNotif() {

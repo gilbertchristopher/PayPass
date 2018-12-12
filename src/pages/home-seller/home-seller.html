@@ -9,55 +9,28 @@
 <ion-content style="background-color: #EEEEEE;">
   <h1 padding-left>Notification</h1>
   <h4 padding-left>{{ userData.storename }}</h4>
-
-  <ion-card margin-left margin-right (click)="transactionDetails()">
-    <ion-grid>
-      <ion-row>
-        <ion-col col-2 class="icon-notif">
-          <img src="../../assets/icon/megaphone.png" style="width: 35px; height: 35px;">
-        </ion-col>
-        <ion-col col-10>
-          <ion-card-header no-padding>
-            <strong>Transaction ID : nomorTransaksi1</strong>
-          </ion-card-header>
-          <ion-card-content no-padding>
-            Buyer : NamaPembeli1<br>
-            Tanggal : Tanggal1<br>
-            Jam : Jam1
-          </ion-card-content>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-  <ion-card margin-left margin-right (click)="transactionDetails()">
-    <ion-grid>
-      <ion-row>
-        <ion-col col-2 class="icon-notif">
-          <img src="../../assets/icon/megaphone.png" style="width: 35px; height: 35px;">
-        </ion-col>
-        <ion-col col-10>
-          <ion-card-header no-padding>
-            <strong>Transaction ID : nomorTransaksi1</strong>
-          </ion-card-header>
-          <ion-card-content no-padding>
-            Buyer : NamaPembeli1<br>
-            Tanggal : Tanggal1<br>
-            Jam : Jam1
-          </ion-card-content>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
+    <ion-card margin-left margin-right *ngFor="let transaction of transactions" (click)="transactionDetails(transaction)">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-2 class="icon-notif">
+            <img src="../../assets/icon/megaphone.png" style="width: 35px; height: 35px;">
+          </ion-col>
+          <ion-col col-10>
+            <ion-card-header no-padding>
+              <strong>Transaction ID : {{ transaction.id }}</strong>
+            </ion-card-header>
+            <ion-card-content no-padding>
+              Buyer : NamaPembeli1<br>
+              Tanggal : Tanggal1<br>
+              Jam : Jam1
+            </ion-card-content>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  
 
   <button padding (click)="encodeText()" ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;">
     Show QR Code
   </button>
-
-  <!-- <div>
-    {{result}}
-  </div> -->
-
-  <!-- <img src="{{result}}" /> -->
-  <!-- <input type="text" [(ngModel)]="result"></input> -->
-  <!-- <qrcode version="{{version}}" error-correction-level="{{level}}" size="{{size}}" data="{{result}}"></qrcode> -->
 </ion-content>
