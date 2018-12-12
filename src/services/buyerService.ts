@@ -110,15 +110,17 @@ export class UserService {
 
     }
 
-    addProductToTransaction(storeId: string, products: any, productId: string, transactionId: string) {
-        const storeRef: firebase.database.Reference = firebase.database().ref('buyer/' + this.userId + '/transactions/' + transactionId + '/products/' + productId);
-        storeRef.set(products).then(res => {
-            console.log(res);
+    addProductToTransaction(transactionId: string, products: any, storeId: string) {
+        const userRef: firebase.database.Reference = firebase.database().ref('buyer/' + this.userId + '/transactions/' + transactionId + '/products/');
+        const storeRef: firebase.database.Reference = firebase.database().ref('seller/' + storeId + '/transactions/' + transactionId + '/products/');
+        userRef.set(products).then(res => {
+            // console.log(res)
+            storeRef.set(products).then(val => {
+                
+            })
+        }).catch(err => {
+            console.log(err);
         });
-        let product = products;
-        product['id'] = productId;
-        // this.productList.push(product);
-        // this.showToast(this.productList);
     }
 
     getAllProductTransaction() {
