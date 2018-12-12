@@ -28,23 +28,27 @@ export class ShopPage {
   productQty: number = 1;
   storeResult: any;
   productResult: ProductTransaction[];
-  productData: ProductTransaction;
+  productData: any;
   storeId: string;
   transactionId: string;
   options: BarcodeScannerOptions;
   buyerData: any;
+  storeData: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, 
-      private toastCtrl: ToastController, private userService: UserService, private storage: Storage, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner,
+    private toastCtrl: ToastController, private userService: UserService, private storage: Storage, private alertCtrl: AlertController) {
     this.buyerData = this.userService.getUserData();
-    
+
     this.transactionId = this.buyerData.transactionIdNow;
     this.storeId = this.buyerData.storeIdNow;
+    this.userService.getStoreData(this.storeId).then((store) => {
+      this.storeData = store;
+    })
 
     if (this.transactionId != "") {
       // ambil cart shop sekarang dari local storage
       this.storage.get('cartShop').then(value => {
-        if(value != ""){
+        if (value != "") {
           this.products = [];
           for (let index = 0; index < value.length; index++) {
             this.products.push(value[index]);
@@ -76,18 +80,27 @@ export class ShopPage {
         const storeRef = firebase.database().ref('seller/' + this.storeId + '/products/' + barcodeData.text);
         storeRef.on('value', product => {
           this.productData = product.val();
-          this.productData['qty'] = 1;
-          this.productData['id'] = barcodeData.text;
-          console.log('productData ', this.productData);
-          this.products.push(this.productData);
-          this.storage.set('cartShop', this.products);
-          // this.userService.addProductToTransaction(this.storeId, this.productData, product.key, this.transactionId);
-
-          this.showToast("Product has stored in the cart.");
+          if(this.productData != null){
+            this.productData['qty'] = 1;
+            this.productData['id'] = barcodeData.text;
+            let idx = this.products.map((value) => {
+              return value.id
+            }).indexOf(barcodeData.text);
+            if(idx > -1){
+              this.showToast("This product's already in your cart.");
+            }
+            else{
+              this.products.push(this.productData);
+              this.storage.set('cartShop', this.products);
+              this.showToast("This product has been added to the cart.");
+            }
+          }
+          else {
+            this.showToast("This product is not found in this store.");
+          }
         })
       }
     }).catch(err => {
-      this.showToast("Product doesn't found in this store.");
       console.log('Error ', err);
     });
   }
@@ -116,7 +129,7 @@ export class ShopPage {
   }
 
   substractProductQuantity(index: any) {
-    if(this.products[index].qty == 1){
+    if (this.products[index].qty == 1) {
       let alert = this.alertCtrl.create({
         title: 'Remove Product From Cart',
         message: 'Do you want to remove this product?',
@@ -132,7 +145,7 @@ export class ShopPage {
             text: 'Yes',
             handler: () => {
               this.products.splice(index, 1);
-              this.storage.set('cartShop',this.products);
+              this.storage.set('cartShop', this.products);
             }
           }
         ]
@@ -148,25 +161,24 @@ export class ShopPage {
   checkout() {
     this.productCheckout = [];
     for (let index = 0; index < this.products.length; index++) {
-      this.productCheckout[this.products[index].id] = {"qty": this.products[index].qty, "price": this.products[index].price, "product": this.products[index].product}
+      this.productCheckout[this.products[index].id] = { "qty": this.products[index].qty, "price": this.products[index].price, "product": this.products[index].product }
     }
-    this.userService.addProductToTransaction(this.transactionId, this.productCheckout, this.storeId);
+    this.userService.addProductToTransaction(this.transactionId, this.productCheckout, this.storeId, this.buyerData);
+    this.sendNotif() 
     this.showToast("Checkout Success");
-    // this.userService.addProductToTransaction(this.isStoreFound, this.productList)
     this.storage.remove('productList');
     this.storage.remove('transactionId');
     this.storage.remove('cartShop');
     this.transactionId = null;
     this.navCtrl.push(CheckoutPage);
-    // this.sendNotif()
   }
 
   sendNotif() {
-    var sendNotification = function(data) {
+    var sendNotification = function (data) {
       var headers = {
         "Content-Type": "application/json; charset=utf-8"
       };
-      
+
       var options = {
         host: "onesignal.com",
         port: 443,
@@ -174,32 +186,34 @@ export class ShopPage {
         method: "POST",
         headers: headers
       };
-      
+
       // var https = require('https');
-      var req = https.request(options, function(res) {  
-        res.on('data', function(data) {
+      var req = https.request(options, function (res) {
+        res.on('data', function (data) {
           console.log("Response:");
           console.log(JSON.parse(data));
         });
       });
-      
-      req.on('error', function(e) {
+
+      req.on('error', function (e) {
         console.log("ERROR:");
         console.log(e);
       });
-      
+
       req.write(JSON.stringify(data));
       req.end();
     };
-    
-    var message = { 
+
+    var message = {
       app_id: "7ae173a1-545e-4bc1-92e3-1839314e42bd",
-      contents: {"en": "Cie bisa"},
+      contents: { "en": "Transaction ID: " + this.transactionId + " wants to finish its shopping. Checkout now!" },
+      
+      data: { "transactionId": this.transactionId },
       include_player_ids: ["d02154d3-3874-4931-bc38-88602fb093a4"]
     };
-    
+
     sendNotification(message);
     this.showToast("asd")
   }
-  
+
 }

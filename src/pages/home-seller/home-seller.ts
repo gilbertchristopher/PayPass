@@ -13,6 +13,7 @@ import { TransactionDetailsPage } from '../transaction-details/transaction-detai
 export class HomeSellerPage {
   resultQRCode: any;
   userData: any;
+  transactions: any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private barcodeScanner: BarcodeScanner,
             private toastCtrl: ToastController, private userService: UserService) {
@@ -22,7 +23,13 @@ export class HomeSellerPage {
   }
 
   ionViewWillEnter() {
-    let uid = this.authService.getActiveUser().uid;
+    this.userService.getAllTransactionData().then((data) => {
+      this.transactions = [];
+      for(let i in data){
+        data[i].id = i;
+        this.transactions.push(data[i]);
+      }
+    })
     
     // this.resultQRCode = this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE, uid)
     // console.log(this.resultQRCode)
@@ -40,8 +47,9 @@ export class HomeSellerPage {
     toast.present();
   }
 
-  transactionDetails(){
-    this.navCtrl.push(TransactionDetailsPage);
+  transactionDetails(transaction: any){
+    console.log(transaction);
+    this.navCtrl.push(TransactionDetailsPage, transaction);
   }
 
 

@@ -14,6 +14,8 @@ export class UserService {
     storeData: any;
     productList: ProductTransaction[];
     transactionId: string;
+    transactionData: any;
+    transaction: any = [];
 
     constructor(private authService: AuthService, private toastCtrl: ToastController, private storage: Storage) {
     }
@@ -33,15 +35,24 @@ export class UserService {
             const userRef: firebase.database.Reference = firebase.database().ref('buyer/' + this.userId);
             userRef.on("value", (snapshot) => {
                 this.userData = snapshot.val();
-                if(this.userData == null || this.userData == ""){
-                  const sellerRef: firebase.database.Reference = firebase.database().ref('seller/' + this.userId);
-                  sellerRef.on("value", (snapshot2) => {
-                      this.userData = snapshot2.val();
-                      resolve(true);  
+                if (this.userData == null || this.userData == "") {
+                    const sellerRef: firebase.database.Reference = firebase.database().ref('seller/' + this.userId);
+                    sellerRef.on("value", (snapshot2) => {
+                        this.userData = snapshot2.val();
+                        resolve(true);
                     })
                 }
                 else
                     resolve(true);
+            })
+        })
+    }
+
+    getStoreData(storeId: string) {
+        return new Promise((resolve) => {
+            const userRef: firebase.database.Reference = firebase.database().ref('seller/' + storeId);
+            userRef.on("value", (snapshot) => {
+                resolve(snapshot.val());
             })
         })
     }
@@ -101,8 +112,8 @@ export class UserService {
                             position: "bottom"
                         });
                         toast.present();
-                
-                        resolve({"storeData": this.storeData, "transactionId": this.transactionId});
+
+                        resolve({ "storeData": this.storeData, "transactionId": this.transactionId });
                     })
                 });
             }
@@ -119,17 +130,38 @@ export class UserService {
 
     }
 
-    addProductToTransaction(transactionId: string, products: any, storeId: string) {
+    addProductToTransaction(transactionId: string, products: any, storeId: string, buyerData: any) {
         const userRef: firebase.database.Reference = firebase.database().ref('buyer/' + this.userId + '/transactions/' + transactionId + '/products/');
-        const storeRef: firebase.database.Reference = firebase.database().ref('seller/' + storeId + '/transactions/' + transactionId + '/products/');
+        const storeRef: firebase.database.Reference = firebase.database().ref('seller/' + storeId + '/transactions/' + transactionId);
         userRef.set(products).then(res => {
             // console.log(res)
-            storeRef.set(products).then(val => {
-                
-            })
         }).catch(err => {
             console.log(err);
         });
+
+        let datetime = new Date();
+        let date = datetime.getDate() + "/" + (datetime.getMonth() + 1) + "/" + datetime.getFullYear();
+        let time = datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds();
+
+        this.transaction.date = date;
+        this.transaction.time = time;
+        this.transaction.buyerInfo = [];
+        this.transaction.buyerInfo.id = this.userId;
+        this.transaction.buyerInfo.firstname = buyerData.firstname;
+        this.transaction.buyerInfo.lastname = buyerData.lastname;
+        this.transaction.buyerInfo.email = buyerData.email;
+        this.transaction.buyerInfo.address = buyerData.address;
+        this.transaction.buyerInfo.lng = buyerData.lng;
+        this.transaction.buyerInfo.lat = buyerData.lat;
+        this.transaction.buyerInfo.phoneNumber = buyerData.phoneNumber;
+        this.transaction.products = products;
+        this.transaction.status = "pending";
+        
+        storeRef.set(this.transaction).then(val => {
+          
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     getAllProductTransaction() {
@@ -171,5 +203,31 @@ export class UserService {
                 resolve(false)
             })
         })
+    }
+
+
+    // StoreService
+    getTransactionData(data: any) {
+        // this.userId = this.authService.getActiveUser().uid;
+        const userRef: firebase.database.Reference = firebase.database().ref('seller/' + data.storeId + '/transactions/' + data.transactionId);
+        this.transactionData = {};
+        return new Promise((resolve) => {
+            userRef.on('value', (snapshot) => {
+                this.transactionData = snapshot.val();
+                resolve(this.transactionData);
+            });
+        });
+    }
+
+    getAllTransactionData() {
+        this.userId = this.authService.getActiveUser().uid;
+        const userRef: firebase.database.Reference = firebase.database().ref('seller/' + this.userId + '/transactions/');
+        
+        return new Promise((resolve) => {
+            userRef.on('value', (snapshot) => {
+                this.transactionData = snapshot.val();
+                resolve(this.transactionData);
+            });
+        });
     }
 }
