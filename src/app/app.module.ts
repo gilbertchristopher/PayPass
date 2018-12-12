@@ -77,6 +77,7 @@ import { IntroPage } from '../pages/intro/intro';
     TransactionDetailsPage,
     ChangePasswordPage,
     IntroPage,
+    RegisHourPage,
   ],
   imports: [
     BrowserModule,
@@ -117,6 +118,7 @@ import { IntroPage } from '../pages/intro/intro';
     TransactionDetailsPage,
     ChangePasswordPage,
     IntroPage,
+    RegisHourPage,
   ],
   providers: [
     StatusBar,

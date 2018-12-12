@@ -25,7 +25,6 @@ export class StoreInformationPage {
   }
 
   ionViewDidLoad() {
-    this.storeId = this.navParams.get('storeId');
   }
 
   dismiss(){
