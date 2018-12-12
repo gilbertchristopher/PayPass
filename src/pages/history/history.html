@@ -14,20 +14,23 @@
 
 <ion-content padding style="background-color: #EEEEEE;">
 
-  <ion-card padding (click)="historyDetails()">
+  <ion-card padding (click)="historyDetails()" *ngFor="let item of items">
     <ion-row>
       <div text-align="left">
         <ion-col col-6>
-          <strong>30 November 2018</strong>
+          <strong></strong>
         </ion-col>
       </div>
     </ion-row>
     <ion-row>
-      <ion-col col-6>
-        Toko Beras Dua Saudara
-      </ion-col>
-      <ion-col col-6 ion-text text-right color="danger">
-        Rp 100.000,-
+      <ion-col>
+       <h2> Transaction Id : {{item.id}} </h2>
+      <br>     
+        Buyer : {{item.firstname}} {{item.lastname}}
+      <br>
+        Date : {{item.date}}
+      <br>
+        Time : {{item.time}}
       </ion-col>
     </ion-row>
   </ion-card>
