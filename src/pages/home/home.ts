@@ -3,6 +3,9 @@ import { NavController } from 'ionic-angular';
 import { StoreDetailPage } from '../store-detail/store-detail';
 import { UserService } from '../../services/buyerService';
 import firebase from 'firebase';
+import { Storage } from '@ionic/storage';
+import { IntroPage } from '../intro/intro';
+//import { Injectable } from '@angular/core';
 
 @Component({
   selector: 'page-home',
@@ -14,7 +17,7 @@ export class HomePage {
   seller: any[];
   loadedSeller: any[] = [];
 
-  constructor(public navCtrl: NavController, private userService: UserService) {
+  constructor(public navCtrl: NavController, private userService: UserService, public storage: Storage) {
       const storeList = firebase.database().ref('seller');
       storeList.on("value", snapshot => {
         let foo = snapshot.val();
@@ -29,6 +32,13 @@ export class HomePage {
   ionViewDidLoad(){
     this.userData = this.userService.getUserData()
     console.log(this.userData)
+
+    // this.storage.get('intro-done').then(done => {
+    //   if(!done){
+    //     this.storage.set('intro-done', true);
+    //     this.navCtrl.setRoot(IntroPage);
+    //   }
+    // });
   }
 
   onSearch(search){
