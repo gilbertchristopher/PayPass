@@ -2,5 +2,5 @@ export interface Product{
     id: string;
     name: string;
     desc: string;
-    // productPic: String; // base64
+    profile: String; // base64
 }

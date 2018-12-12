@@ -132,22 +132,22 @@ body {
   font-weight: 400 !important;
 }
 
-h1, h2, button, p {
+h1, h2, button {
   font-family: "Raleway" !important;
   font-weight: 700 !important;
 }
 
-h3, h4 {
+h3, h4, ion-card-header {
   font-family: "Raleway" !important;
   font-weight: 600 !important;
 }
 
-ion-title, ion-input, ion-card {
+ion-title, ion-input, ion-card, p {
   font-family: "Open Sans" !important;
   font-weight: 300 !important;
 }
 
- ion-button, ion-card-header {
+ ion-button {
   font-family: "Raleway" !important;
   font-weight: 400 !important;
 }

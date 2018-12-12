@@ -24,6 +24,7 @@ import * as https from 'https';
 export class ShopPage {
   productList: {};
   products: any[] = [];
+  productCheckout: any[] = [];
   productQty: number = 1;
   storeResult: any;
   productResult: ProductTransaction[];
@@ -145,7 +146,11 @@ export class ShopPage {
   }
 
   checkout() {
-    // this.userService.addProductToTransaction(this.products, );
+    this.productCheckout = [];
+    for (let index = 0; index < this.products.length; index++) {
+      this.productCheckout[this.products[index].id] = {"qty": this.products[index].qty, "price": this.products[index].price, "product": this.products[index].product}
+    }
+    this.userService.addProductToTransaction(this.transactionId, this.productCheckout, this.storeId);
     this.showToast("Checkout Success");
     // this.userService.addProductToTransaction(this.isStoreFound, this.productList)
     this.storage.remove('productList');
@@ -153,7 +158,7 @@ export class ShopPage {
     this.storage.remove('cartShop');
     this.transactionId = null;
     this.navCtrl.push(CheckoutPage);
-    this.sendNotif()
+    // this.sendNotif()
   }
 
   sendNotif() {
