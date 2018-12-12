@@ -7,11 +7,11 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content style="background-color: #EEEEEE;">
   <ion-grid class="background-login">
     <form [formGroup]="editProfileForm">
       <ion-list class="list1">
-        <ion-card text-center>
+        <ion-card text-center padding>
           <ion-row>
 
             <ion-col>
@@ -33,8 +33,8 @@
         </ion-card>
 
 
-        <ion-card padding-right>
-          <strong padding=left>Information Account</strong>
+        <ion-card padding>
+          <h2 class="subtitle">Information Account</h2>
           <ion-item class="text-field-editProfile" style="border-width: 0px;">
             <ion-label floating>Email</ion-label>
             <ion-input type="text" formControlName="email" value="{{ buyerData.email }}"></ion-input>
@@ -53,8 +53,8 @@
           </button>
         </ion-card>
 
-        <ion-card padding-right>
-          <strong padding-left>Detail Account</strong>
+        <ion-card padding>
+          <h2 class="subtitle">Detail Account</h2>
           <ion-item class="text-field-editProfile" style="border-width: 0px;">
             <ion-label floating>Handphone</ion-label>
             <ion-input type="text" formControlName="phoneNumber" value="{{buyerData.phoneNumber}}"></ion-input>
@@ -78,7 +78,7 @@
           </ion-row>
         </ion-card>
 
-        <button type="submit" (click)="edit()" [disabled]="!editProfileForm.valid" ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;">
+        <button type="submit" (click)="edit()" [disabled]="!editProfileForm.valid" ion-button block color="secondary" style="border-width: 3px; border-color: #05BCFF;">
           Save
         </button>
 

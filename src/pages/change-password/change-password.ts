@@ -65,8 +65,7 @@ export class ChangePasswordPage {
 
   }
 
-
-
-
-
+  dismiss(){
+    this.viewCtrl.dismiss();
+  }
 }

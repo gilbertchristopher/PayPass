@@ -79,6 +79,7 @@ export class MyApp {
 
     this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
 
+    
     this.oneSignal.handleNotificationReceived().subscribe(() => {
       let alert = this.alertCtrl.create({
         title: "New message",
