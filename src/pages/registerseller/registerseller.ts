@@ -86,6 +86,6 @@ export class RegistersellerPage {
     this.user = this.regisForm.value;
     console.log(this.user)
     //this.authService.signupSeller(this.regisForm.value.email, this.regisForm.value.password, this.user);
-    this.navCtrl.push(RegisHourPage, this.user);
+    this.navCtrl.push(RegisHourPage, {"userData": this.user, "page": "regis"});
   }
 }

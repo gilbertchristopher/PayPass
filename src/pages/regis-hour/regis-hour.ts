@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ViewController, ToastController } from 'ionic-angular';
 import { Time } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/authService';
+import { UserService } from '../../services/buyerService';
 
 /**
  * Generated class for the RegisHourPage page.
@@ -17,12 +18,16 @@ import { AuthService } from '../../services/authService';
   templateUrl: 'regis-hour.html',
 })
 export class RegisHourPage implements OnInit{
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService) {
+  page: string;
+  userData: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private authService: AuthService, private buyerService: UserService,  private viewCtrl: ViewController) {
+    this.page = navParams.get('page');
+    this.userData = this.buyerService.getUserData();
   }
 
   user: any;
   operationalHourForm: FormGroup;
+  operationalHour: any;
   monday: any;
   tuesday: any;
   wednesday: any;
@@ -72,7 +77,7 @@ export class RegisHourPage implements OnInit{
 
 
   regis(){
-    this.user = this.navParams.data;   
+    this.user = this.navParams.get('userData');   
     this.monday = { "openHour": this.operationalHourForm.value.mondayOpenHour, "closeHour": this.operationalHourForm.value.mondayCloseHour }
     this.tuesday = { "openHour": this.operationalHourForm.value.tuesdayOpenHour, "closeHour": this.operationalHourForm.value.tuesdayCloseHour }
     this.wednesday = { "openHour": this.operationalHourForm.value.wednesdayOpenHour, "closeHour": this.operationalHourForm.value.wednesdayCloseHour }
@@ -82,6 +87,34 @@ export class RegisHourPage implements OnInit{
     this.sunday = { "openHour": this.operationalHourForm.value.sundayOpenHour, "closeHour": this.operationalHourForm.value.sundayCloseHour }
     this.user.operationalHour = { "monday": this.monday, "tuesday": this.tuesday, "wednesday": this.wednesday, "thursday": this.thursday, "friday": this.friday, "saturday": this.saturday, "sunday": this.sunday}
     this.authService.signupSeller(this.user.email, this.user.password, this.user);  
+  }
+
+  showToast(msg: string) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom',
+    })
+    toast.present();
+  }
+
+  updateOperationHour(){
+    this.monday = { "openHour": this.operationalHourForm.value.mondayOpenHour, "closeHour": this.operationalHourForm.value.mondayCloseHour }
+    this.tuesday = { "openHour": this.operationalHourForm.value.tuesdayOpenHour, "closeHour": this.operationalHourForm.value.tuesdayCloseHour }
+    this.wednesday = { "openHour": this.operationalHourForm.value.wednesdayOpenHour, "closeHour": this.operationalHourForm.value.wednesdayCloseHour }
+    this.thursday = { "openHour": this.operationalHourForm.value.thursdayOpenHour, "closeHour": this.operationalHourForm.value.thursdayCloseHour }
+    this.friday = { "openHour": this.operationalHourForm.value.fridayOpenHour, "closeHour": this.operationalHourForm.value.fridayCloseHour }
+    this.saturday = { "openHour": this.operationalHourForm.value.saturdayOpenHour, "closeHour": this.operationalHourForm.value.saturdayCloseHour }
+    this.sunday = { "openHour": this.operationalHourForm.value.sundayOpenHour, "closeHour": this.operationalHourForm.value.sundayCloseHour }
+    this.operationalHour = { "monday": this.monday, "tuesday": this.tuesday, "wednesday": this.wednesday, "thursday": this.thursday, "friday": this.friday, "saturday": this.saturday, "sunday": this.sunday}
+    this.buyerService.updateUserDataOperationalHour(this.operationalHour, "seller");
+    this.showToast("Operational Hour Updated");
+    this.viewCtrl.dismiss();
+
+  }
+
+  dismiss(){
+    this.viewCtrl.dismiss();
   }
 
 

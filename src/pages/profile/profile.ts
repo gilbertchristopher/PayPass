@@ -39,6 +39,6 @@ export class ProfilePage {
 
   editProfile(){
     console.log("editProfile")
-    this.navCtrl.push(EditProfilePage);
+    this.navCtrl.push(EditProfilePage, {"role": this.role});
   }
 }

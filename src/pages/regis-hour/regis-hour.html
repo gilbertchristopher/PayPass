@@ -1,4 +1,4 @@
-<ion-content text-center>
+<ion-content *ngIf="page == regis" text-center>
   <ion-grid class="background-login">
     <img style="width: 50%; margin-left: 25%;" src="../../assets/imgs/PayPassLogo.png">
     <h3 align-items-center justify-content-center style="height: 1%; padding-top: 1px; color: white;">Operational Hour</h3>
@@ -70,6 +70,89 @@
             <strong style="color:yellow">Sign In</strong>
           </button>
         </span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-header *ngIf = "page == 'edit'">
+
+  <ion-navbar color="theme">
+    <ion-title>Set Operational Hour</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content *ngIf="page == 'edit'" text-center>
+  <ion-grid>
+    <ion-row align-items-center justify-content-center style="height: 100%;">
+      <ion-col>
+        <form [formGroup]="operationalHourForm" (ngSubmit)="updateOperationHour()">
+          <ion-list>
+            <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
+              <ion-label style="width: 100px;">
+                <p>Monday</p>
+              </ion-label>
+              <ion-input type="time" formControlName="mondayOpenHour" value="{{userData.operationalHour.monday.openHour}}"></ion-input>
+              <ion-input type="time" formControlName="mondayCloseHour" value="{{userData.operationalHour.monday.closeHour}}"></ion-input>
+            </ion-item>
+            <br>
+            <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
+              <ion-label style="width: 100px;">
+                <p>Tuesday</p>
+              </ion-label>
+              <ion-input type="time" formControlName="tuesdayOpenHour" value="{{userData.operationalHour.tuesday.openHour}}"></ion-input>
+              <ion-input type="time" formControlName="tuesdayCloseHour" value="{{userData.operationalHour.tuesday.closeHour}}"></ion-input>
+            </ion-item>
+            <br>
+            <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
+              <ion-label style="width: 100px;">
+                <p>Wednesday</p>
+              </ion-label>
+              <ion-input type="time" formControlName="wednesdayOpenHour" value="{{userData.operationalHour.wednesday.openHour}}"></ion-input>
+              <ion-input type="time" formControlName="wednesdayCloseHour" value="{{userData.operationalHour.wednesday.closeHour}}"></ion-input>
+            </ion-item>
+            <br>
+            <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
+              <ion-label style="width: 100px;">
+                <p>Thursday</p>
+              </ion-label>
+              <ion-input type="time" formControlName="thursdayOpenHour" value="{{userData.operationalHour.thursday.openHour}}"></ion-input>
+              <ion-input type="time" formControlName="thursdayCloseHour" value="{{userData.operationalHour.thursday.closeHour}}"></ion-input>
+            </ion-item>
+            <br>
+            <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
+              <ion-label style="width: 100px;">
+                <p>Friday</p>
+              </ion-label>
+              <ion-input type="time" formControlName="fridayOpenHour" value="{{userData.operationalHour.friday.openHour}}"></ion-input>
+              <ion-input type="time" formControlName="fridayCloseHour" value="{{userData.operationalHour.friday.closeHour}}"></ion-input>
+            </ion-item>
+            <br>
+            <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
+              <ion-label style="width: 100px;">
+                <p>Saturday</p>
+              </ion-label>
+              <ion-input type="time" formControlName="saturdayOpenHour" value="{{userData.operationalHour.saturday.openHour}}"></ion-input>
+              <ion-input type="time" formControlName="saturdayCloseHour" value="{{userData.operationalHour.saturday.closeHour}}"></ion-input>
+            </ion-item>
+            <br>
+            <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
+              <ion-label style="width: 100px;">
+                <p>Sunday</p>
+              </ion-label>
+              <ion-input type="time" formControlName="sundayOpenHour" value="{{userData.operationalHour.sunday.openHour}}"></ion-input>
+              <ion-input type="time" formControlName="sundayCloseHour" value="{{userData.operationalHour.saturday.closeHour}}"></ion-input>
+            </ion-item>
+            <br>
+          </ion-list>
+          <button ion-button full color="secondary" [disabled]="!operationalHourForm.valid" type="submit">Save</button>
+        </form>
       </ion-col>
     </ion-row>
   </ion-grid>
