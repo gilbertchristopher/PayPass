@@ -8,6 +8,7 @@ import { ChooseLocationPage } from '../choose-location/choose-location';
 import { Loc } from '../../services/location';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ChangePasswordPage } from '../change-password/change-password';
+import { RegisHourPage } from '../regis-hour/regis-hour';
 
 @IonicPage()
 @Component({
@@ -25,6 +26,7 @@ export class EditProfilePage implements OnInit {
   lat = -6.178306;
   lng = 106.631889;
   base64Url: string;
+  
 
   @Input('useURI') useURI: boolean = true;
 
@@ -39,7 +41,7 @@ export class EditProfilePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    // this.base64Url = this.buyerData.profile;
+   
   }
 
   ngOnInit() {
@@ -52,8 +54,9 @@ export class EditProfilePage implements OnInit {
       firstname: new FormControl(null, Validators.compose([Validators.required])),
       lastname: new FormControl(null),
       phoneNumber: new FormControl(null, Validators.compose([Validators.required])),
-      dateOfBirth: new FormControl(null, Validators.compose([Validators.required])),
-      addressInput: new FormControl(null, Validators.compose([Validators.required]))
+      dateOfBirth: new FormControl(null),
+      addressInput: new FormControl(null, Validators.compose([Validators.required])),
+      storename: new FormControl(null, Validators.compose([Validators.required]))
       // password: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)])),
 
       // dobInput: new FormControl(null, Validators.compose([Validators.required])),
@@ -148,6 +151,18 @@ export class EditProfilePage implements OnInit {
     let modal = this.modalCtrl.create(ChangePasswordPage);
     modal.present();
     console.log("DEF")
+    modal.onDidDismiss(
+      (data: any) => {
+        console.log(data);
+      }
+    );
+  }
+
+  setOperationHour(){
+    console.log("ini edit OH")
+    let modal = this.modalCtrl.create(RegisHourPage, {"userData": this.buyerData, "page": "edit"});
+    modal.present();
+    console.log("COBA")
     modal.onDidDismiss(
       (data: any) => {
         console.log(data);

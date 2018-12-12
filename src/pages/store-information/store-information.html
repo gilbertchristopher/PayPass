@@ -13,9 +13,47 @@
 
 
 <ion-content>
-
   <ion-card color="light" no-margin padding>
-    <ion-icon name="time"><span><strong style="color: green;"> OPEN</strong></span> UNTIL 21:00 TODAY</ion-icon>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div style="height:74px; border-radius: 37px; border-width: 2px; border-color: #05BCFF; display: flex; justify-content: center">
+            <img src="../../assets/imgs/profile.jpg" style="width: 70px; border-radius: 35px;" text-center>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <ion-card>
+    <h2 padding-left padding-top class="subtitle">Store Information</h2>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+            Store Name
+          </ion-col>
+          <ion-col col-6 text-right>
+            {{store.storename}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            Phone Number
+          </ion-col>
+          <ion-col col-6 text-right>
+            {{store.phoneNumber}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            Email
+          </ion-col>
+          <ion-col col-6 text-right>
+            {{store.address}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
   </ion-card>
   <ion-card color="light" no-margin padding>
     <ion-grid>
@@ -28,6 +66,71 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+  </ion-card>
+  <ion-card>
+    <ion-col>
+      <h2 padding-left class="subtitle">Operational Hour</h2>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6>
+              Monday
+            </ion-col>
+            <ion-col col-6 text-right>
+              {{store.operationalHour.monday.openHour}} - {{store.operationalHour.monday.closeHour}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              Tuesday
+            </ion-col>
+            <ion-col col-6 text-right>
+              {{store.operationalHour.tuesday.openHour}} - {{store.operationalHour.tuesday.closeHour}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              Wednesday
+            </ion-col>
+            <ion-col col-6 text-right>
+              {{store.operationalHour.wednesday.openHour}} - {{store.operationalHour.wednesday.closeHour}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              Thursday
+            </ion-col>
+            <ion-col col-6 text-right>
+              {{store.operationalHour.thursday.openHour}} - {{store.operationalHour.thursday.closeHour}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              Friday
+            </ion-col>
+            <ion-col col-6 text-right>
+              {{store.operationalHour.friday.openHour}} - {{store.operationalHour.friday.closeHour}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              Saturday
+            </ion-col>
+            <ion-col col-6 text-right>
+              {{store.operationalHour.saturday.openHour}} - {{store.operationalHour.saturday.closeHour}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              Sunday
+            </ion-col>
+            <ion-col col-6 text-right>
+              {{store.operationalHour.sunday.openHour}} - {{store.operationalHour.sunday.closeHour}}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-col>
   </ion-card>
 
 </ion-content>
