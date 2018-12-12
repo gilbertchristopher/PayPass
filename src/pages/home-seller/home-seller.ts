@@ -30,9 +30,6 @@ export class HomeSellerPage {
         this.transactions.push(data[i]);
       }
     })
-    
-    // this.resultQRCode = this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE, uid)
-    // console.log(this.resultQRCode)
   }
 
   async encodeText() {
