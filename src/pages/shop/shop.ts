@@ -72,28 +72,30 @@ export class ShopPage {
 
   async scanBarcode() {
     this.barcodeScanner.scan().then(barcodeData => {
-      const storeRef = firebase.database().ref('seller/' + this.storeId + '/products/' + barcodeData.text);
-      storeRef.on('value', product => {
-        this.productData = product.val();
-        if(this.productData != null){
-          this.productData['qty'] = 1;
-          this.productData['id'] = barcodeData.text;
-          let idx = this.products.map((value) => {
-            return value.id
-          }).indexOf(barcodeData.text);
-          if(idx > -1){
-            this.showToast("This product's already in your cart.");
+      if(barcodeData.text != ""){
+        const storeRef = firebase.database().ref('seller/' + this.storeId + '/products/' + barcodeData.text);
+        storeRef.on('value', product => {
+          this.productData = product.val();
+          if(this.productData != null){
+            this.productData['qty'] = 1;
+            this.productData['id'] = barcodeData.text;
+            let idx = this.products.map((value) => {
+              return value.id
+            }).indexOf(barcodeData.text);
+            if(idx > -1){
+              this.showToast("This product's already in your cart.");
+            }
+            else{
+              this.products.push(this.productData);
+              this.storage.set('cartShop', this.products);
+              this.showToast("This product has been added to the cart.");
+            }
           }
-          else{
-            this.products.push(this.productData);
-            this.storage.set('cartShop', this.products);
-            this.showToast("This product has been added to the cart.");
+          else {
+            this.showToast("This product is not found in this store.");
           }
-        }
-        else {
-          this.showToast("This product is not found in this store.");
-        }
-      })
+        })
+      }
     }).catch(err => {
       console.log('Error ', err);
     });
@@ -160,13 +162,11 @@ export class ShopPage {
     this.userService.addProductToTransaction(this.transactionId, this.productCheckout, this.storeId, this.buyerData);
     this.sendNotif()
     this.showToast("Checkout Success");
-    // this.userService.addProductToTransaction(this.isStoreFound, this.productList)
     this.storage.remove('productList');
     this.storage.remove('transactionId');
     this.storage.remove('cartShop');
     this.transactionId = null;
     this.navCtrl.push(CheckoutPage);
-    // this.sendNotif()adress email firstname lastname id long lat phonenumber
   }
 
   sendNotif() {
