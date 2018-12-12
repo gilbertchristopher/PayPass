@@ -1,6 +1,7 @@
 <ion-header>
   <ion-navbar color="theme" style="height: 60px;">
-    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" placeholder="Search Store" (ionInput)="onSearch($event)" (ionCancel)="cancelSearch()"></ion-searchbar>
+    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" placeholder="Search Store" (ionInput)="onSearch($event)"
+      (ionCancel)="cancelSearch()"></ion-searchbar>
     <img *ngIf="!isSearchbarOpened" src="../../assets/imgs/icon.png" style="width: 100px;">
     <ion-buttons end>
       <button ion-button icon-only *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">
@@ -10,25 +11,21 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content color="light">
+<ion-content style="background-color: #EEEEEE;">
   <h1 padding-left>Store List</h1>
-  <ion-list>
-    <ion-item *ngFor = "let Store of seller">
-      <ion-card (click)="goToStoreDetailPage(Store)" no-margin color="light">
-        <ion-grid>
-          <ion-row>
-            <ion-col col-3 class="image-card-list">
-              <img src="../../assets/imgs/logo.png">
-            </ion-col>
-            <ion-col col-9>
-              <ion-card-header>
-                <strong> {{ Store.storename }}</strong>
-              </ion-card-header>
-              <ion-card-content>Phone Number : {{ Store.phoneNumber }}</ion-card-content>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-    </ion-item>
-  </ion-list>
+  <ion-card *ngFor="let Store of seller" (click)="goToStoreDetailPage(Store)" margin-left margin-right>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3 class="image-card-list">
+          <img src="../../assets/imgs/logo.png">
+        </ion-col>
+        <ion-col col-9>
+          <ion-card-header>
+            <strong> {{ Store.storename }}</strong>
+          </ion-card-header>
+          <ion-card-content>Phone Number : {{ Store.phoneNumber }}</ion-card-content>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
 </ion-content>
