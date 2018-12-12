@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, LoadingController, AlertController, ToastController } from 'ionic-angular';
+import { Platform, LoadingController, AlertController, ToastController, App } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
@@ -14,6 +14,7 @@ import { UserService } from '../services/buyerService';
 import { AuthService } from '../services/authService';
 
 import { IntroPage } from '../pages/intro/intro';
+import { TransactionDetailsPage } from '../pages/transaction-details/transaction-details';
 
 
 
@@ -29,7 +30,7 @@ export class MyApp {
 
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private buyerService: UserService, private loadingCtrl: LoadingController,
-     private alertCtrl: AlertController, private oneSignal: OneSignal, private storage: Storage, private toastCtrl: ToastController) {
+    private alertCtrl: AlertController, private oneSignal: OneSignal, private storage: Storage, private toastCtrl: ToastController, private app: App) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -51,7 +52,7 @@ export class MyApp {
     // this.pushSetup();
 
     // push notification OneSignal
-   // this.oneSignalSetup();
+    this.oneSignalSetup();
 
 
     // check if there is a user that has been login or not
@@ -137,6 +138,8 @@ export class MyApp {
   }
 
   private onPushOpened(payload: OSNotificationPayload) {
+    var nav = this.app.getActiveNav();
+    nav.push(TransactionDetailsPage)
     alert('Push opened: ' + payload.body);
   }
 
