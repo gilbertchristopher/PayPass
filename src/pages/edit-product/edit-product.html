@@ -5,30 +5,30 @@
     </ion-navbar>
   </ion-header>
   
-  <ion-content>
+  <ion-content style="background-color: #EEEEEE;">
       <h1 style="padding-left:30px;">Edit Product</h1>
     <ion-grid>
       <ion-row>
         <ion-col>
           <form [formGroup]="editProductForm" (ngSubmit)="editProduct()">
             <ion-list>
-              <ion-item class="text-field-login">
+              <ion-item class="text-field-edit-product">
                 <ion-label stacked><strong>ID</strong></ion-label>
                 <ion-input type="text" placeholder="Product ID" formControlName="productIDInput" disabled></ion-input>
               </ion-item>
-              <ion-item class="text-field-login">
+              <ion-item class="text-field-edit-product">
                 <ion-label stacked><strong>Name</strong></ion-label>
                 <ion-input type="text" placeholder="Product Name" formControlName="productNameInput"></ion-input>
               </ion-item>
-              <ion-item class="text-field-login">
+              <ion-item class="text-field-edit-product">
                 <ion-label stacked><strong>Quantity</strong></ion-label>
                 <ion-input type="number" placeholder="Product Quantity" formControlName="productQtyInput"></ion-input>
               </ion-item>
-              <ion-item class="text-field-login">
+              <ion-item class="text-field-edit-product">
                 <ion-label stacked><strong>Price</strong></ion-label>
                 <ion-input type="number" placeholder="Product Price" formControlName="productPriceInput"></ion-input>
               </ion-item>
-              <ion-item class="text-field-login">
+              <ion-item class="text-field-edit-product">
                 <ion-label stacked><strong>Description</strong></ion-label>
                 <ion-input type="text" placeholder="Product Description" formControlName="productDescriptionInput"></ion-input>
               </ion-item>
