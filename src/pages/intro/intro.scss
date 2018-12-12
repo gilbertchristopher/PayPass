@@ -31,46 +31,66 @@ page-intro {
     font-size: 2em;
     color: white;
     opacity: 1;
-    transition: all 2.5s ease;
+    transition: all 2.5s ease-in-out;
   }
   .fly-in-item-form li:last-child{
     margin-right: 0px;
   }
   .fly-in-item-form.hidden li:nth-child(1){
-    transform: translateX(150px) translateY(200px);
+    transform: translateX(100px) translateY(200px);
   }
   .fly-in-item-form.hidden li:nth-child(2){
-    transform: translateX(-150px) translateY(-200px);
+    transform: translateX(-100px) translateY(-200px);
   }
   .fly-in-item-form.hidden li:nth-child(3){
-    transform: translateX(500px) translateY(100px);
+    transform: translateX(200px) translateY(200px);
   }
   .fly-in-item-form.hidden li:nth-child(4){
-    transform: translateX(-210px) translateY(-110px);
+    transform: translateX(-200px) translateY(-200px);
   }
   .fly-in-item-form.hidden li:nth-child(5){
-    transform: translateX(350px) translateY(250px);
+    transform: translateX(300px) translateY(200px);
   }
   .fly-in-item-form.hidden li:nth-child(6){
-    transform: translateX(-180px) translateY(-220px);
+    transform: translateX(-300px) translateY(-200px);
   }
   .fly-in-item-form.hidden li:nth-child(7){
-    transform: translateX(100px) translateY(220px);
+    transform: translateX(400px) translateY(200px);
   }
   .fly-in-item-form.hidden li:nth-child(8){
-    transform: translateX(-130px) translateY(-210px);
+    transform: translateX(-400px) translateY(-200px);
   }
   .fly-in-item-form.hidden li:nth-child(9){
-    transform: translateX(175px) translateY(125px);
+    transform: translateX(500px) translateY(200px);
   }
   .fly-in-item-form.hidden li:nth-child(10){
-    transform: translateX(-155px) translateY(-180px);
+    transform: translateX(-500px) translateY(-200px);
   }
   .fly-in-item-form.hidden li:nth-child(11){
-    transform: translateX(125px) translateY(320px);
+    transform: translateX(600px) translateY(200px);
   }
   .fly-in-item-form.hidden li:nth-child(12){
-    transform: translateX(-160px) translateY(-350px);
+    transform: translateX(-600px) translateY(-200px);
+  }
+
+  .fly-in{
+    width: 90%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    display: inline-block;
+    opacity: 1;
+    transition: all 2.5s ease;
+  }
+
+  .fly-in p{
+    color: white;
+  }
+
+  .fly-in.hidden{
+    opacity: 0;
+    transform: translateX(-50%) translateY(200px);
   }
 
 }

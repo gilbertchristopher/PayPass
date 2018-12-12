@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-slides pager="true" parallax="true" class="background-login">
+  <ion-slides pager="true" parallax="true" class="background-login" (ionSlideDidChange) = "slideChanged()">
 
     <ion-slide>
       <!-- <img src="assets/imgs/Background_Polos.png"> -->
@@ -18,13 +18,15 @@
         <li>e</li>
         <li>!</li>
       </ul>
-
     </ion-slide>
 
     <ion-slide>
-      <img src="assets/imgs/SplashScreen.png">
-      <h1>All of the features</h1>
-      <p>Here's what you can do with the app...</p>
+      <div class="fly-in hidden">
+          <h1 style="color:white;">Welcome to</h1>
+          <img src="assets/imgs/icon_trans.png">
+          <p>Here's what you can do with the app...</p>
+      </div>
+      
     </ion-slide>
 
     <ion-slide>
