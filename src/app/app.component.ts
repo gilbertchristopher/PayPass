@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Platform, LoadingController, AlertController, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { Storage } from '@ionic/storage';
+
 import { OneSignal, OSNotificationPayload } from '@ionic-native/onesignal';
 import { isCordovaAvailable } from '../common/is-cordova-available';
 import firebase from 'firebase';
@@ -11,6 +12,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { UserService } from '../services/buyerService';
 import { AuthService } from '../services/authService';
+
+import { IntroPage } from '../pages/intro/intro';
 
 
 
@@ -26,7 +29,7 @@ export class MyApp {
 
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private buyerService: UserService, private loadingCtrl: LoadingController,
-    private push: Push, private alertCtrl: AlertController, private oneSignal: OneSignal, private toastCtrl: ToastController) {
+     private alertCtrl: AlertController, private oneSignal: OneSignal, private storage: Storage, private toastCtrl: ToastController) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -48,8 +51,7 @@ export class MyApp {
     // this.pushSetup();
 
     // push notification OneSignal
-    this.oneSignalSetup();
-
+   // this.oneSignalSetup();
 
 
     // check if there is a user that has been login or not
@@ -68,10 +70,30 @@ export class MyApp {
         });
       }
       else {
-        this.rootPage = LoginPage;
+        this.storage.get('intro-done').then((value) => {
+          if (value == null) {
+            console.log("Slider 2")
+            this.storage.set('intro-done', false);
+            this.rootPage = IntroPage;
+          }
+          else {
+            console.log("Login Login 2")
+            this.rootPage = LoginPage;
+          }
+        });
       }
     }, () => {
-      this.rootPage = LoginPage;
+      this.storage.get('intro-done').then((value) => {
+        if (value == null) {
+          console.log("Slider 2")
+          this.storage.set('intro-done', false);
+          this.rootPage = IntroPage;
+        }
+        else {
+          console.log("Login Login 2")
+          this.rootPage = LoginPage;
+        }
+      });
     });
   }
 

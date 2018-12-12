@@ -48,6 +48,9 @@ import { TransactionDetailsPage } from '../pages/transaction-details/transaction
 import { Camera } from '@ionic-native/camera';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 
+import { IntroPage } from '../pages/intro/intro';
+//import { Storage } from '@ionic/storage';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -73,6 +76,8 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
     RegistersellerOpenhourPage,
     TransactionDetailsPage,
     ChangePasswordPage,
+    IntroPage,
+    RegisHourPage,
   ],
   imports: [
     BrowserModule,
@@ -112,6 +117,8 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
     RegistersellerOpenhourPage,
     TransactionDetailsPage,
     ChangePasswordPage,
+    IntroPage,
+    RegisHourPage,
   ],
   providers: [
     StatusBar,
@@ -124,6 +131,7 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
     BarcodeScanner,
     Push,
     OneSignal,
+    //IonicStorageModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Geolocation,
     NativeGeocoder,

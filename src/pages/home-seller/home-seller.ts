@@ -23,7 +23,7 @@ export class HomeSellerPage {
 
   ionViewWillEnter() {
     let uid = this.authService.getActiveUser().uid;
-    this.encodeText(uid)
+    
     // this.resultQRCode = this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE, uid)
     // console.log(this.resultQRCode)
   }

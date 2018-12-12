@@ -23,9 +23,14 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col *ngIf="!!buyerData" text-center>
-        <strong>{{ buyerData.firstname }} {{ buyerData.lastname }}</strong><br>
+    <ion-row *ngIf ="!!buyerData">
+      <ion-col  *ngIf = "role == 'Buyer'" text-center>
+        <strong>{{ buyerData.firstname }}  {{ buyerData.lastname }}</strong><br>
+        {{ buyerData.email }}<br>
+        {{ buyerData.phoneNumber }}<br>
+      </ion-col>
+      <ion-col *ngIf = "role == 'Seller'" text-center>
+        <strong>{{ buyerData.storename }}</strong><br>
         {{ buyerData.email }}<br>
         {{ buyerData.phoneNumber }}<br>
       </ion-col>

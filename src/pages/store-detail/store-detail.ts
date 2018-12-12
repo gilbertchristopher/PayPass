@@ -52,7 +52,7 @@ export class StoreDetailPage {
 
   // present the modal when call this method
   presentStoreInformationModal(){
-    let storeInformationModal = this.modalCtrl.create(StoreInformationPage, this.navParams.data);
+    let storeInformationModal = this.modalCtrl.create(StoreInformationPage, this.store);
     storeInformationModal.present();
   }
 }
