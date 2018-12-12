@@ -18,8 +18,8 @@
       <ion-row>
         <ion-col col-3>
           <div class="image-div">
-              <img *ngIf="!!store.profile" [src]="store.profile" style="width: 70px; border-radius: 35px;">
-            <img *ngIf="store.profile == undefined" src="../../assets/imgs/logo.png" style="width: 70px; border-radius: 35px;">
+            <img *ngIf="!!store.profile" [src]="store.profile" style="width: 70px; border-radius: 35px;">
+            <img *ngIf="store.profile == undefined" src="../../assets/icon/StoreDefaultIcon.png" style="width: 70px; border-radius: 35px;">
           </div>
         </ion-col>
         <ion-col col-9 padding-left>
@@ -34,7 +34,9 @@
     <ion-row responsive-sm wrap>
       <ion-col col-6 *ngFor="let product of products">
         <ion-card>
-          <img src="../../assets/imgs/icon.png" style="height: 100px;">
+          <img *ngIf="!!product.product.profile" [src]="product.product.profile" style="width: 70px;" class="center">
+          <img *ngIf="product.product.profile == undefined" src="../../assets/icon/ProductDefaultIcon.png" style="width: 70px;"
+            class="center">
           <ion-card-header style="padding-bottom: 0;"><strong>{{ product.product.name }}</strong></ion-card-header>
           <ion-card-content style="padding-bottom: 0;">Price: Rp. {{ product.price }}</ion-card-content>
           <ion-card-content style="padding-top: 0;">Stok: {{ product.qty }}</ion-card-content>
