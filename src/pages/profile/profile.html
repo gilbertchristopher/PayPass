@@ -1,15 +1,7 @@
-<!--
-  Generated template for the ProfilePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-    <ion-navbar color="theme" style="height: 60px;">
-        <img src="../../assets/imgs/icon.png" style="width: 100px;">
-      </ion-navbar>
-
+  <ion-navbar color="theme" style="height: 60px;">
+    <img src="../../assets/imgs/icon.png" style="width: 100px;">
+  </ion-navbar>
 </ion-header>
 
 
@@ -36,18 +28,26 @@
         {{ buyerData.phoneNumber }}<br>
       </ion-col>
     </ion-row>
-    <button ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;" (click)="editProfile()" icon-start><ion-icon name="person">
-    </ion-icon>Edit Profile</button>
+    <button ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;" (click)="editProfile()"
+      icon-start>
+      <ion-icon name="person">
+      </ion-icon>Edit Profile
+    </button>
   </ion-card>
 
-  
+
   <ion-card padding>
     <ion-row>
-        <h1 style="position: relative; text-align: center;">History</h1><br><br>See your transaction history
+      <h1 style="position: relative; text-align: center;">History</h1><br><br>See your transaction history
     </ion-row>
-    <button ion-button block color="theme" (click)="history()" style="border-width: 3px; border-color: #05BCFF;" icon-start><ion-icon name="time"></ion-icon>Show History</button>
-
+    <button ion-button block color="theme" (click)="history()" style="border-width: 3px; border-color: #05BCFF;"
+      icon-start>
+      <ion-icon name="time"></ion-icon>Show History
+    </button>
   </ion-card>
-  <button ion-button block color="danger" (click)="logout()" style="border-width: 3px; border-color: #05BCFF;" icon-start><ion-icon name="log-out"></ion-icon>Log Out</button>
+  <button ion-button block color="danger" (click)="logout()" style="border-width: 3px; border-color: #05BCFF;"
+    icon-start>
+    <ion-icon name="log-out"></ion-icon>Log Out
+  </button>
 
 </ion-content>

@@ -136,7 +136,7 @@ import { IntroPage } from '../pages/intro/intro';
     Geolocation,
     NativeGeocoder,
     FcmProvider,
-    Camera
+    Camera,
   ]
 })
 export class AppModule {}
