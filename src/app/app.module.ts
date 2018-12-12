@@ -128,7 +128,7 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
     Geolocation,
     NativeGeocoder,
     FcmProvider,
-    Camera
+    Camera,
   ]
 })
 export class AppModule {}
