@@ -26,7 +26,7 @@ export class EditProfilePage implements OnInit {
   lat = -6.178306;
   lng = 106.631889;
   base64Url: string;
-  
+
 
   @Input('useURI') useURI: boolean = true;
 
@@ -35,13 +35,14 @@ export class EditProfilePage implements OnInit {
     this.buyerData = this.userService.getUserData();
     this.role = this.buyerData.role;
     this.marker = new Loc();
-    this.lat = this.buyerData.lat;
-    this.lng = this.buyerData.lng;
+    if(this.buyerData.lat != undefined) this.lat = this.buyerData.lat;
+    if(this.buyerData.lng != undefined)this.lng = this.buyerData.lng;
+
     this.marker.setLocation(this.lat, this.lng);
   }
 
   ionViewWillEnter() {
-   
+
   }
 
   ngOnInit() {
@@ -85,6 +86,13 @@ export class EditProfilePage implements OnInit {
 
   edit() {
     this.buyerData = { "email": this.editProfileForm.value.email, "firstname": this.editProfileForm.value.firstname, "lastname": this.editProfileForm.value.lastname, "phoneNumber": this.editProfileForm.value.phoneNumber, "address": this.editProfileForm.value.addressInput, "dateOfBirth": this.editProfileForm.value.dateOfBirth, "lng": this.lng, "lat": this.lat }
+    this.userService.updateUserData(this.buyerData, this.role.toLowerCase());
+    this.navCtrl.pop();
+  }
+
+  editSeller() {
+    this.buyerData = { "email": this.editProfileForm.value.email, "firstname": this.editProfileForm.value.firstname, "lastname": this.editProfileForm.value.lastname, "phoneNumber": this.editProfileForm.value.phoneNumber, "address": this.editProfileForm.value.addressInput, "dateOfBirth": this.editProfileForm.value.dateOfBirth, "lng": this.lng, "lat": this.lat, "storename": this.editProfileForm.value.storename }
+    console.log(this.buyerData);
     this.userService.updateUserData(this.buyerData, this.role.toLowerCase());
     this.navCtrl.pop();
   }
@@ -158,9 +166,9 @@ export class EditProfilePage implements OnInit {
     );
   }
 
-  setOperationHour(){
+  setOperationHour() {
     console.log("ini edit OH")
-    let modal = this.modalCtrl.create(RegisHourPage, {"userData": this.buyerData, "page": "edit"});
+    let modal = this.modalCtrl.create(RegisHourPage, { "userData": this.buyerData, "page": "edit" });
     modal.present();
     console.log("COBA")
     modal.onDidDismiss(
