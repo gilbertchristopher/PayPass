@@ -56,7 +56,7 @@ export class EditProfilePage implements OnInit {
       phoneNumber: new FormControl(null, Validators.compose([Validators.required])),
       dateOfBirth: new FormControl(null),
       addressInput: new FormControl(null, Validators.compose([Validators.required])),
-      storename: new FormControl(null, Validators.compose([Validators.required]))
+      storename: new FormControl(null)
       // password: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)])),
 
       // dobInput: new FormControl(null, Validators.compose([Validators.required])),

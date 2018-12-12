@@ -157,7 +157,7 @@ export class MyApp {
     this.oneSignal.getIds().then(data => {
       let toast = this.toastCtrl.create({
         message: data.userId + " " + data.pushToken,
-        duration: 10000,
+        duration: 3000,
         position: 'bottom',
       })
       toast.present();
