@@ -56,6 +56,12 @@ export class AuthService {
         return firebase.auth().currentUser;
     }
 
+    changePassword(){
+
+    }
+
+
+
     storeSeller(user: any){
         let toast = this.toastCtrl.create({
             message: "Register success",

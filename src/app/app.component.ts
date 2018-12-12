@@ -64,7 +64,6 @@ export class MyApp {
           loader.dismiss();
           this.rootPage = TabsPage;
         });
-
       }
       else {
         this.rootPage = LoginPage;
@@ -75,11 +74,25 @@ export class MyApp {
   }
 
   oneSignalSetup() {
-    this.oneSignal.startInit('7ae173a1-545e-4bc1-92e3-1839314e42bd', '534497429105');
+    // this.oneSignal.startInit('7ae173a1-545e-4bc1-92e3-1839314e42bd', '534497429105');
+    this.oneSignal.startInit('7ae173a1-545e-4bc1-92e3-1839314e42bd', 'REMOTE');
 
     this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
 
     this.oneSignal.handleNotificationReceived().subscribe(() => {
+      let alert = this.alertCtrl.create({
+        title: "New message",
+        message: "You have new message",
+        buttons: [
+          {
+            text: 'See',
+            handler: () => {
+              console.log('Checkout clicked');
+            }
+          }
+        ]
+      })
+      alert.present();
       // do something when notification is received
     });
 
