@@ -89,6 +89,36 @@ $colors: (
 // @import "roboto";
 // @import "noto-sans";
 
+// Raleway
+@font-face{
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/raleway/400/Raleway-Regular.ttf');
+}
+
+@font-face{
+  font-family: 'Raleway';
+  font-style: semi-bold;
+  font-weight: 600;
+  src: url('../assets/fonts/raleway/600/Raleway-SemiBold.ttf');
+}
+
+@font-face{
+  font-family: 'Raleway';
+  font-style: bold;
+  font-weight: 700;
+  src: url('../assets/fonts/raleway/700/Raleway-Bold.ttf');
+}
+
+@font-face{
+  font-family: 'Raleway';
+  font-style: extra-bold;
+  font-weight: 900;
+  src: url('../assets/fonts/raleway/900/Raleway-ExtraBold.ttf');
+}
+
+// Open Sans
 @font-face{
   font-family: 'Open Sans';
   font-style: normal;
@@ -96,41 +126,30 @@ $colors: (
   src: url('../assets/fonts/opensans/400/OpenSans-Regular.ttf');
 }
 
-@font-face{
-  font-family: 'Open Sans';
-  font-style: semi-bold;
-  font-weight: 600;
-  src: url('../assets/fonts/opensans/600/OpenSans-SemiBold.ttf');
-}
-
-@font-face{
-  font-family: 'Open Sans';
-  font-style: bold;
-  font-weight: 700;
-  src: url('../assets/fonts/opensans/700/OpenSans-Bold.ttf');
-}
-
-@font-face{
-  font-family: 'Open Sans';
-  font-style: extra-bold;
-  font-weight: 900;
-  src: url('../assets/fonts/opensans/900/OpenSans-ExtraBold.ttf');
-}
-
-$font-family-base: "Open Sans";
+$font-family-base: "Raleway";
 body {
-  font-family: "Open Sans" !important;
+  font-family: "Raleway" !important;
   font-weight: 400 !important;
 }
 
 h1, h2, button, p {
-  font-family: "Open Sans" !important;
+  font-family: "Raleway" !important;
   font-weight: 700 !important;
 }
 
 h3 {
-  font-family: "Open Sans" !important;
+  font-family: "Raleway" !important;
   font-weight: 600 !important;
+}
+
+ion-input, ion-button, ion-card {
+  font-family: "Raleway" !important;
+  font-weight: 400 !important;
+}
+
+ion-title, ion-input{
+  font-family: "Open Sans" !important;
+  font-weight: 300 !important;
 }
 
 $card-md-margin-left: 0;
