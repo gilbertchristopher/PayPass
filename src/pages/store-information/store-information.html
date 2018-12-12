@@ -14,9 +14,7 @@
 
 <ion-content>
 
-  <ion-card color="light" no-margin padding>
-    <ion-icon name="time"><span><strong style="color: green;"> OPEN</strong></span> UNTIL 21:00 TODAY</ion-icon>
-  </ion-card>
+
   <ion-card color="light" no-margin padding>
     <ion-grid>
       <ion-row>
@@ -28,6 +26,27 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+  </ion-card>
+  <ion-card>
+    <ion-col>
+    <strong>Store Information</strong><br>
+    Store Name : {{store.storename}} <br>
+      Phone Number : {{store.phoneNumber}} <br>
+      Email : {{store.address}}
+    </ion-col>
+  </ion-card>
+  <ion-card>
+    <ion-col>
+    <strong>Operational Hour</strong><br>
+      <ion-card-content>Monday : {{store.operationalHour.monday.openHour}} - {{store.operationalHour.monday.closeHour}} <br>
+      Tuesday : {{store.operationalHour.tuesday.openHour}} - {{store.operationalHour.tuesday.closeHour}} <br>
+      Wednesday : {{store.operationalHour.wednesday.openHour}} - {{store.operationalHour.wednesday.closeHour}} <br>
+      Thursday : {{store.operationalHour.thursday.openHour}} - {{store.operationalHour.thursday.closeHour}} <br>
+      Friday : {{store.operationalHour.friday.openHour}} - {{store.operationalHour.friday.closeHour}} <br>
+      Saturday : {{store.operationalHour.saturday.openHour}} - {{store.operationalHour.saturday.closeHour}} <br>
+      Sunday : {{store.operationalHour.sunday.openHour}} - {{store.operationalHour.sunday.closeHour}} <br>
+    </ion-card-content>
+    </ion-col>
   </ion-card>
 
 </ion-content>

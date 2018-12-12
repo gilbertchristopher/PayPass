@@ -48,9 +48,9 @@ export class MyApp {
     // this.pushSetup();
 
     // push notification OneSignal
-    this.oneSignalSetup();
+   // this.oneSignalSetup();
 
-    this.getID();
+    
 
     // check if there is a user that has been login or not
     firebase.auth().onAuthStateChanged(user => {
@@ -105,6 +105,7 @@ export class MyApp {
     });
 
     this.oneSignal.endInit();
+    this.getID();
   }
 
   onPushReceived(payload: OSNotificationPayload) {
