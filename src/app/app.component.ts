@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Platform, LoadingController, AlertController } from 'ionic-angular';
+import { Platform, LoadingController, AlertController, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
-import { OneSignal } from '@ionic-native/onesignal';
+import { OneSignal, OSNotificationPayload } from '@ionic-native/onesignal';
 
 import firebase from 'firebase';
 
@@ -26,7 +26,7 @@ export class MyApp {
 
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private buyerService: UserService, private loadingCtrl: LoadingController,
-    private push: Push, private alertCtrl: AlertController, private oneSignal: OneSignal) {
+    private push: Push, private alertCtrl: AlertController, private oneSignal: OneSignal, private toastCtrl: ToastController) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -48,7 +48,9 @@ export class MyApp {
     // this.pushSetup();
 
     // push notification OneSignal
-    // this.oneSignalSetup();
+    this.oneSignalSetup();
+
+    this.getID();
 
     // check if there is a user that has been login or not
     firebase.auth().onAuthStateChanged(user => {
@@ -95,6 +97,7 @@ export class MyApp {
       })
       alert.present();
       // do something when notification is received
+      // this.onPushReceived(data.payload);
     });
 
     this.oneSignal.handleNotificationOpened().subscribe(() => {
@@ -104,6 +107,20 @@ export class MyApp {
     this.oneSignal.endInit();
   }
 
+  onPushReceived(payload: OSNotificationPayload) {
+    alert('Push received: ' + payload.body);
+  }
+
+  getID() {
+    this.oneSignal.getIds().then(data => {
+      let toast = this.toastCtrl.create({
+        message: data.userId + " " + data.pushToken,
+        duration: 10000,
+        position: 'bottom',
+      })
+      toast.present();
+    })
+  }
   pushSetup() {
     // to initialize push notifications
     const options: PushOptions = {
