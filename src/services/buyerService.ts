@@ -14,6 +14,7 @@ export class UserService {
     storeData: any;
     productList: ProductTransaction[];
     transactionId: string;
+    transactionData: any;
 
     constructor(private authService: AuthService, private toastCtrl: ToastController, private storage: Storage) {
     }
@@ -33,11 +34,11 @@ export class UserService {
             const userRef: firebase.database.Reference = firebase.database().ref('buyer/' + this.userId);
             userRef.on("value", (snapshot) => {
                 this.userData = snapshot.val();
-                if(this.userData == null || this.userData == ""){
-                  const sellerRef: firebase.database.Reference = firebase.database().ref('seller/' + this.userId);
-                  sellerRef.on("value", (snapshot2) => {
-                      this.userData = snapshot2.val();
-                      resolve(true);  
+                if (this.userData == null || this.userData == "") {
+                    const sellerRef: firebase.database.Reference = firebase.database().ref('seller/' + this.userId);
+                    sellerRef.on("value", (snapshot2) => {
+                        this.userData = snapshot2.val();
+                        resolve(true);
                     })
                 }
                 else
@@ -101,8 +102,8 @@ export class UserService {
                             position: "bottom"
                         });
                         toast.present();
-                
-                        resolve({"storeData": this.storeData, "transactionId": this.transactionId});
+
+                        resolve({ "storeData": this.storeData, "transactionId": this.transactionId });
                     })
                 });
             }
@@ -125,7 +126,7 @@ export class UserService {
         userRef.set(products).then(res => {
             // console.log(res)
             storeRef.set(products).then(val => {
-                
+
             })
         }).catch(err => {
             console.log(err);
@@ -171,5 +172,31 @@ export class UserService {
                 resolve(false)
             })
         })
+    }
+
+
+    // StoreService
+    getTransactionData(data: any) {
+        // this.userId = this.authService.getActiveUser().uid;
+        const userRef: firebase.database.Reference = firebase.database().ref('seller/' + data.storeId + '/transactions/' + data.transactionId);
+        this.transactionData = {};
+        return new Promise((resolve) => {
+            userRef.on('value', (snapshot) => {
+                this.transactionData = snapshot.val();
+                resolve(this.transactionData);
+            });
+        });
+    }
+
+    getAllTransactionData() {
+        this.userId = this.authService.getActiveUser().uid;
+        const userRef: firebase.database.Reference = firebase.database().ref('seller/' + this.userId + '/transactions/');
+        
+        return new Promise((resolve) => {
+            userRef.on('value', (snapshot) => {
+                this.transactionData = snapshot.val();
+                resolve(this.transactionData);
+            });
+        });
     }
 }

@@ -144,12 +144,13 @@ export class MyApp {
 
   private onPushOpened(payload: OSNotificationPayload) {
     var nav = this.app.getActiveNav();
-    nav.push(TransactionDetailsPage)
-    alert('Push opened: ' + payload.body);
+    console.log(payload.additionalData.transactionId)
+    nav.push(TransactionDetailsPage, {"transactionId": payload.additionalData.transactionId, "storeId": payload.additionalData.sellerId})
+    console.log(payload);
   }
 
   onPushReceived(payload: OSNotificationPayload) {
-    alert('Push received: ' + payload.body);
+    console.log('Push received: ' + payload.body);
   }
 
   getID() {
