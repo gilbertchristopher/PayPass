@@ -31,7 +31,8 @@
       <ion-grid>
         <ion-row>
           <ion-col col-3>
-            <img src="../../assets/imgs/icon.png" style="width: 70px; height: 70px; border-radius: 4px;">
+            <img *ngIf="!!product.product.profile" [src]="product.product.profile" style="width: 70px">
+            <img *ngIf="product.product.profile == undefined" src="../../assets/icon/ProductDefaultIcon.png" style="width: 70px">
           </ion-col>
           <ion-col col-9>
             <ion-card-header no-padding padding-bottom>
