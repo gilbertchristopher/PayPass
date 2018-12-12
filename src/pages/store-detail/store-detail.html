@@ -11,16 +11,16 @@
 </ion-header>
 
 
-<ion-content>
-  <ion-grid padding>
-    <ion-card padding color="light">
+<ion-content style="background-color: #EEEEEE;">
+  <ion-grid>
+    <ion-card padding>
       <ion-row>
         <ion-col col-3>
-          <div style="height:74px; width:74px; border-radius: 37px; border-width: 2px; border-color: #05BCFF;">
+          <div class="image-div">
             <img src="../../assets/imgs/logo.png" style="width: 70px; border-radius: 35px;">
           </div>
         </ion-col>
-        <ion-col col-9>
+        <ion-col col-9 padding-left>
           <strong> {{ store.storename }}</strong><br>
          {{ store.address }}<br>
           {{ store.phoneNumber }}<br>
@@ -31,7 +31,7 @@
     
     <ion-row responsive-sm wrap>
       <ion-col col-6 *ngFor ="let product of products">
-        <ion-card >
+        <ion-card>
           <img src="../../assets/imgs/icon.png" style="height: 100px;">
           <ion-card-header style="padding-bottom: 0;"><strong>{{ product.product.name }}</strong></ion-card-header>
           <ion-card-content style="padding-bottom: 0;">Price: Rp. {{ product.price }}</ion-card-content>

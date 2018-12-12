@@ -137,19 +137,19 @@ h1, h2, button, p {
   font-weight: 700 !important;
 }
 
-h3 {
+h3, h4 {
   font-family: "Raleway" !important;
   font-weight: 600 !important;
 }
 
-ion-input, ion-button, ion-card {
-  font-family: "Raleway" !important;
-  font-weight: 400 !important;
-}
-
-ion-title, ion-input{
+ion-title, ion-input, ion-card {
   font-family: "Open Sans" !important;
   font-weight: 300 !important;
+}
+
+ ion-button, ion-card-header {
+  font-family: "Raleway" !important;
+  font-weight: 400 !important;
 }
 
 $card-md-margin-left: 0;
