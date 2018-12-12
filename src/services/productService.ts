@@ -21,7 +21,6 @@ export class ProductService {
         let uid = this.authSvc.getActiveUser().uid;
         const storeRef = firebase.database().ref('seller/' + uid + '/products/');
         storeRef.child(product.id).remove();
-        //this.productData.splice(this.productData.indexOf(product), 1);
     }
 
     getAllproduct(){
@@ -61,6 +60,32 @@ export class ProductService {
             loading.dismiss();
         }).catch(err => {
             loading.dismiss();
+        })
+    }
+
+    checkProduct(productId: string) {
+        return new Promise((resolve) => {
+            let uid = this.authSvc.getActiveUser().uid;
+            const productRef = firebase.database().ref('seller/' + uid + '/products/' + productId);
+            productRef.on('value', product => {
+                let res = product.val();
+                if(res == null){
+                    resolve(true);
+                }
+                else{
+                    resolve(false);
+                }
+            })
+        })
+    }
+
+    getProduct(productId: string) {
+        return new Promise((resolve) => {
+            const productRef = firebase.database().ref('product/' + productId);
+            productRef.on('value', product => {
+                let res = product.val();
+                resolve(res);
+            })
         })
     }
 }
