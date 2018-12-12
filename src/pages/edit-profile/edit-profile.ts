@@ -132,7 +132,7 @@ export class EditProfilePage implements OnInit {
       .then((base64Url) => {
         let loader = this.loadingCtrl.create({
           spinner: 'circles',
-          content: 'Updating your profile'
+          content: 'Updating your profile picture'
         });
         loader.present();
         //  this.base64Url = 'data:image/jpeg;base64,' + base64Url;

@@ -15,13 +15,19 @@ export class StoreInformationPage {
   store: any;
   lat: number = 52.678418;
   lng: number = 7.809007;
+  today: Date;
+  day: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private geoloc: Geolocation) {
     this.store = navParams.data;
     this.marker = new Loc();
     this.marker.setLocation(this.store.lat, this.store.lng);
     this.lat = this.store.lat;
-    this.lng = this.store.lng;   
+    this.lng = this.store.lng;
+    this.today = new Date();
+    this.day = this.today.getDay()
+
+    console.log(this.day); 
   }
 
   ionViewDidLoad() {
