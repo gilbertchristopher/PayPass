@@ -46,7 +46,13 @@ import { RegisHourPage } from '../pages/regis-hour/regis-hour';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { OneSignal } from '@ionic-native/onesignal';
 import { TransactionDetailsPage } from '../pages/transaction-details/transaction-details';
+import { ComponentsModule } from '../components/components.module';
+import { AngularFireModule} from 'angularfire2';
+import { AngularFireAuthModule} from 'angularfire2/auth';
+import { GooglePlus } from '@ionic-native/google-plus';
+const firebaseConfig={
 
+}
 @NgModule({
   declarations: [
     MyApp,
@@ -71,11 +77,13 @@ import { TransactionDetailsPage } from '../pages/transaction-details/transaction
     ChooseLocationPage,
     RegistersellerOpenhourPage,
     TransactionDetailsPage,
-  ],
+  ],  
   imports: [
     BrowserModule,
     HttpClientModule,
-    // AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    ComponentsModule,
     // IonicModule.forRoot(MyApp)  default
     IonicModule.forRoot(MyApp, {
       scrollPadding: false,
@@ -126,6 +134,7 @@ import { TransactionDetailsPage } from '../pages/transaction-details/transaction
     Geolocation,
     NativeGeocoder,
     FcmProvider,
+    GooglePlus
   ]
 })
 export class AppModule {}

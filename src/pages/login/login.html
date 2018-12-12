@@ -13,11 +13,23 @@
               <ion-label><ion-icon name="lock"></ion-icon></ion-label>
               <ion-input type="password" placeholder="Password" formControlName="passwordInput"></ion-input>
             </ion-item>
+           
           </ion-list>
           <button ion-button full color="secondary" [disabled]="!loginForm.valid" type="submit">Sign In</button>
         </form>
-        <span style="color:white;">Don't have an account? <button class="background-transparent-100" (click)="goToSignUpPage()"><strong style="color:yellow">Sign Up</strong></button></span>
+        <button class="googlelogin">
+          <ion-icon style="color: white;" name="logo-google">
+              <google-login></google-login> 
+          </ion-icon>
+        </button>
+         
+        
+        
       </ion-col>
+      
     </ion-row>
+    <span style="color:white;">Don't have an account? <button class="background-transparent-100" (click)="goToSignUpPage()"><strong style="color:yellow">Sign Up</strong></button></span>
+            
   </ion-grid>
+  
 </ion-content>
