@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { OneSignal, OSNotificationPayload } from '@ionic-native/onesignal';
-
+import { isCordovaAvailable } from '../common/is-cordova-available';
 import firebase from 'firebase';
 
 import { TabsPage } from '../pages/tabs/tabs';
@@ -50,7 +50,7 @@ export class MyApp {
     // push notification OneSignal
     this.oneSignalSetup();
 
-    this.getID();
+
 
     // check if there is a user that has been login or not
     firebase.auth().onAuthStateChanged(user => {
@@ -76,35 +76,46 @@ export class MyApp {
   }
 
   oneSignalSetup() {
-    // this.oneSignal.startInit('7ae173a1-545e-4bc1-92e3-1839314e42bd', '534497429105');
-    this.oneSignal.startInit('7ae173a1-545e-4bc1-92e3-1839314e42bd', 'REMOTE');
+    if (isCordovaAvailable()) {
+      // this.oneSignal.startInit('7ae173a1-545e-4bc1-92e3-1839314e42bd', '534497429105');
+      this.oneSignal.startInit('7ae173a1-545e-4bc1-92e3-1839314e42bd', 'REMOTE');
 
-    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
 
-    
-    this.oneSignal.handleNotificationReceived().subscribe(() => {
-      let alert = this.alertCtrl.create({
-        title: "New message",
-        message: "You have new message",
-        buttons: [
-          {
-            text: 'See',
-            handler: () => {
-              console.log('Checkout clicked');
+
+      this.oneSignal.handleNotificationReceived().subscribe((data) => {
+        this.onPushReceived(data.payload);
+        let alert = this.alertCtrl.create({
+          title: "New message",
+          message: "You have new message",
+          buttons: [
+            {
+              text: 'See',
+              handler: () => {
+                console.log('Checkout clicked');
+              }
             }
-          }
-        ]
-      })
-      alert.present();
-      // do something when notification is received
-      // this.onPushReceived(data.payload);
-    });
+          ]
+        })
+        alert.present();
+        // do something when notification is received
+        // this.onPushReceived(data.payload);
+      });
 
-    this.oneSignal.handleNotificationOpened().subscribe(() => {
-      // do something when a notification is opened
-    });
+      this.oneSignal.handleNotificationOpened().subscribe((data) => {
+        // do something when a notification is opened
+        this.onPushOpened(data.notification.payload);
+      });
 
-    this.oneSignal.endInit();
+      this.oneSignal.endInit();
+
+      this.getID();
+    }
+
+  }
+
+  private onPushOpened(payload: OSNotificationPayload) {
+    alert('Push opened: ' + payload.body);
   }
 
   onPushReceived(payload: OSNotificationPayload) {
@@ -120,79 +131,6 @@ export class MyApp {
       })
       toast.present();
     })
-  }
-  pushSetup() {
-    // to initialize push notifications
-    const options: PushOptions = {
-      android: {
-        senderID: "534497429105",
-        // titleKey: "You have new message",
-        // messageKey: "Hello there! New message",
-        // icon: "../../resources/android/icon/drawable-hdpi-icon.png",
-        // forceShow: true,
-        // sound: true,
-        // vibrate: true,
-      },
-      ios: {
-        alert: 'true',
-        badge: true,
-        sound: 'false'
-      }
-    };
-
-    const pushObject: PushObject = this.push.init(options);
-
-
-    pushObject.on('notification').subscribe((notification: any) => {
-      if (notification.additionalData.foreground) {
-        let alert = this.alertCtrl.create({
-          title: notification.title,
-          message: notification.message,
-          buttons: [
-            {
-              text: 'See',
-              handler: () => {
-                console.log('Checkout clicked');
-              }
-            }
-          ]
-        })
-        alert.present();
-        console.log('Received a notification', notification)
-      }
-
-    });
-
-    pushObject.on('registration').subscribe((registration: any) => {
-      console.log('Device registered', registration)
-    });
-
-    pushObject.on('error').subscribe(error => {
-      console.error('Error with Push plugin', error)
-    });
-    // const FCM = require('fcm-node');
-    // // Replace these with your own values.
-    // const apiKey = 'replace with API key';
-    // const deviceID = 'my device id';
-    // const fcm = new FCM(apiKey);
-
-    // const message = {
-    //   to: deviceID,
-    //   data: {
-    //     title: 'Large Icon',
-    //     message: 'Loaded from assets folder.',
-    //     image: 'www/image/logo.png'
-    //   }
-    // };
-
-    // fcm.send(message, (err, response) => {
-    //   if (err) {
-    //     console.log(err);
-    //     console.log('Something has gone wrong!');
-    //   } else {
-    //     console.log('Successfully sent with response: ', response);
-    //   }
-    // });
   }
 }
 
