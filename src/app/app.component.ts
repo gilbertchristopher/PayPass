@@ -132,7 +132,7 @@ export class MyApp {
 
       this.oneSignal.endInit();
 
-      this.getID();
+      // this.getID();
     }
 
   }
@@ -151,7 +151,7 @@ export class MyApp {
     this.oneSignal.getIds().then(data => {
       let toast = this.toastCtrl.create({
         message: data.userId + " " + data.pushToken,
-        duration: 10000,
+        duration: 3000,
         position: 'bottom',
       })
       toast.present();
