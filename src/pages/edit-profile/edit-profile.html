@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content *ngIf = "role == 'Buyer'">
   <ion-grid class="background-login">
     <form [formGroup]="editProfileForm">
       <ion-list class="list1">
@@ -62,6 +62,87 @@
           <ion-item class="text-field-editProfile" style="border-width: 0px;">
             <ion-label floating>Date Of Birth</ion-label>
             <ion-input type="date" formControlName="dateOfBirth" value="{{ buyerData.dateOfBirth }}"></ion-input>
+          </ion-item>
+          <ion-row>
+            <ion-col col-10>
+              <ion-item class="text-field-editProfile" style="border-width: 0px;">
+                <ion-label floating>Address</ion-label>
+                <ion-input type="text" formControlName="addressInput" value="{{ buyerData.address }}"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-2>
+              <button ion-button color="light" (click)="onOpenMap()">
+                <ion-icon name="pin"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <button type="submit" (click)="edit()" [disabled]="!editProfileForm.valid" ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;">
+          Save
+        </button>
+
+      </ion-list>
+    </form>
+
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf = "role == 'Seller'">
+  <ion-grid class="background-login">
+    <form [formGroup]="editProfileForm">
+      <ion-list class="list1">
+        <ion-card text-center>
+          <ion-row>
+
+            <ion-col>
+              <div style="border-width: 2px; justify-content: center; width: 100%; display: flex;" *ngIf="!!buyerData">
+                <img [src]="buyerData.profile" style="height: 80px; width: 80px; border-radius: 50%; "/>
+              </div>
+
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;" (click)="editProfile()"
+                icon-start>
+                <ion-icon name="person">
+                </ion-icon>Edit Photo
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+
+        <ion-card padding-right>
+          <strong padding=left>Owner Information</strong>
+          <ion-item class="text-field-editProfile" style="border-width: 0px;">
+            <ion-label stacked>Firstname</ion-label>
+            <ion-input type="text" formControlName="firstname" value="{{ buyerData.firstname }}" floating> </ion-input>
+          </ion-item>
+          <ion-item class="text-field-editProfile" style="border-width: 0px;">
+            <ion-label stacked>Lastname</ion-label>
+            <ion-input type="text" formControlName="lastname" value="{{ buyerData.lastname }}" floating> </ion-input>
+          </ion-item>
+          <button ion-button block color="theme" style="border-width: 10px; border-color: #05BCFF;" (click)="changePassword()" icon-start>
+            <ion-icon name="ios-lock-outline">
+            </ion-icon>Change Password
+          </button>
+        </ion-card>
+
+        <ion-card padding-right>
+          <strong padding-left>Store Information</strong>
+          <ion-item class="text-field-editProfile" style="border-width: 0px;">
+            <ion-label floating>Store Name</ion-label>
+            <ion-input type="text" formControlName="storename" value="{{ buyerData.storename }}"></ion-input>
+          </ion-item>
+          <ion-item class="text-field-editProfile" style="border-width: 0px;">
+            <ion-label floating>Email</ion-label>
+            <ion-input type="text" formControlName="email" value="{{ buyerData.email }}"></ion-input>
+          </ion-item>
+          <ion-item class="text-field-editProfile" style="border-width: 0px;">
+            <ion-label floating>Phone Number</ion-label>
+            <ion-input type="text" formControlName="phoneNumber" value="{{buyerData.phoneNumber}}"></ion-input>
           </ion-item>
           <ion-row>
             <ion-col col-10>
