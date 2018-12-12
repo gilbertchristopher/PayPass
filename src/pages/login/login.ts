@@ -3,6 +3,10 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisrolePage } from '../regisrole/regisrole';
 import { AuthService } from '../../services/authService';
+import * as $ from 'jquery';
+
+// declare var jquery: any;
+// declare var $: any;
 
 
 @IonicPage()
@@ -15,6 +19,11 @@ export class LoginPage implements OnInit {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private loadingCtrl: LoadingController,
     private toastCtrl: ToastController) {
+      $(function(){
+        setTimeout(function(){
+          $(".fly-in-item-form").removeClass('hidden')
+        }, 500);
+      })
   }
 
   ngOnInit() {

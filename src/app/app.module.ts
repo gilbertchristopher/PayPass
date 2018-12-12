@@ -47,6 +47,7 @@ import { FcmProvider } from '../providers/fcm/fcm';
 import { OneSignal } from '@ionic-native/onesignal';
 import { TransactionDetailsPage } from '../pages/transaction-details/transaction-details';
 import { Camera } from '@ionic-native/camera';
+import { ChangePasswordPage } from '../pages/change-password/change-password';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { Camera } from '@ionic-native/camera';
     ChooseLocationPage,
     RegistersellerOpenhourPage,
     TransactionDetailsPage,
+    ChangePasswordPage,
   ],
   imports: [
     BrowserModule,
@@ -110,6 +112,7 @@ import { Camera } from '@ionic-native/camera';
     ChooseLocationPage,
     RegistersellerOpenhourPage,
     TransactionDetailsPage,
+    ChangePasswordPage,
   ],
   providers: [
     StatusBar,

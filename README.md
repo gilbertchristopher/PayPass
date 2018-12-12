@@ -3,7 +3,7 @@ How to clone:
 - clone project ini terlebih dahulu:
     git config --global user.name name_kalian
     git config --global user.email email_kalian
-    git clone https://github.com/octa_vany/paypass.git
+    git clone https://gitlab.com/octa_vany/paypass.git
 - di gitlab, aku ud buat branch masing2 buat kalian, sama branch dev
 - kalo pas kalian clone ga ada branch kalian, coba jalanin: git fetch
 
@@ -23,3 +23,5 @@ How to pull:
 - waktu mau pull dari dev, jangan lupa commit dulu ya
 - pull from dev
 - kalo ada conflict di solve dlu
+
+ C:\Users\asus02\AppData\Roaming\npm\firebase deploy --only functions
