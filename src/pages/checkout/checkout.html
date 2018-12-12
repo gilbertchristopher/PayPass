@@ -26,10 +26,10 @@
         <strong>Please check your cart before check out </strong>
       </ion-card-title>
       <ion-card-header text-center>
-        <strong>Toko A</strong><br>
-        Jalan Scientia Boulevard, Gading Serpong<br>
-        021-123456<br>
-        30 November 2018
+        <strong>{{storename}}</strong><br>
+        {{address}}<br>
+        {{phoneNumber}}<br>
+        {{date}}
       </ion-card-header>
 
       <ion-list>
@@ -72,4 +72,6 @@
       
     </ion-card>
     <button ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;" icon-start><ion-icon name="cash"></ion-icon>Check Out </button>
+    
+    <button ion-button block color="danger" style="border-width: 3px;" (click)="cancel()" icon-start><ion-icon name="close"></ion-icon>Cancel </button>
 </ion-content>
