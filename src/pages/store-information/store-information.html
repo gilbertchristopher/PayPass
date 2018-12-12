@@ -18,7 +18,8 @@
       <ion-row>
         <ion-col>
           <div style="height:74px; border-radius: 37px; border-width: 2px; border-color: #05BCFF; display: flex; justify-content: center">
-            <img src="../../assets/imgs/profile.jpg" style="width: 70px; border-radius: 35px;" text-center>
+              <img *ngIf="!!store.profile" [src]="store.profile" style="width: 70px; border-radius: 35px;">
+              <img *ngIf="store.profile == undefined" src="../../assets/icon/StoreDefaultIcon.png" style="width: 70px; border-radius: 35px;">
           </div>
         </ion-col>
       </ion-row>
@@ -93,7 +94,7 @@
               <strong>Tuesday</strong>
             </ion-col>
             <ion-col col-6 text-right>
-              {{store.operationalHour.tuesday.openHour}} - {{store.operationalHour.tuesday.closeHour}}
+              <strong>{{store.operationalHour.tuesday.openHour}} - {{store.operationalHour.tuesday.closeHour}}</strong>
             </ion-col>
           </ion-row>
           <ion-row *ngIf="day != 2">
@@ -127,7 +128,9 @@
               <strong>Thursday</strong>
             </ion-col>
             <ion-col col-6 text-right>
-              {{store.operationalHour.thursday.openHour}} - {{store.operationalHour.thursday.closeHour}}
+              <strong>
+                {{store.operationalHour.thursday.openHour}} - {{store.operationalHour.thursday.closeHour}}
+              </strong>
             </ion-col>
           </ion-row>
           <ion-row *ngIf="day != 4">
@@ -143,7 +146,7 @@
               <strong>Friday</strong>
             </ion-col>
             <ion-col col-6 text-right>
-              {{store.operationalHour.friday.openHour}} - {{store.operationalHour.friday.closeHour}}
+              <strong>{{store.operationalHour.friday.openHour}} - {{store.operationalHour.friday.closeHour}}</strong>
             </ion-col>
           </ion-row>
           <ion-row *ngIf="day != 5">
@@ -159,7 +162,7 @@
               <strong>Saturday</strong>
             </ion-col>
             <ion-col col-6 text-right>
-              {{store.operationalHour.saturday.openHour}} - {{store.operationalHour.saturday.closeHour}}
+              <strong>{{store.operationalHour.saturday.openHour}} - {{store.operationalHour.saturday.closeHour}}</strong>
             </ion-col>
           </ion-row>
           <ion-row *ngIf="day != 6">
@@ -175,7 +178,7 @@
               <strong>Sunday</strong>
             </ion-col>
             <ion-col col-6 text-right>
-              {{store.operationalHour.sunday.openHour}} - {{store.operationalHour.sunday.closeHour}}
+              <strong>{{store.operationalHour.sunday.openHour}} - {{store.operationalHour.sunday.closeHour}}</strong>
             </ion-col>
           </ion-row>
           <ion-row *ngIf="day != 7">
