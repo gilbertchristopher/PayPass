@@ -28,7 +28,7 @@ export class ShopPage {
   productQty: number = 1;
   storeResult: any;
   productResult: ProductTransaction[];
-  productData: ProductTransaction;
+  productData: any;
   storeId: string;
   transactionId: string;
   options: BarcodeScannerOptions;
@@ -72,22 +72,29 @@ export class ShopPage {
 
   async scanBarcode() {
     this.barcodeScanner.scan().then(barcodeData => {
-      if (barcodeData.text != "") {
-        const storeRef = firebase.database().ref('seller/' + this.storeId + '/products/' + barcodeData.text);
-        storeRef.on('value', product => {
-          this.productData = product.val();
+      const storeRef = firebase.database().ref('seller/' + this.storeId + '/products/' + barcodeData.text);
+      storeRef.on('value', product => {
+        this.productData = product.val();
+        if(this.productData != null){
           this.productData['qty'] = 1;
           this.productData['id'] = barcodeData.text;
-          console.log('productData ', this.productData);
-          this.products.push(this.productData);
-          this.storage.set('cartShop', this.products);
-          // this.userService.addProductToTransaction(this.storeId, this.productData, product.key, this.transactionId);
-
-          this.showToast("Product has stored in the cart.");
-        })
-      }
+          let idx = this.products.map((value) => {
+            return value.id
+          }).indexOf(barcodeData.text);
+          if(idx > -1){
+            this.showToast("This product's already in your cart.");
+          }
+          else{
+            this.products.push(this.productData);
+            this.storage.set('cartShop', this.products);
+            this.showToast("This product has been added to the cart.");
+          }
+        }
+        else {
+          this.showToast("This product is not found in this store.");
+        }
+      })
     }).catch(err => {
-      this.showToast("Product doesn't found in this store.");
       console.log('Error ', err);
     });
   }
@@ -150,7 +157,7 @@ export class ShopPage {
     for (let index = 0; index < this.products.length; index++) {
       this.productCheckout[this.products[index].id] = { "qty": this.products[index].qty, "price": this.products[index].price, "product": this.products[index].product }
     }
-    this.userService.addProductToTransaction(this.transactionId, this.productCheckout, this.storeId);
+    this.userService.addProductToTransaction(this.transactionId, this.productCheckout, this.storeId, this.buyerData);
     this.sendNotif()
     this.showToast("Checkout Success");
     // this.userService.addProductToTransaction(this.isStoreFound, this.productList)
@@ -159,7 +166,7 @@ export class ShopPage {
     this.storage.remove('cartShop');
     this.transactionId = null;
     this.navCtrl.push(CheckoutPage);
-    // this.sendNotif()
+    // this.sendNotif()adress email firstname lastname id long lat phonenumber
   }
 
   sendNotif() {
@@ -196,6 +203,7 @@ export class ShopPage {
     var message = {
       app_id: "7ae173a1-545e-4bc1-92e3-1839314e42bd",
       contents: { "en": "Transaction ID: " + this.transactionId + " wants to finish its shopping. Checkout now!" },
+      
       data: { "transactionId": this.transactionId },
       include_player_ids: ["d02154d3-3874-4931-bc38-88602fb093a4"]
     };
