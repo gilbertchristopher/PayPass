@@ -16,13 +16,13 @@
     </ion-card-title>
     <ion-card-header text-center>
       {{ transactionData.buyerInfo.firstname }} {{ transactionData.buyerInfo.lastname }}<br>
-      {{ transactionData.buyerInfo.address }}<br> 
+      {{ transactionData.buyerInfo.address }}<br>
       {{ transactionData.buyerInfo.phoneNumber }}<br>
       {{ transactionData.date}}, {{ transactionData.time }}<br>
-      Status : 
+      Status :
       <span *ngIf="transactionData.status == 'pending'" style="color: #ffbf00;">{{ transactionData.status }}</span>
-      <span *ngIf="transactionData.status == 'cancelled'" color="danger">{{ transactionData.status }}</span>
-      <span *ngIf="transactionData.status == 'success'" color="secondary">{{ transactionData.status }}</span>
+      <span *ngIf="transactionData.status == 'cancelled'" style="color: #f53d3d;">{{ transactionData.status }}</span>
+      <span *ngIf="transactionData.status == 'success'" style="color: #32db64;">{{ transactionData.status }}</span>
     </ion-card-header>
 
     <ion-grid>
@@ -62,8 +62,18 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+    <ion-grid *ngIf="transactionData.status == 'pending'">
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button block color="theme" (click)="confirm()">Confirm
+            Payment</button>
+        </ion-col>
+        <ion-col col-6>
+            <button ion-button block color="danger" (click)="cancel()">Cancel</button>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
 
-    <button ion-button color="theme" *ngIf="transactionData.status == 'pending'" (click)="confirm()">Confirm Payment</button>
 
   </ion-card>
 </ion-content>

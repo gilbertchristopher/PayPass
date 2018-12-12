@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserService } from '../../services/buyerService';
 import * as https from 'https';
+import { TabsPage } from '../tabs/tabs';
 
 
 @IonicPage()
@@ -60,7 +61,14 @@ export class TransactionDetailsPage {
   }
 
   confirm() {
+    this.userService.changeStatusTransaction("success", this.transactionData.id, this.transactionData.buyerInfo.id);
     this.sendNotif();
+    this.navCtrl.setRoot(TabsPage);
+  }
+
+  cancel(){
+    this.userService.changeStatusTransaction("cancelled", this.transactionData.id, this.transactionData.buyerInfo.id);
+    this.navCtrl.setRoot(TabsPage);
   }
 
   sendNotif() {

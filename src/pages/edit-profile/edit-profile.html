@@ -92,7 +92,7 @@
   <ion-grid class="background-login">
     <form [formGroup]="editProfileForm">
       <ion-list class="list1">
-        <ion-card text-center>
+        <ion-card text-center padding>
           <ion-row>
 
             <ion-col>
@@ -113,14 +113,14 @@
           </ion-row>
         </ion-card>
 
-        <ion-card padding-right>
-          <strong padding=left>Owner Information</strong>
+        <ion-card padding>
+          <strong class="subtitle">Owner Information</strong>
           <ion-item class="text-field-editProfile" style="border-width: 0px;">
-            <ion-label stacked>Firstname</ion-label>
+            <ion-label floating>Firstname</ion-label>
             <ion-input type="text" formControlName="firstname" value="{{ buyerData.firstname }}" floating> </ion-input>
           </ion-item>
           <ion-item class="text-field-editProfile" style="border-width: 0px;">
-            <ion-label stacked>Lastname</ion-label>
+            <ion-label floating>Lastname</ion-label>
             <ion-input type="text" formControlName="lastname" value="{{ buyerData.lastname }}" floating> </ion-input>
           </ion-item>
           <button ion-button block color="theme" style="border-width: 10px; border-color: #05BCFF;" (click)="changePassword()" icon-start>
@@ -129,8 +129,8 @@
           </button>
         </ion-card>
 
-        <ion-card padding-right>
-          <strong padding-left>Store Information</strong>
+        <ion-card padding>
+          <strong class="subtitle">Store Information</strong>
           <ion-item class="text-field-editProfile" style="border-width: 0px;">
             <ion-label floating>Store Name</ion-label>
             <ion-input type="text" formControlName="storename" value="{{ buyerData.storename }}"></ion-input>
@@ -162,7 +162,7 @@
           </button>
         </ion-card>
 
-        <button type="submit" (click)="edit()" [disabled]="!editProfileForm.valid" ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;">
+        <button type="submit" (click)="edit()" [disabled]="!editProfileForm.valid" ion-button block color="secondary" style="border-width: 3px; border-color: #05BCFF;">
           <ion-icon name="folder-open"></ion-icon>
           Save
         </button>
