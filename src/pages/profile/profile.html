@@ -14,16 +14,17 @@
 
 
 <ion-content padding style="background-color: #EEEEEE;">
-  <ion-card padding>
+  <ion-card padding *ngIf ="!!buyerData">
     <ion-row> 
       <ion-col>
         <div style="height:74px; border-radius: 37px; border-width: 2px; border-color: #05BCFF; display: flex; justify-content: center" > 
-          <img src="../../assets/imgs/profile.jpg" style="width: 70px; border-radius: 35px;" text-center>
+          <img *ngIf ="!!buyerData.profile" [src]="buyerData.profile" style="width: 70px; border-radius: 35px;" text-center>
+          <img *ngIf ="buyerData == undefined" src="../../assets/imgs/profile.jpg" style="width: 70px; border-radius: 35px;" text-center>
         </div>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf ="!!buyerData">
+    <ion-row >
       <ion-col  *ngIf = "role == 'Buyer'" text-center>
         <strong>{{ buyerData.firstname }}  {{ buyerData.lastname }}</strong><br>
         {{ buyerData.email }}<br>

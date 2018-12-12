@@ -11,7 +11,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content style="background-color: #EEEEEE;">
   <h1 style="padding-left: 30px">Product List</h1>
   <!-- <ion-searchbar placeholder="Search Your Product" (ionInput)="onInput($event)"></ion-searchbar> -->
   <hr style="margin-bottom: 2px" />
@@ -20,7 +20,8 @@
       <ion-item> 
         <ion-row>
           <ion-col col-3>
-            <img src="../../assets/imgs/logo.png" style="width: 70px">
+            <img *ngIf="!!product.product.profile" [src]="product.product.profile" style="width: 70px">
+            <img *ngIf="product.product.profile == undefined" src="../../assets/imgs/logo.png" style="width: 70px">
           </ion-col>
           <ion-col col-9>
             <h3><strong>{{product.product.name}}</strong></h3>
@@ -29,8 +30,8 @@
         </ion-row>
       </ion-item>
       <ion-item-options>
-        <button ion-button color="secondary" (click)="editProduct(product)" style="width: 14%;"><ion-icon name="create"></ion-icon>Edit</button>
-        <button ion-button color="danger" (click)="deleteProduct(product)" style="width: 14%;"><ion-icon name="trash"></ion-icon>Delete</button>
+        <button ion-button color="secondary" (click)="editProduct(product)" style="width: 15%;"><ion-icon name="create"></ion-icon>Edit</button>
+        <button ion-button color="danger" (click)="deleteProduct(product)" style="width: 15%;"><ion-icon name="trash"></ion-icon>Delete</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
