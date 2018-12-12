@@ -27,6 +27,7 @@ export class MyApp {
   rootPage: any;
   userData1: any;
   userData2: any;
+  isNotifReceived: boolean;
 
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private buyerService: UserService, private loadingCtrl: LoadingController,
@@ -58,17 +59,20 @@ export class MyApp {
     // check if there is a user that has been login or not
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        let loader = this.loadingCtrl.create({
-          spinner: 'circles',
-          content: 'Loading, fetch data...'
-        });
-        loader.present();
-        this.buyerService.requestUserData().then((buyerInfo) => {
-          this.userData1 = buyerInfo;
-          console.log(this.userData1);
-          loader.dismiss();
-          this.rootPage = TabsPage;
-        });
+        if (this.isNotifReceived != true) {
+          let loader = this.loadingCtrl.create({
+            spinner: 'circles',
+            content: 'Loading, fetch data...'
+          });
+          loader.present();
+          this.buyerService.requestUserData().then((buyerInfo) => {
+            this.userData1 = buyerInfo;
+            console.log(this.userData1);
+            loader.dismiss();
+            this.rootPage = TabsPage;
+          });
+        }
+
       }
       else {
         this.storage.get('intro-done').then((value) => {
@@ -108,25 +112,26 @@ export class MyApp {
 
       this.oneSignal.handleNotificationReceived().subscribe((data) => {
         this.onPushReceived(data.payload);
-        let alert = this.alertCtrl.create({
-          title: "New message",
-          message: "You have new message",
-          buttons: [
-            {
-              text: 'See',
-              handler: () => {
-                console.log('Checkout clicked');
-              }
-            }
-          ]
-        })
-        alert.present();
+        // let alert = this.alertCtrl.create({
+        //   title: "New message",
+        //   message: "You have new message",
+        //   buttons: [
+        //     {
+        //       text: 'See',
+        //       handler: () => {
+        //         console.log('Checkout clicked');
+        //       }
+        //     }
+        //   ]
+        // })
+        // alert.present();
         // do something when notification is received
         // this.onPushReceived(data.payload);
       });
 
       this.oneSignal.handleNotificationOpened().subscribe((data) => {
         // do something when a notification is opened
+        this.isNotifReceived = true;
         this.onPushOpened(data.notification.payload);
       });
 
@@ -139,12 +144,13 @@ export class MyApp {
 
   private onPushOpened(payload: OSNotificationPayload) {
     var nav = this.app.getActiveNav();
-    nav.push(TransactionDetailsPage)
-    alert('Push opened: ' + payload.body);
+    console.log(payload.additionalData.transactionId)
+    nav.push(TransactionDetailsPage, {"transactionId": payload.additionalData.transactionId, "storeId": payload.additionalData.sellerId})
+    console.log(payload);
   }
 
   onPushReceived(payload: OSNotificationPayload) {
-    alert('Push received: ' + payload.body);
+    console.log('Push received: ' + payload.body);
   }
 
   getID() {
