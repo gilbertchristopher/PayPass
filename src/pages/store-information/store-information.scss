@@ -7,4 +7,15 @@ page-store-information {
     agm-map{
         height: 300px;
     }
+
+    .subtitle{
+        font-style: italic;
+    }
+    .text-field-editProfile{
+        background: rgba(255, 255, 255, 0.5); 
+        border-radius: 5px;
+        border-width: 2px;
+        border-color: #05BCFF;
+    }
+    
 }

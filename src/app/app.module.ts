@@ -41,7 +41,6 @@ import { HomeSellerPage } from '../pages/home-seller/home-seller';
 import { UserService } from '../services/buyerService';
 import { ChooseLocationPage } from '../pages/choose-location/choose-location';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
-import { from } from 'rxjs/observable/from';
 import { RegisHourPage } from '../pages/regis-hour/regis-hour';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { OneSignal } from '@ionic-native/onesignal';
@@ -51,6 +50,11 @@ import { AngularFireModule} from 'angularfire2';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import { GooglePlus } from '@ionic-native/google-plus';
 const firebaseConfig={
+import { Camera } from '@ionic-native/camera';
+import { ChangePasswordPage } from '../pages/change-password/change-password';
+
+import { IntroPage } from '../pages/intro/intro';
+//import { Storage } from '@ionic/storage';
 
 }
 @NgModule({
@@ -78,6 +82,10 @@ const firebaseConfig={
     RegistersellerOpenhourPage,
     TransactionDetailsPage,
   ],  
+    ChangePasswordPage,
+    IntroPage,
+    RegisHourPage,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -118,6 +126,9 @@ const firebaseConfig={
     ChooseLocationPage,
     RegistersellerOpenhourPage,
     TransactionDetailsPage,
+    ChangePasswordPage,
+    IntroPage,
+    RegisHourPage,
   ],
   providers: [
     StatusBar,
@@ -130,11 +141,13 @@ const firebaseConfig={
     BarcodeScanner,
     Push,
     OneSignal,
+    //IonicStorageModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Geolocation,
     NativeGeocoder,
     FcmProvider,
-    GooglePlus
+    GooglePlus,
+    Camera
   ]
 })
 export class AppModule {}

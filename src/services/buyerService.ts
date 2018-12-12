@@ -59,6 +59,15 @@ export class UserService {
         });
     }
 
+    updateUserDataOperationalHour(userUpdateData: any, role: string) {
+        this.userId = this.authService.getActiveUser().uid;
+        const userRef: firebase.database.Reference = firebase.database().ref(role + '/' + this.userId + '/operationalHour/');
+
+        userRef.update(userUpdateData).then(res => {
+            console.log(res);
+        });
+    }
+
     readStoreData(storeId: string, isStoreFound: boolean, transactionId: string) {
         return new Promise((resolve) => {
             if (!isStoreFound) {
@@ -110,15 +119,17 @@ export class UserService {
 
     }
 
-    addProductToTransaction(storeId: string, products: any, productId: string, transactionId: string) {
-        const storeRef: firebase.database.Reference = firebase.database().ref('buyer/' + this.userId + '/transactions/' + transactionId + '/products/' + productId);
-        storeRef.set(products).then(res => {
-            console.log(res);
+    addProductToTransaction(transactionId: string, products: any, storeId: string) {
+        const userRef: firebase.database.Reference = firebase.database().ref('buyer/' + this.userId + '/transactions/' + transactionId + '/products/');
+        const storeRef: firebase.database.Reference = firebase.database().ref('seller/' + storeId + '/transactions/' + transactionId + '/products/');
+        userRef.set(products).then(res => {
+            // console.log(res)
+            storeRef.set(products).then(val => {
+                
+            })
+        }).catch(err => {
+            console.log(err);
         });
-        let product = products;
-        product['id'] = productId;
-        // this.productList.push(product);
-        // this.showToast(this.productList);
     }
 
     getAllProductTransaction() {
@@ -146,5 +157,19 @@ export class UserService {
 
     transactionDone() {
         // remove transactionIdNow from firebase
+    }
+
+    uploadPhotoUser(base64Url: string, role: string) {
+        return new Promise((resolve) => {
+            this.userId = this.authService.getActiveUser().uid;
+            const userRef: firebase.database.Reference = firebase.database().ref(role + '/' + this.userId);
+            userRef.update({
+                "profile": "data:image/jpeg;base64," + base64Url
+            }).then(() => {
+                resolve(true)
+            }).catch(err => {
+                resolve(false)
+            })
+        })
     }
 }

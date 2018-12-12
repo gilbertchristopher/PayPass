@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { CheckoutPage } from "../checkout/checkout";
@@ -6,16 +6,25 @@ import { UserService } from '../../services/buyerService';
 import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
 import { ProductTransaction } from '../../data/producttransaction.interface';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import * as https from 'https';
+// declare module 'https'
+// import https from 'https'
 
 
+// import ;
+// var https = require('https')
 @IonicPage()
+
 @Component({
   selector: 'page-shop',
   templateUrl: 'shop.html',
 })
+@Injectable()
 export class ShopPage {
   productList: {};
   products: any[] = [];
+  productCheckout: any[] = [];
   productQty: number = 1;
   storeResult: any;
   productResult: ProductTransaction[];
@@ -137,6 +146,11 @@ export class ShopPage {
   }
 
   checkout() {
+    this.productCheckout = [];
+    for (let index = 0; index < this.products.length; index++) {
+      this.productCheckout[this.products[index].id] = {"qty": this.products[index].qty, "price": this.products[index].price, "product": this.products[index].product}
+    }
+    this.userService.addProductToTransaction(this.transactionId, this.productCheckout, this.storeId);
     this.showToast("Checkout Success");
     // this.userService.addProductToTransaction(this.isStoreFound, this.productList)
     this.storage.remove('productList');
@@ -144,5 +158,48 @@ export class ShopPage {
     this.storage.remove('cartShop');
     this.transactionId = null;
     this.navCtrl.push(CheckoutPage);
+    // this.sendNotif()
   }
+
+  sendNotif() {
+    var sendNotification = function(data) {
+      var headers = {
+        "Content-Type": "application/json; charset=utf-8"
+      };
+      
+      var options = {
+        host: "onesignal.com",
+        port: 443,
+        path: "/api/v1/notifications",
+        method: "POST",
+        headers: headers
+      };
+      
+      // var https = require('https');
+      var req = https.request(options, function(res) {  
+        res.on('data', function(data) {
+          console.log("Response:");
+          console.log(JSON.parse(data));
+        });
+      });
+      
+      req.on('error', function(e) {
+        console.log("ERROR:");
+        console.log(e);
+      });
+      
+      req.write(JSON.stringify(data));
+      req.end();
+    };
+    
+    var message = { 
+      app_id: "7ae173a1-545e-4bc1-92e3-1839314e42bd",
+      contents: {"en": "Cie bisa"},
+      include_player_ids: ["d02154d3-3874-4931-bc38-88602fb093a4"]
+    };
+    
+    sendNotification(message);
+    this.showToast("asd")
+  }
+  
 }

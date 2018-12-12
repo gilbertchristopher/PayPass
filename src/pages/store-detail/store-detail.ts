@@ -11,15 +11,18 @@ export class StoreDetailPage {
   isSearchbarOpened = false;
   store: any;
   products: any[];
+  loadedProducts: any[];
   product: any;
-  // store: Store
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController) {
     this.store = navParams.data;
     this.products = [];
+    this.loadedProducts = [];
     for(let i in this.store.products){
       this.product = this.store.products[i];
       this.product.id = i;
       this.products.push(this.product);
+      this.loadedProducts.push(this.product);
     }
   }
 
@@ -28,12 +31,28 @@ export class StoreDetailPage {
   }
 
   onSearch(event){
-    console.log(event.target.value)
+    this.products = this.loadedProducts;
+    var query = event.target.value;
+    if(!query){
+      return
+    }
+    this.products = this.products.filter((value) => {
+      if(value.product.name && query) {
+        if (value.product.name.toLowerCase().indexOf(query.toLowerCase()) > -1){
+          return true;
+        }
+      }
+    });
+  }
+
+  cancelSearch(){
+    this.isSearchbarOpened=false;
+    this.products = this.loadedProducts;
   }
 
   // present the modal when call this method
   presentStoreInformationModal(){
-    let storeInformationModal = this.modalCtrl.create(StoreInformationPage, this.navParams.data);
+    let storeInformationModal = this.modalCtrl.create(StoreInformationPage, this.store);
     storeInformationModal.present();
   }
 }

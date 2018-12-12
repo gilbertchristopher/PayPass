@@ -15,6 +15,7 @@ import { EditProfilePage } from '../edit-profile/edit-profile';
 })
 export class ProfilePage {
   buyerData: any;
+  role: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService,  private buyerService: UserService) {
     
   }
@@ -22,7 +23,7 @@ export class ProfilePage {
   ionViewWillEnter(){
     console.log(this.buyerService.userData)
     this.buyerData = this.buyerService.getUserData();
-    
+    this.role = this.buyerData.role;
   }
 
   logout(){
@@ -38,6 +39,6 @@ export class ProfilePage {
 
   editProfile(){
     console.log("editProfile")
-    this.navCtrl.push(EditProfilePage);
+    this.navCtrl.push(EditProfilePage, {"role": this.role});
   }
 }

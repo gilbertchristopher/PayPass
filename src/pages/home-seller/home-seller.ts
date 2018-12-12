@@ -23,13 +23,13 @@ export class HomeSellerPage {
 
   ionViewWillEnter() {
     let uid = this.authService.getActiveUser().uid;
-    this.encodeText(uid)
+    
     // this.resultQRCode = this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE, uid)
     // console.log(this.resultQRCode)
   }
 
-  async encodeText(uid: string) {
-    
+  async encodeText() {
+    var uid = this.authService.getActiveUser().uid;
     const result = await this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE, uid)
     console.log(result);
     let toast = this.toastCtrl.create({
