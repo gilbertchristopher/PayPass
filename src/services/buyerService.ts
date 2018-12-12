@@ -59,6 +59,15 @@ export class UserService {
         });
     }
 
+    updateUserDataOperationalHour(userUpdateData: any, role: string) {
+        this.userId = this.authService.getActiveUser().uid;
+        const userRef: firebase.database.Reference = firebase.database().ref(role + '/' + this.userId + '/operationalHour/');
+
+        userRef.update(userUpdateData).then(res => {
+            console.log(res);
+        });
+    }
+
     readStoreData(storeId: string, isStoreFound: boolean, transactionId: string) {
         return new Promise((resolve) => {
             if (!isStoreFound) {
