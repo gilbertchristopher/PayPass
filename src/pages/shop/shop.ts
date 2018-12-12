@@ -34,17 +34,17 @@ export class ShopPage {
   options: BarcodeScannerOptions;
   buyerData: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, 
-      private toastCtrl: ToastController, private userService: UserService, private storage: Storage, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner,
+    private toastCtrl: ToastController, private userService: UserService, private storage: Storage, private alertCtrl: AlertController) {
     this.buyerData = this.userService.getUserData();
-    
+
     this.transactionId = this.buyerData.transactionIdNow;
     this.storeId = this.buyerData.storeIdNow;
 
     if (this.transactionId != "") {
       // ambil cart shop sekarang dari local storage
       this.storage.get('cartShop').then(value => {
-        if(value != ""){
+        if (value != "") {
           this.products = [];
           for (let index = 0; index < value.length; index++) {
             this.products.push(value[index]);
@@ -72,7 +72,7 @@ export class ShopPage {
 
   async scanBarcode() {
     this.barcodeScanner.scan().then(barcodeData => {
-      if(barcodeData.text != ""){
+      if (barcodeData.text != "") {
         const storeRef = firebase.database().ref('seller/' + this.storeId + '/products/' + barcodeData.text);
         storeRef.on('value', product => {
           this.productData = product.val();
@@ -116,7 +116,7 @@ export class ShopPage {
   }
 
   substractProductQuantity(index: any) {
-    if(this.products[index].qty == 1){
+    if (this.products[index].qty == 1) {
       let alert = this.alertCtrl.create({
         title: 'Remove Product From Cart',
         message: 'Do you want to remove this product?',
@@ -132,7 +132,7 @@ export class ShopPage {
             text: 'Yes',
             handler: () => {
               this.products.splice(index, 1);
-              this.storage.set('cartShop',this.products);
+              this.storage.set('cartShop', this.products);
             }
           }
         ]
@@ -148,9 +148,10 @@ export class ShopPage {
   checkout() {
     this.productCheckout = [];
     for (let index = 0; index < this.products.length; index++) {
-      this.productCheckout[this.products[index].id] = {"qty": this.products[index].qty, "price": this.products[index].price, "product": this.products[index].product}
+      this.productCheckout[this.products[index].id] = { "qty": this.products[index].qty, "price": this.products[index].price, "product": this.products[index].product }
     }
     this.userService.addProductToTransaction(this.transactionId, this.productCheckout, this.storeId);
+    this.sendNotif()
     this.showToast("Checkout Success");
     // this.userService.addProductToTransaction(this.isStoreFound, this.productList)
     this.storage.remove('productList');
@@ -162,11 +163,11 @@ export class ShopPage {
   }
 
   sendNotif() {
-    var sendNotification = function(data) {
+    var sendNotification = function (data) {
       var headers = {
         "Content-Type": "application/json; charset=utf-8"
       };
-      
+
       var options = {
         host: "onesignal.com",
         port: 443,
@@ -174,32 +175,33 @@ export class ShopPage {
         method: "POST",
         headers: headers
       };
-      
+
       // var https = require('https');
-      var req = https.request(options, function(res) {  
-        res.on('data', function(data) {
+      var req = https.request(options, function (res) {
+        res.on('data', function (data) {
           console.log("Response:");
           console.log(JSON.parse(data));
         });
       });
-      
-      req.on('error', function(e) {
+
+      req.on('error', function (e) {
         console.log("ERROR:");
         console.log(e);
       });
-      
+
       req.write(JSON.stringify(data));
       req.end();
     };
-    
-    var message = { 
+
+    var message = {
       app_id: "7ae173a1-545e-4bc1-92e3-1839314e42bd",
-      contents: {"en": "Cie bisa"},
+      contents: { "en": "Transaction ID: " + this.transactionId + " wants to finish its shopping. Checkout now!" },
+      data: { "transactionId": this.transactionId },
       include_player_ids: ["d02154d3-3874-4931-bc38-88602fb093a4"]
     };
-    
+
     sendNotification(message);
     this.showToast("asd")
   }
-  
+
 }
