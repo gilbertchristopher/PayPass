@@ -104,10 +104,5 @@
     </plugin>
     <plugin name="cordova-plugin-camera" spec="4.0.3" />
     <plugin name="onesignal-cordova-plugin" spec="2.4.5" />
-<<<<<<< HEAD
-    <engine name="android" spec="7.1.4" />
-    <plugin name="cordova-plugin-googleplus" spec="^5.3.2" />
-=======
     <engine name="android" spec="6.4.0" />
->>>>>>> 3986ae34b790cb129df3aec645074ccd6267cef3
 </widget>

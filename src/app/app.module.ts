@@ -49,14 +49,14 @@ import { ComponentsModule } from '../components/components.module';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import { GooglePlus } from '@ionic-native/google-plus';
-const firebaseConfig={
+const firebaseConfig={}
 import { Camera } from '@ionic-native/camera';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 
 import { IntroPage } from '../pages/intro/intro';
 //import { Storage } from '@ionic/storage';
 
-}
+
 @NgModule({
   declarations: [
     MyApp,
@@ -81,7 +81,6 @@ import { IntroPage } from '../pages/intro/intro';
     ChooseLocationPage,
     RegistersellerOpenhourPage,
     TransactionDetailsPage,
-  ],  
     ChangePasswordPage,
     IntroPage,
     RegisHourPage,
