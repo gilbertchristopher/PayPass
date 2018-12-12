@@ -1,63 +1,69 @@
 <ion-content text-center>
   <ion-grid class="background-login">
     <img style="width: 50%; margin-left: 25%;" src="../../assets/imgs/PayPassLogo.png">
+    <h3 align-items-center justify-content-center style="height: 1%; padding-top: 1px; color: white;">Operational Hour</h3>
     <ion-row align-items-center justify-content-center style="height: 100%;">
-      <strong>Please insert your operation time</strong>
       <ion-col>
-        <form [formGroup]="regisForm" (ngSubmit)="regis()">
+        <form [formGroup]="operationalHourForm" (ngSubmit)="regis()">
           <ion-list>
             <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
-              <ion-label>
-                <ion-label>Sunday</ion-label>
+              <ion-label style="width: 100px;">
+                <p>Monday</p>
               </ion-label>
-              <ion-input type="hour" placeholder="Full Name" formControlName="fullname"></ion-input>
+              <ion-input type="time" formControlName="mondayOpenHour"></ion-input>
+              <ion-input type="time" formControlName="mondayCloseHour"></ion-input>
             </ion-item>
             <br>
             <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
-              <ion-label>
-                <ion-icon name="person"></ion-icon>
+              <ion-label style="width: 100px;">
+                <p>Tuesday</p>
               </ion-label>
-              <ion-input type="text" placeholder="Store Name" formControlName="storename"></ion-input>
+              <ion-input type="time" formControlName="tuesdayOpenHour"></ion-input>
+              <ion-input type="time" formControlName="tuesdayCloseHour"></ion-input>
             </ion-item>
             <br>
             <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
-              <ion-label>
-                <ion-icon name="mail"></ion-icon>
+              <ion-label style="width: 100px;">
+                <p>Wednesday</p>
               </ion-label>
-              <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+              <ion-input type="time" formControlName="wednesdayOpenHour"></ion-input>
+              <ion-input type="time" formControlName="wednesdayCloseHour"></ion-input>
             </ion-item>
             <br>
             <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
-              <ion-label>
-                <ion-icon name="lock"></ion-icon>
+              <ion-label style="width: 100px;">
+                <p>Thursday</p>
               </ion-label>
-              <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+              <ion-input type="time" formControlName="thursdayOpenHour"></ion-input>
+              <ion-input type="time" formControlName="thursdayCloseHour"></ion-input>
             </ion-item>
             <br>
             <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
-              <ion-label>
-                <ion-icon name="phone-portrait"></ion-icon>
+              <ion-label style="width: 100px;">
+                <p>Friday</p>
               </ion-label>
-              <ion-input type="number" placeholder="Phone Number" formControlName="phoneNumber"></ion-input>
+              <ion-input type="time" formControlName="fridayOpenHour"></ion-input>
+              <ion-input type="time" formControlName="fridayCloseHour"></ion-input>
             </ion-item>
             <br>
-            <ion-row class="text-field-regis">
-              <ion-col col-10 >
-                  <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
-                      <ion-label>
-                        <ion-icon name="locate"></ion-icon>
-                      </ion-label>
-                      <ion-input type="text-area" placeholder="Address" formControlName="address"></ion-input>
-                    </ion-item>
-              </ion-col>
-              <ion-col col-2>
-                  <button ion-button color="light"> <ion-icon name="pin"></ion-icon> </button>
-                </ion-col>
-            </ion-row>
-            
-
+            <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
+              <ion-label style="width: 100px;">
+                <p>Saturday</p>
+              </ion-label>
+              <ion-input type="time" formControlName="saturdayOpenHour"></ion-input>
+              <ion-input type="time" formControlName="saturdayCloseHour"></ion-input>
+            </ion-item>
+            <br>
+            <ion-item class="text-field-regis" style="border-width: 0px; border-color: white; position: static !important;">
+              <ion-label style="width: 100px;">
+                <p>Sunday</p>
+              </ion-label>
+              <ion-input type="time" formControlName="sundayOpenHour"></ion-input>
+              <ion-input type="time" formControlName="sundayCloseHour"></ion-input>
+            </ion-item>
+            <br>
           </ion-list>
-          <button ion-button full color="secondary" [disabled]="!regisForm.valid" type="submit">Register</button>
+          <button ion-button full color="secondary" [disabled]="!operationalHourForm.valid" type="submit">Register</button>
         </form>
         <span style="color:white;">Have an account?
           <button class="background-transparent-100" (click)="goToSignInPage()">

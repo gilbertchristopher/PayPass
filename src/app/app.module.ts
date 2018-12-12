@@ -74,6 +74,7 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
     RegistersellerOpenhourPage,
     TransactionDetailsPage,
     ChangePasswordPage,
+    RegisHourPage,
   ],
   imports: [
     BrowserModule,
@@ -113,6 +114,7 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
     RegistersellerOpenhourPage,
     TransactionDetailsPage,
     ChangePasswordPage,
+    RegisHourPage,
   ],
   providers: [
     StatusBar,
