@@ -3,8 +3,8 @@ import { Platform, LoadingController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
-import { OneSignal } from '@ionic-native/onesignal';
-
+import { OneSignal, OSNotificationPayload } from '@ionic-native/onesignal';
+import { isCordovaAvailable } from '../common/is-cordova-available';
 import firebase from 'firebase';
 
 import { TabsPage } from '../pages/tabs/tabs';
@@ -48,7 +48,7 @@ export class MyApp {
     // this.pushSetup();
 
     // push notification OneSignal
-    // this.oneSignalSetup();
+    this.oneSignalSetup();
 
     // check if there is a user that has been login or not
     firebase.auth().onAuthStateChanged(user => {
@@ -74,34 +74,47 @@ export class MyApp {
   }
 
   oneSignalSetup() {
-    // this.oneSignal.startInit('7ae173a1-545e-4bc1-92e3-1839314e42bd', '534497429105');
-    this.oneSignal.startInit('7ae173a1-545e-4bc1-92e3-1839314e42bd', 'REMOTE');
+    if (isCordovaAvailable()) {
+      // this.oneSignal.startInit('7ae173a1-545e-4bc1-92e3-1839314e42bd', '534497429105');
+      this.oneSignal.startInit('7ae173a1-545e-4bc1-92e3-1839314e42bd', 'REMOTE');
 
-    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
 
-    
-    this.oneSignal.handleNotificationReceived().subscribe(() => {
-      let alert = this.alertCtrl.create({
-        title: "New message",
-        message: "You have new message",
-        buttons: [
-          {
-            text: 'See',
-            handler: () => {
-              console.log('Checkout clicked');
+
+      this.oneSignal.handleNotificationReceived().subscribe((data) => {
+        this.onPushReceived(data.payload);
+        let alert = this.alertCtrl.create({
+          title: "New message",
+          message: "You have new message",
+          buttons: [
+            {
+              text: 'See',
+              handler: () => {
+                console.log('Checkout clicked');
+              }
             }
-          }
-        ]
-      })
-      alert.present();
-      // do something when notification is received
-    });
+          ]
+        })
+        alert.present();
+        // do something when notification is received
+      });
 
-    this.oneSignal.handleNotificationOpened().subscribe(() => {
-      // do something when a notification is opened
-    });
+      this.oneSignal.handleNotificationOpened().subscribe((data) => {
+        // do something when a notification is opened
+        this.onPushOpened(data.notification.payload);
+      });
 
-    this.oneSignal.endInit();
+      this.oneSignal.endInit();
+    }
+
+  }
+
+  private onPushReceived(payload: OSNotificationPayload) {
+    alert('Push recevied:' + payload.body);
+  }
+  
+  private onPushOpened(payload: OSNotificationPayload) {
+    alert('Push opened: ' + payload.body);
   }
 
   pushSetup() {
