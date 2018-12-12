@@ -1,7 +1,13 @@
 page-store-detail {
 
-ion-row { width:100%; height:auto; }
-ion-col { width:auto; height:33%; }
-img { width:100%; height:100%; }
-    
+    ion-row { width:100%; height:auto; }
+    ion-col { width:auto; height:33%; }
+    img { width:100%; height:100%; }
+    .image-div{
+        height:74px; 
+        width:74px; 
+        border-radius: 37px; 
+        border-width: 2px;
+        border-color: #05BCFF;
+    }
 }
