@@ -9,7 +9,7 @@
 <ion-content>
   <h1 padding>{{ userData.storename }}</h1>
 
-  <ion-card no-margin (click)="transactionDetails()">
+  <ion-card (click)="transactionDetails()">
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -24,7 +24,7 @@
       </ion-row>
     </ion-grid>
   </ion-card>
-  <ion-card no-margin>
+  <ion-card>
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -39,6 +39,11 @@
       </ion-row>
     </ion-grid>
   </ion-card>
+
+  <button (click)="encodeText(uid)" ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;">
+    Show QR Code
+  </button>
+
   <!-- <div>
     {{result}}
   </div> -->
