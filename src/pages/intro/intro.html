@@ -1,0 +1,63 @@
+<ion-content>
+  <ion-slides pager="true" parallax="true" class="background-login" (ionSlideDidChange) = "slideChanged()">
+
+    <ion-slide>
+      <!-- <img src="assets/imgs/Background_Polos.png"> -->
+      <!-- <h1 class="fly-in-item-form hidden">Hello there !</h1><br> -->
+      <ul class="fly-in-item-form hidden">
+        <li>H</li>
+        <li>e</li>
+        <li>l</li>
+        <li>l</li>
+        <li>o</li>
+        <li> </li>
+        <li>t</li>
+        <li>h</li>
+        <li>e</li>
+        <li>r</li>
+        <li>e</li>
+        <li>!</li>
+      </ul>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="fly-in hidden">
+          <h1>Welcome to</h1>
+          <img src="assets/imgs/icon_trans.png">
+          <p>Let's get started...</p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide-3 hidden">
+        <img src="assets/imgs/ScanQR.png">
+        <h1>First, scan store's QR Code</h1>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide-4 hidden">
+        <img src="assets/imgs/ScanBarcode_02.png">
+        <h1>Next, scan the product's barcode</h1>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide-5 hidden">
+        <img src="assets/imgs/Cashier.png">
+        <h1>Then, checkout your shopping cart at cashier</h1>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+        <div class="slide-6 hidden">
+          <img src="assets/imgs/Check.png">
+          <h1>Ready to explore?</h1>
+          <button ion-button large (click)="navHome()">
+              Shop Now
+          </button>
+        </div>
+      </ion-slide>
+
+  </ion-slides>
+</ion-content>
