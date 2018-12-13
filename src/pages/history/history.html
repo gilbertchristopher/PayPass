@@ -12,96 +12,52 @@
 
 </ion-header>
 
-<ion-content padding style="background-color: #EEEEEE;">
+<ion-content *ngIf ="userData.role == 'Buyer'"padding style="background-color: #EEEEEE;">
 
-  <ion-card padding (click)="historyDetails()">
-    <ion-row>
-      <div text-align="left">
-        <ion-col col-6>
-          <strong>30 November 2018</strong>
-        </ion-col>
-      </div>
-    </ion-row>
-    <ion-row>
-      <ion-col col-6>
-        Toko Beras Dua Saudara
-      </ion-col>
-      <ion-col col-6 ion-text text-right color="danger">
-        Rp 100.000,-
-      </ion-col>
-    </ion-row>
-  </ion-card>
-
-  <ion-card padding>
-    <ion-row>
-      <div text-align="left">
-        <ion-col col-6>
-          <strong>29 November 2018</strong>
-        </ion-col>
-      </div>
-    </ion-row>
-    <ion-row>
-      <ion-col col-6>
-        Indomaret
-      </ion-col>
-      <ion-col col-6 ion-text text-right color="danger">
-        Rp 900.000,-
-      </ion-col>
-    </ion-row>
-  </ion-card>
-
-  <ion-card padding>
-    <ion-row>
-      <div text-align="left">
-        <ion-col col-6>
-          <strong>29 Oktober 2018</strong>
-        </ion-col>
-      </div>
-    </ion-row>
-    <ion-row>
-      <ion-col col-6>
-        Lotte Mart
-      </ion-col>
-      <ion-col col-6 ion-text text-right color="danger">
-        Rp 500.000,-
-      </ion-col>
-    </ion-row>
-  </ion-card>
-
-  <ion-card padding>
-    <ion-row>
-      <div text-align="left">
-        <ion-col col-6>
-          <strong>17 Agustus 2018</strong>
-        </ion-col>
-      </div>
-    </ion-row>
-    <ion-row>
-      <ion-col col-6>
-        Toko Beras Dua Saudara
-      </ion-col>
-      <ion-col col-6 ion-text text-right color="danger">
-        Rp 1.000.000,-
-      </ion-col>
-    </ion-row>
-  </ion-card>
-
-  <ion-card padding>
-    <ion-row>
-      <div text-align="left">
-        <ion-col col-6>
-          <strong>20 Maret 2018</strong>
-        </ion-col>
-      </div>
-    </ion-row>
-    <ion-row>
-      <ion-col col-6>
-        IKEA
-      </ion-col>
-      <ion-col col-6 ion-text text-right color="danger">
-        Rp 55.000.000,-
-      </ion-col>
-    </ion-row>
-  </ion-card>
+    <ion-card margin-left margin-right *ngFor="let transaction of transactions" (click)="historyDetails(transaction)">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-card-header no-padding>
+                <strong>Transaction ID : {{ transaction.id }}</strong>
+              </ion-card-header>
+              <ion-card-content no-padding>
+                Buyer : {{ transaction.storeId }}<br>
+                Tanggal : {{ transaction.date }}<br>
+                Jam : {{ transaction.time }}
+              </ion-card-content>
+              <p *ngIf="transaction.status == 'success'" style="color: #32db64;" text-right>{{transaction.status}}</p>
+              <p *ngIf="transaction.status == 'cancelled'" style="color: #f53d3d;" text-right>{{transaction.status}}</p>
+              <p *ngIf="transaction.status == 'pending'" style="color: #ffbf00;" text-right>{{transaction.status}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
 
 </ion-content>
+
+<ion-content *ngIf ="userData.role == 'Seller'"padding style="background-color: #EEEEEE;">
+
+    <ion-card margin-left margin-right *ngFor="let transaction of transactions" (click)="historyDetails(transaction)">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-card-header no-padding>
+                <strong>Transaction ID : {{ transaction.id }}</strong>
+              </ion-card-header>
+              <ion-card-content no-padding>
+                Buyer : {{ transaction.buyerInfo.firstname }} {{ transaction.buyerInfo.lastname }}<br>
+                Tanggal : {{ transaction.date }}<br>
+                Jam : {{ transaction.time }}
+              </ion-card-content>
+              <p *ngIf="transaction.status == 'success'" style="color: #32db64;" text-right>{{transaction.status}}</p>
+              <p *ngIf="transaction.status == 'cancelled'" style="color: #f53d3d;" text-right>{{transaction.status}}</p>
+              <p *ngIf="transaction.status == 'pending'" style="color: #ffbf00;" text-right>{{transaction.status}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+
+</ion-content>
+
+
