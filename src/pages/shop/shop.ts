@@ -206,10 +206,13 @@ export class ShopPage {
 
     var message = {
       app_id: "7ae173a1-545e-4bc1-92e3-1839314e42bd",
-      contents: { "en": "Transaction ID: " + this.transactionId + " wants to finish its shopping. Checkout now!" },
+      contents: { "en": "Transaction ID: " + this.transactionId + " wants to finish its shopping. Confirm Now!" },
       
-      data: { "transactionId": this.transactionId },
-      include_player_ids: ["d02154d3-3874-4931-bc38-88602fb093a4"]
+      data: { "transactionId": this.transactionId, 
+              "sellerId": this.storeId  },
+      include_player_ids: ["d02154d3-3874-4931-bc38-88602fb093a4"],
+      small_icon: "ic_stat_onesignal_default",
+      headings: { "en": "New Transaction" },
     };
 
     sendNotification(message);
