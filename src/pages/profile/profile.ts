@@ -34,7 +34,7 @@ export class ProfilePage {
 
   history(){
     console.log("history")
-    this.navCtrl.push(HistoryPage);
+    this.navCtrl.push(HistoryPage, {"role": this.role});
   }
 
   editProfile(){
