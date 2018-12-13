@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '../../../node_modules/@angular/forms';
 import { AuthService } from '../../services/authService';
 import { User } from '../../data/user.interface';
 import { Seller } from '../../data/seller.interface';
+import { RegistersellerOpenhourPage } from '../registerseller-openhour/registerseller-openhour';
+import { Loc } from '../../services/location';
+import { ChooseLocationPage } from '../choose-location/choose-location';
+import { RegisHourPage } from '../regis-hour/regis-hour';
 
 
 @IonicPage()
@@ -13,16 +17,22 @@ import { Seller } from '../../data/seller.interface';
 })
 export class RegistersellerPage {
   regisForm: FormGroup;
-  user: User;
+  // user: User;
+  user: any;
   sellerInfo: any;
   userData = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService) {
+  marker: Loc;
+  lat: number;
+  lng: number;
+  address: string;
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegistersellerPage');
   }
-
+  
 
   ngOnInit(){
     this.initializeForm();
@@ -33,7 +43,8 @@ export class RegistersellerPage {
     this.regisForm = new FormGroup({
       email: new FormControl(null, Validators.compose([Validators.required, Validators.email])),
       firstname: new FormControl(null, Validators.compose([Validators.required])),
-      lastname: new FormControl(null),
+      lastname: new FormControl(null, Validators.compose([Validators.required])),
+      storename: new FormControl(null, Validators.compose([Validators.required])),
       phoneNumber: new FormControl(null, Validators.compose([Validators.required])),
       password: new FormControl(null, Validators.compose([Validators.required, Validators.minLength(8)])),
       address: new FormControl(null, Validators.compose([Validators.required]))
@@ -48,21 +59,33 @@ export class RegistersellerPage {
     })
   }
 
-  // goToSignInPage(){
-  //   this.navCtrl.push(LoginPage);
-  // }
-
-  // regis(){
-  //   this.navCtrl.push(LoginPage);
-  // }
-
   goToSignInPage(){
     this.navCtrl.popToRoot();
+  }
+
+  onOpenMap(){
+    let modal = this.modalCtrl.create(ChooseLocationPage, {'lat': this.lat, 'lng': this.lng});
+    modal.present();
+
+    modal.onDidDismiss(
+      (data: any) => {
+        
+        if(data.marker){
+          console.log(data.marker);
+          this.marker = data.marker;
+          this.lat = this.marker.lat;
+          this.lng = this.marker.lng;
+          this.address = data.address;
+          this.regisForm.value.address = data.address;
+        }
+      }
+    );
   }
 
   regis(){
     this.user = this.regisForm.value;
     console.log(this.user)
-    this.authService.signup(this.regisForm.value.email, this.regisForm.value.password, this.user, this.sellerInfo);
+    //this.authService.signupSeller(this.regisForm.value.email, this.regisForm.value.password, this.user);
+    this.navCtrl.push(RegisHourPage, {"userData": this.user, "page": "regis"});
   }
 }

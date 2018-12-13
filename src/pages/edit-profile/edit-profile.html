@@ -1,9 +1,3 @@
-<!--
-  Generated template for the EditProfilePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar color="theme">
@@ -13,61 +7,164 @@
 </ion-header>
 
 
-<ion-content text-center>
+<ion-content *ngIf = "role == 'Buyer'" style="background-color: #EEEEEE;">
   <ion-grid class="background-login">
-
-    <form [formGroup]="editProfileForm" (ngSubmit)="edit()">
+    <form [formGroup]="editProfileForm">
       <ion-list class="list1">
-        <ion-row>
-          <ion-col col-6>
-            <ion-item class="text-field-editProfile" style="border-width: 0px;">
-              <ion-label stacked>Firstname</ion-label>
-              <ion-input type="text" formControlName="firstname"></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col col-6>
-            <ion-item class="text-field-editProfile" style="border-width: 0px;">
-              <ion-label stacked>Lastname</ion-label>
-              <ion-input type="text" formControlName="lastname"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-item class="text-field-editProfile" style="border-width: 0px;">
-          <ion-label stacked>Email</ion-label>
-          <ion-input type="text" formControlName="email"></ion-input>
-        </ion-item>
-        <ion-item class="text-field-editProfile" style="border-width: 0px;">
-          <ion-label stacked>Handphone</ion-label>
-          <ion-input type="number" formControlName="phoneNumber"></ion-input>
-        </ion-item>
-        <ion-item class="text-field-editProfile" style="border-width: 0px;">
-          <ion-label stacked>Date Of Birth</ion-label>
-          <ion-input type="date" formControlName="dateOfBirth"></ion-input>
-        </ion-item>
-        <ion-row>
-          <ion-col col-10>
-            <ion-item class="text-field-editProfile" style="border-width: 0px;">
-              <ion-label stacked>Address</ion-label>
-              <ion-input type="text" formControlName="addressInput"></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col col-2>
-            <button ion-button color="light"> <ion-icon name="pin"></ion-icon> </button>
-          </ion-col>
-        </ion-row>
+        <ion-card text-center padding>
+          <ion-row>
+
+            <ion-col>
+              <div style="border-width: 2px; justify-content: center; width: 100%; display: flex;" *ngIf="!!buyerData">
+                <img [src]="buyerData.profile" style="height: 80px; width: 80px; border-radius: 50%; "/>
+              </div>
+
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;" (click)="editProfile()"
+                icon-start>
+                <ion-icon name="person">
+                </ion-icon>Edit Photo
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
 
 
-        <!-- <ion-item class="text-field-regis" style="border-width: 0px;">
-              <ion-label stacked>Address</ion-label>
-              <ion-input type="text" formControlName="addressInput"></ion-input>
-            </ion-item> -->
-        <!-- </ion-list>
+        <ion-card padding>
+          <h2 class="subtitle">Information Account</h2>
+          <ion-item class="text-field-editProfile" style="border-width: 0px;">
+            <ion-label floating>Email</ion-label>
+            <ion-input type="text" formControlName="email" value="{{ buyerData.email }}"></ion-input>
+          </ion-item>
+          <ion-item class="text-field-editProfile" style="border-width: 0px;">
+            <ion-label stacked>Firstname</ion-label>
+            <ion-input type="text" formControlName="firstname" value="{{ buyerData.firstname }}" floating> </ion-input>
+          </ion-item>
+          <ion-item class="text-field-editProfile" style="border-width: 0px;">
+            <ion-label stacked>Lastname</ion-label>
+            <ion-input type="text" formControlName="lastname" value="{{ buyerData.lastname }}" floating> </ion-input>
+          </ion-item>
+          <button ion-button block color="theme" style="border-width: 10px; border-color: #05BCFF;" (click)="changePassword()" icon-start>
+            <ion-icon name="ios-lock-outline">
+            </ion-icon>Change Password
+          </button>
+        </ion-card>
 
-          <ion-list> -->
-        <!--  -->
+        <ion-card padding>
+          <h2 class="subtitle">Detail Account</h2>
+          <ion-item class="text-field-editProfile" style="border-width: 0px;">
+            <ion-label floating>Handphone</ion-label>
+            <ion-input type="text" formControlName="phoneNumber" value="{{buyerData.phoneNumber}}"></ion-input>
+          </ion-item>
+          <ion-item class="text-field-editProfile" style="border-width: 0px;">
+            <ion-label floating>Date Of Birth</ion-label>
+            <ion-input type="date" formControlName="dateOfBirth" value="{{ buyerData.dateOfBirth }}"></ion-input>
+          </ion-item>
+          <ion-row>
+            <ion-col col-10>
+              <ion-item class="text-field-editProfile" style="border-width: 0px;">
+                <ion-label floating>Address</ion-label>
+                <ion-input type="text" formControlName="addressInput" value="{{ buyerData.address }}"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-2>
+              <button ion-button color="light" (click)="onOpenMap()">
+                <ion-icon name="pin"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
 
-        <button type="submit" [disabled]="!editProfileForm.valid" ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;">
-          Register
+        <button type="submit" (click)="edit()" [disabled]="!editProfileForm.valid" ion-button block color="secondary" style="border-width: 3px; border-color: #05BCFF;">
+          Save
+        </button>
+
+      </ion-list>
+    </form>
+
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf = "role == 'Seller'" style="background-color: #EEEEEE;">
+  <ion-grid class="background-login">
+    <form [formGroup]="editProfileForm">
+      <ion-list class="list1">
+        <ion-card text-center padding>
+          <ion-row>
+
+            <ion-col>
+              <div style="border-width: 2px; justify-content: center; width: 100%; display: flex;" *ngIf="!!buyerData">
+                <img [src]="buyerData.profile" style="height: 80px; width: 80px; border-radius: 50%; "/>
+              </div>
+
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;" (click)="editProfile()"
+                icon-start>
+                <ion-icon name="person">
+                </ion-icon>Edit Photo
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <ion-card padding>
+          <strong class="subtitle">Owner Information</strong>
+          <ion-item class="text-field-editProfile" style="border-width: 0px;">
+            <ion-label floating>Firstname</ion-label>
+            <ion-input type="text" formControlName="firstname" value="{{ buyerData.firstname }}" floating> </ion-input>
+          </ion-item>
+          <ion-item class="text-field-editProfile" style="border-width: 0px;">
+            <ion-label floating>Lastname</ion-label>
+            <ion-input type="text" formControlName="lastname" value="{{ buyerData.lastname }}" floating> </ion-input>
+          </ion-item>
+          <button ion-button block color="theme" style="border-width: 10px; border-color: #05BCFF;" (click)="changePassword()" icon-start>
+            <ion-icon name="ios-lock-outline">
+            </ion-icon>Change Password
+          </button>
+        </ion-card>
+
+        <ion-card padding>
+          <strong class="subtitle">Store Information</strong>
+          <ion-item class="text-field-editProfile" style="border-width: 0px;">
+            <ion-label floating>Store Name</ion-label>
+            <ion-input type="text" formControlName="storename" value="{{ buyerData.storename }}"></ion-input>
+          </ion-item>
+          <ion-item class="text-field-editProfile" style="border-width: 0px;">
+            <ion-label floating>Email</ion-label>
+            <ion-input type="text" formControlName="email" value="{{ buyerData.email }}"></ion-input>
+          </ion-item>
+          <ion-item class="text-field-editProfile" style="border-width: 0px;">
+            <ion-label floating>Phone Number</ion-label>
+            <ion-input type="text" formControlName="phoneNumber" value="{{buyerData.phoneNumber}}"></ion-input>
+          </ion-item>
+          <ion-row>
+            <ion-col col-10>
+              <ion-item class="text-field-editProfile" style="border-width: 0px;">
+                <ion-label floating>Address</ion-label>
+                <ion-input type="text" formControlName="addressInput" value="{{ buyerData.address }}"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-2>
+              <button ion-button color="light" (click)="onOpenMap()">
+                <ion-icon name="pin"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+          <button ion-button block color="theme" style="border-width: 10px; border-color: #05BCFF;" (click)="setOperationHour()" icon-start>
+            <ion-icon name="ios-lock-outline">
+            </ion-icon>Set Operation Hour
+          </button>
+        </ion-card>
+
+        <button type="submit" (click)="edit()" [disabled]="!editProfileForm.valid" ion-button block color="secondary" style="border-width: 3px; border-color: #05BCFF;">
+          <ion-icon name="folder-open"></ion-icon>
+          Save
         </button>
 
       </ion-list>

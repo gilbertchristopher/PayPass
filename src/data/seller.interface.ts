@@ -8,15 +8,13 @@ export interface Seller{
     email: string;
     password: string;
     role: string;
-    firstname: string;
-    lastname: string;
+    fullname: string;
+    storename: string;
     phoneNumber: string;
-    // profilePic: string;
     address: string;
     city: string;
     regency: string;
     long: number;
     lat: number;
-    // dateOfBirth: Date;
     isStoreFound: boolean;
 }

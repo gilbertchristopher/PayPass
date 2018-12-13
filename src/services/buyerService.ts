@@ -14,6 +14,8 @@ export class UserService {
     storeData: any;
     productList: ProductTransaction[];
     transactionId: string;
+    transactionData: any;
+    transaction: any = [];
 
     constructor(private authService: AuthService, private toastCtrl: ToastController, private storage: Storage) {
     }
@@ -30,10 +32,27 @@ export class UserService {
     requestUserData() {
         return new Promise((resolve) => {
             this.userId = this.authService.getActiveUser().uid;
-            const userRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId);
+            const userRef: firebase.database.Reference = firebase.database().ref('buyer/' + this.userId);
             userRef.on("value", (snapshot) => {
                 this.userData = snapshot.val();
-                resolve(true);
+                if (this.userData == null || this.userData == "") {
+                    const sellerRef: firebase.database.Reference = firebase.database().ref('seller/' + this.userId);
+                    sellerRef.on("value", (snapshot2) => {
+                        this.userData = snapshot2.val();
+                        resolve(true);
+                    })
+                }
+                else
+                    resolve(true);
+            })
+        })
+    }
+
+    getStoreData(storeId: string) {
+        return new Promise((resolve) => {
+            const userRef: firebase.database.Reference = firebase.database().ref('seller/' + storeId);
+            userRef.on("value", (snapshot) => {
+                resolve(snapshot.val());
             })
         })
     }
@@ -42,9 +61,18 @@ export class UserService {
         return this.userData;
     }
 
-    updateUserData(userUpdateData: any) {
+    updateUserData(userUpdateData: any, role: string) {
         this.userId = this.authService.getActiveUser().uid;
-        const userRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId);
+        const userRef: firebase.database.Reference = firebase.database().ref(role + '/' + this.userId);
+
+        userRef.update(userUpdateData).then(res => {
+            console.log(res);
+        });
+    }
+
+    updateUserDataOperationalHour(userUpdateData: any, role: string) {
+        this.userId = this.authService.getActiveUser().uid;
+        const userRef: firebase.database.Reference = firebase.database().ref(role + '/' + this.userId + '/operationalHour/');
 
         userRef.update(userUpdateData).then(res => {
             console.log(res);
@@ -54,76 +82,86 @@ export class UserService {
     readStoreData(storeId: string, isStoreFound: boolean, transactionId: string) {
         return new Promise((resolve) => {
             if (!isStoreFound) {
-                const userRef: firebase.database.Reference = firebase.database().ref('user/' + storeId);
+                const userRef: firebase.database.Reference = firebase.database().ref('buyer/' + storeId);
                 let datetime = new Date();
-                let date = datetime.getDate() + "/" + datetime.getMonth() + "/" + datetime.getFullYear();
+                let date = datetime.getDate() + "/" + (datetime.getMonth() + 1) + "/" + datetime.getFullYear();
                 let time = datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds();
 
 
                 userRef.on("value", (snapshot) => {
                     this.storeData = snapshot.val();
 
-                    const transDateRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/');
+                    const transDateRef: firebase.database.Reference = firebase.database().ref('buyer/' + this.userId + '/transactions/');
                     // status terdiri dari pending, cancelled, success
-                    transDateRef.push({ "date": date, "time": time, "status": "pending" }).then((res) => {
+                    transDateRef.push({ "date": date, "time": time, "status": "pending", "storeId": storeId }).then((res) => {
                         this.transactionId = res.key;
 
                         // masukkin transactionId ke localstorage
                         this.storage.set('transactionId', this.transactionId);
 
                         // update transactionIdNow ke firebase
-                        this.updateUserData({ "transactionIdNow": this.transactionId });
+                        this.updateUserData({ "transactionIdNow": this.transactionId }, 'buyer');
 
-                        this.showToast(this.transactionId)
-                        // masukkin storeData ke firebase pada bagian transaction
-                        const transactionRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/' + this.transactionId + '/store/' + storeId);
-                        transactionRef.set(this.storeData).then(() => {
-                            let toast = this.toastCtrl.create({
-                                message: "Store found!",
-                                duration: 3000,
-                                position: "bottom"
-                            });
-                            toast.present();
-                        }).catch((err) => {
-                            let toast = this.toastCtrl.create({
-                                message: "Store doesn't found!",
-                                duration: 3000,
-                                position: "bottom"
-                            });
-                            toast.present();
+                        // masukkin data store ke localstorage
+                        this.storage.set('storeData', this.storeData);
+
+                        // tampilin toast success
+                        let toast = this.toastCtrl.create({
+                            message: "Store found!",
+                            duration: 3000,
+                            position: "bottom"
                         });
-                    });
-                    resolve(true);
+                        toast.present();
+
+                        resolve({ "storeData": this.storeData, "transactionId": this.transactionId });
+                    })
                 });
             }
             else {
-                // this.showToast("read product data in transaction " + transactionId)
                 const transactionRef = firebase.database().ref('user/' + this.userId + '/transactions/' + transactionId + '/products/');
 
                 transactionRef.on("value", snapshot => {
                     this.productList = snapshot.val();
-                    this.showToast(snapshot.val().name + snapshot.val().price)
-                    this.productList.forEach(element => {
-                        this.showToast(element.product.price + " " + element.product.qty + " " + element.qty)
-                    });
-                    resolve(true);
+                    resolve(snapshot.val());
                 });
-                // return this.productList;
             }
         })
 
 
     }
 
-    addProductToTransaction(storeId: string, products: any, productId: string, transactionId: string) {
-        const storeRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/' + transactionId + '/products/' + productId);
-        storeRef.set(products).then(res => {
-            console.log(res);
+    addProductToTransaction(transactionId: string, products: any, storeId: string, buyerData: any) {
+        const userRef: firebase.database.Reference = firebase.database().ref('buyer/' + this.userId + '/transactions/' + transactionId + '/products/');
+        const storeRef: firebase.database.Reference = firebase.database().ref('seller/' + storeId + '/transactions/' + transactionId);
+        userRef.set(products).then(res => {
+            // console.log(res)
+        }).catch(err => {
+            console.log(err);
         });
-        let product = products;
-        product['id'] = productId;
-        // this.productList.push(product);
-        // this.showToast(this.productList);
+
+        let datetime = new Date();
+        let date = datetime.getDate() + "/" + (datetime.getMonth() + 1) + "/" + datetime.getFullYear();
+        let time = datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds();
+
+        this.transaction.date = date;
+        this.transaction.time = time;
+        this.transaction.buyerInfo = [];
+        this.transaction.buyerInfo.id = this.userId;
+        this.transaction.buyerInfo.firstname = buyerData.firstname;
+        this.transaction.buyerInfo.lastname = buyerData.lastname;
+        this.transaction.buyerInfo.email = buyerData.email;
+        this.transaction.buyerInfo.address = buyerData.address;
+        this.transaction.buyerInfo.lng = buyerData.lng;
+        this.transaction.buyerInfo.lat = buyerData.lat;
+        this.transaction.buyerInfo.phoneNumber = buyerData.phoneNumber;
+        this.transaction.products = products;
+        this.transaction.status = "pending";
+        
+        storeRef.set(this.transaction).then(val => {
+          
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     getAllProductTransaction() {
@@ -132,7 +170,7 @@ export class UserService {
 
     readProductData(storeId: string) {
         return new Promise((resolve) => {
-            const userRef: firebase.database.Reference = firebase.database().ref('user/' + storeId + '/products');
+            const userRef: firebase.database.Reference = firebase.database().ref('seller/' + storeId + '/products');
             userRef.on("value", (snapshot) => {
                 this.productData = snapshot.val();
                 resolve(true);
@@ -142,7 +180,7 @@ export class UserService {
 
     addUserTransactionData(userAddData: any) {
         this.userId = this.authService.getActiveUser().uid;
-        const userRef: firebase.database.Reference = firebase.database().ref('user/' + this.userId + '/transactions/products');
+        const userRef: firebase.database.Reference = firebase.database().ref('buyer/' + this.userId + '/transactions/products');
 
         userRef.update(userAddData).then(res => {
             console.log(res);
@@ -151,5 +189,66 @@ export class UserService {
 
     transactionDone() {
         // remove transactionIdNow from firebase
+    }
+
+    uploadPhotoUser(base64Url: string, role: string) {
+        return new Promise((resolve) => {
+            this.userId = this.authService.getActiveUser().uid;
+            const userRef: firebase.database.Reference = firebase.database().ref(role + '/' + this.userId);
+            userRef.update({
+                "profile": "data:image/jpeg;base64," + base64Url
+            }).then(() => {
+                resolve(true)
+            }).catch(err => {
+                resolve(false)
+            })
+        })
+    }
+
+
+    // StoreService
+    getTransactionData(data: any) {
+        // this.userId = this.authService.getActiveUser().uid;
+        const userRef: firebase.database.Reference = firebase.database().ref('seller/' + data.storeId + '/transactions/' + data.transactionId);
+        this.transactionData = {};
+        return new Promise((resolve) => {
+            userRef.on('value', (snapshot) => {
+                this.transactionData = snapshot.val();
+                this.transactionData.id = snapshot.val().key;
+                resolve(this.transactionData);
+            });
+        });
+    }
+
+    getAllTransactionData() {
+        this.userId = this.authService.getActiveUser().uid;
+        const userRef: firebase.database.Reference = firebase.database().ref('seller/' + this.userId + '/transactions/');
+        
+        return new Promise((resolve) => {
+            userRef.on('value', (snapshot) => {
+                this.transactionData = snapshot.val();
+                resolve(this.transactionData);
+            });
+        });
+    }
+
+    changeStatusTransaction(status: string, transactionId: string, buyerId: string){
+        this.userId = this.authService.getActiveUser().uid;
+        console.log(transactionId);
+        const transactionSellerRef: firebase.database.Reference = firebase.database().ref('seller/' + this.userId + '/transactions/' + transactionId);
+        const transactionBuyerRef: firebase.database.Reference = firebase.database().ref('buyer/' + buyerId + '/transactions/' + transactionId);
+
+        transactionSellerRef.update({"status": status}).then(() => {
+            if(status == "success") this.showToast("Payment Success");
+            else if(status == "cancelled") this.showToast("Payment Cancelled");
+        }).catch(() => {
+            this.showToast("Payment Failed");
+        });
+
+        transactionBuyerRef.update({"status": status}).then(() => {
+            // success
+        }).catch(() => {
+            // failed
+        })
     }
 }

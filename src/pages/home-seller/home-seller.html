@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar color="theme" style="height: 60px;">
+
+    <img src="../../assets/imgs/icon.png" style="width: 100px;">
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content style="background-color: #EEEEEE;">
+  <h1 padding-left>Notification</h1>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-10>
+          <h4 padding-left>{{ userData.storename }}</h4>
+      </ion-col>
+      <ion-col col-2 padding>
+        <button (click)="encodeText()" ion-button block color="theme" style="border-width: 3px; border-color: #05BCFF;">
+          <!-- Show QR Code -->
+          <ion-icon name="qr-scanner"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+
+  <ion-card margin-left margin-right *ngFor="let transaction of transactions" (click)="transactionDetails(transaction)">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2 class="icon-notif">
+          <img src="../../assets/icon/megaphone.png" style="width: 35px; height: 35px;">
+        </ion-col>
+        <ion-col col-10>
+          <ion-card-header no-padding>
+            <strong>Transaction ID : {{ transaction.id }}</strong>
+          </ion-card-header>
+          <ion-card-content no-padding>
+            Buyer : {{ transaction.buyerInfo.firstname }} {{ transaction.buyerInfo.lastname }}<br>
+            Tanggal : {{ transaction.date }}<br>
+            Jam : {{ transaction.time }}
+          </ion-card-content>
+          <p *ngIf="transaction.status == 'success'" style="color: #32db64;" text-right>{{transaction.status}}</p>
+          <p *ngIf="transaction.status == 'cancelled'" style="color: #f53d3d;" text-right>{{transaction.status}}</p>
+          <p *ngIf="transaction.status == 'pending'" style="color: #ffbf00;" text-right>{{transaction.status}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+
+
+</ion-content>

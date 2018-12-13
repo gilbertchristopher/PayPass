@@ -1,6 +1,7 @@
 <ion-header>
   <ion-navbar color="theme" style="height: 60px;">
-    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" placeholder="Search Store" (search)="onSearch($event)" (ionCancel)="isSearchbarOpened=false"></ion-searchbar>
+    <ion-searchbar *ngIf="isSearchbarOpened" showCancelButton="true" placeholder="Search Store" (ionInput)="onSearch($event)"
+      (ionCancel)="cancelSearch()"></ion-searchbar>
     <img *ngIf="!isSearchbarOpened" src="../../assets/imgs/icon.png" style="width: 100px;">
     <ion-buttons end>
       <button ion-button icon-only *ngIf="!isSearchbarOpened" (click)="isSearchbarOpened=true">
@@ -10,100 +11,22 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <h1 padding-left>Store Lists</h1>
-  <ion-list>
-    <ion-item>
-      <ion-card (click)="goToStoreDetailPage()">
-        <ion-grid>
-          <ion-row>
-            <ion-col col-3 class="image-card-list">
-              <img src="../../assets/imgs/logo.png">
-            </ion-col>
-            <ion-col col-9>
-              <ion-card-header>
-                <strong>Toko A</strong>
-              </ion-card-header>
-              <ion-card-content>Gading Serpong, Tangerang</ion-card-content>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-      <ion-card>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-3 class="image-card-list">
-              <img src="../../assets/imgs/logo.png">
-            </ion-col>
-            <ion-col col-9>
-              <ion-card-header>
-                <strong>Lotte Mart</strong>
-              </ion-card-header>
-              <ion-card-content>Alam Sutera, Tangerang</ion-card-content>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-      <ion-card>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-3 class="image-card-list">
-              <img src="../../assets/imgs/logo.png">
-            </ion-col>
-            <ion-col col-9>
-              <ion-card-header>
-                <strong>Lotte Mart</strong>
-              </ion-card-header>
-              <ion-card-content>BSD, Tangerang</ion-card-content>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-      <ion-card>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-3 class="image-card-list">
-              <img src="../../assets/imgs/logo.png">
-            </ion-col>
-            <ion-col col-9>
-              <ion-card-header>
-                <strong>Lotte Mart</strong>
-              </ion-card-header>
-              <ion-card-content>Binong, Tangerang</ion-card-content>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-      <ion-card>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-3 class="image-card-list">
-              <img src="../../assets/imgs/logo.png">
-            </ion-col>
-            <ion-col col-9>
-              <ion-card-header>
-                <strong>Lotte Mart</strong>
-              </ion-card-header>
-              <ion-card-content>Tomang, Jakarta</ion-card-content>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-      <ion-card>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-3 class="image-card-list">
-              <img src="../../assets/imgs/logo.png">
-            </ion-col>
-            <ion-col col-9>
-              <ion-card-header>
-                <strong>Lotte Mart</strong>
-              </ion-card-header>
-              <ion-card-content>Palmerah Selatan, Jakarta</ion-card-content>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-    </ion-item>
-  </ion-list>
+<ion-content style="background-color: #EEEEEE;">
+  <h1 padding-left>Store List</h1>
+  <ion-card *ngFor="let Store of seller" (click)="goToStoreDetailPage(Store)" margin-left margin-right>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3 class="image-card-list">
+          <img *ngIf="!!Store.profile" [src]="Store.profile">
+          <img *ngIf="Store.profile == undefined" src="../../assets/icon/StoreDefaultIcon.png">
+        </ion-col>
+        <ion-col col-9>
+          <ion-card-header>
+            <strong> {{ Store.storename }}</strong>
+          </ion-card-header>
+          <ion-card-content>Phone Number : {{ Store.phoneNumber }}</ion-card-content>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
 </ion-content>

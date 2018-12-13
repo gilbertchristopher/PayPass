@@ -12,17 +12,25 @@ import { Loc } from '../../services/location';
 export class StoreInformationPage {
   storeId: String;
   marker: Loc;
+  store: any;
   lat: number = 52.678418;
   lng: number = 7.809007;
+  today: Date;
+  day: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private geoloc: Geolocation) {
-    console.log('Store ID: ', navParams.get('storeId'))
+    this.store = navParams.data;
     this.marker = new Loc();
-    this.marker.setLocation(this.lat, this.lng);   
+    this.marker.setLocation(this.store.lat, this.store.lng);
+    this.lat = this.store.lat;
+    this.lng = this.store.lng;
+    this.today = new Date();
+    this.day = this.today.getDay()
+
+    console.log(this.day); 
   }
 
   ionViewDidLoad() {
-    this.storeId = this.navParams.get('storeId');
   }
 
   dismiss(){

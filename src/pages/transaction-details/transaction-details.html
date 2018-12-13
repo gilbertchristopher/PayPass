@@ -1,0 +1,79 @@
+<ion-header>
+
+  <ion-navbar color="theme">
+    <ion-title>Transaction Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background-color: #EEEEEE;">
+  <ion-card padding *ngIf="!!transactionData">
+    <ion-card-title text-center>
+      <strong>Transaction ID</strong>
+      <p *ngIf="transactionId != undefined">{{ transactionId }}</p>
+      <p *ngIf="transactionData.id">{{ transactionData.id }}</p>
+    </ion-card-title>
+    <ion-card-header text-center>
+      {{ transactionData.buyerInfo.firstname }} {{ transactionData.buyerInfo.lastname }}<br>
+      {{ transactionData.buyerInfo.address }}<br>
+      {{ transactionData.buyerInfo.phoneNumber }}<br>
+      {{ transactionData.date}}, {{ transactionData.time }}<br>
+      Status :
+      <span *ngIf="transactionData.status == 'pending'" style="color: #ffbf00;">{{ transactionData.status }}</span>
+      <span *ngIf="transactionData.status == 'cancelled'" style="color: #f53d3d;">{{ transactionData.status }}</span>
+      <span *ngIf="transactionData.status == 'success'" style="color: #32db64;">{{ transactionData.status }}</span>
+    </ion-card-header>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2>
+          <strong>QTY</strong>
+        </ion-col>
+        <ion-col col-7 ion-text text-left>
+          <strong>ITEM</strong>
+        </ion-col>
+        <ion-col col-3 ion-text text-right>
+          <strong>TOTAL</strong>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngFor="let product of productData">
+      <ion-row>
+        <ion-col col-2>
+          {{ product.qty }}
+        </ion-col>
+        <ion-col col-7 ion-text text-left>
+          {{ product.product.name }}
+        </ion-col>
+        <ion-col col-3 ion-text text-right>
+          {{ product.totalPerProduct }}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6 style="font-size:14pt;">
+          <strong>Total : </strong>
+        </ion-col>
+        <ion-col col-6 ion-text text-right color="danger" style="font-size:14pt;">
+          Rp {{ total }}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="transactionData.status == 'pending'">
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button block color="theme" (click)="confirm()">Confirm
+            Payment</button>
+        </ion-col>
+        <ion-col col-6>
+            <button ion-button block color="danger" (click)="cancel()">Cancel</button>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  </ion-card>
+</ion-content>

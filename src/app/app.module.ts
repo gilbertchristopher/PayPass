@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Geolocation } from '@ionic-native/geolocation';
 import { IonicStorageModule } from '@ionic/storage';
+import { Push } from '@ionic-native/push';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -26,6 +27,7 @@ import { RegisrolePage } from '../pages/regisrole/regisrole';
 import { RegisterPage } from '../pages/register/register';
 import { RegistersellerPage } from '../pages/registerseller/registerseller';
 import { StoreInformationPage } from '../pages/store-information/store-information';
+import { RegistersellerOpenhourPage } from '../pages/registerseller-openhour/registerseller-openhour';
 
 import { AgmCoreModule } from '@agm/core';
 
@@ -35,12 +37,25 @@ import { ProductService } from '../services/productService';
 import { StoreService } from '../services/storeService';
 import { Loc } from '../services/location';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeSellerPage } from '../pages/home-seller/home-seller';
 import { UserService } from '../services/buyerService';
+import { ChooseLocationPage } from '../pages/choose-location/choose-location';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import { RegisHourPage } from '../pages/regis-hour/regis-hour';
+import { FcmProvider } from '../providers/fcm/fcm';
+import { OneSignal } from '@ionic-native/onesignal';
+import { TransactionDetailsPage } from '../pages/transaction-details/transaction-details';
+import { Camera } from '@ionic-native/camera';
+import { ChangePasswordPage } from '../pages/change-password/change-password';
+
+import { IntroPage } from '../pages/intro/intro';
+//import { Storage } from '@ionic/storage';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    HomeSellerPage,
     RegisrolePage,
     RegisterPage,
     RegistersellerPage,
@@ -57,6 +72,12 @@ import { UserService } from '../services/buyerService';
     EditProfilePage,
     HistoryDetailsPage,
     CheckoutPage,
+    ChooseLocationPage,
+    RegistersellerOpenhourPage,
+    TransactionDetailsPage,
+    ChangePasswordPage,
+    IntroPage,
+    RegisHourPage,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +96,7 @@ import { UserService } from '../services/buyerService';
   entryComponents: [
     MyApp,
     HomePage,
+    HomeSellerPage,
     RegisrolePage,
     RegisterPage,
     RegistersellerPage,
@@ -91,6 +113,12 @@ import { UserService } from '../services/buyerService';
     EditProfilePage,
     HistoryDetailsPage,
     CheckoutPage,
+    ChooseLocationPage,
+    RegistersellerOpenhourPage,
+    TransactionDetailsPage,
+    ChangePasswordPage,
+    IntroPage,
+    RegisHourPage,
   ],
   providers: [
     StatusBar,
@@ -101,9 +129,14 @@ import { UserService } from '../services/buyerService';
     UserService,
     Loc,
     BarcodeScanner,
+    Push,
+    OneSignal,
+    //IonicStorageModule,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     Geolocation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    NativeGeocoder,
+    FcmProvider,
+    Camera,
   ]
 })
 export class AppModule {}
-
